@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" minHeight="100.0" minWidth="620.0" prefHeight="400.0" prefWidth="620.0"
+            xmlns="http://javafx.com/javafx/8" fx:controller="Controller">
+    <top>
+        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu fx:id="menuTasks" mnemonicParsing="false" text="View">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#switchToLivingTasks" text="To-do List"/>
+                        <MenuItem mnemonicParsing="false" onAction="#switchToDeadTasks" text="Completed Tasks"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox fx:id="newUIBox">
+                    <children>
+                        <VBox>
+                            <children>
+                                <TextField fx:id="newTaskNameTextField" maxHeight="-Infinity"
+                                           maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="75.0"
+                                           onAction="#runTaskButton" prefHeight="25.0" prefWidth="403.0"
+                                           promptText="Enter task description..." HBox.hgrow="SOMETIMES">
+                                    <HBox.margin>
+                                        <Insets bottom="14.0" left="8.0" right="5.0" top="14.0"/>
+                                    </HBox.margin>
+                                    <VBox.margin>
+                                        <Insets left="15.0" right="15.0" top="8.0"/>
+                                    </VBox.margin>
+                                </TextField>
+                                <Slider fx:id="newTaskTimerSlider" blockIncrement="60.0" majorTickUnit="600.0"
+                                        max="3599.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" min="1.0"
+                                        minHeight="-Infinity" minWidth="-Infinity" minorTickCount="300"
+                                        onMouseDragged="#setTaskTimer" onMouseReleased="#runTaskButton"
+                                        prefWidth="350.0" snapToTicks="true" value="600.0">
+                                    <VBox.margin>
+                                        <Insets bottom="2.0" left="10.0" right="10.0" top="4.0"/>
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets left="1.0"/>
+                                    </padding>
+                                </Slider>
+                            </children>
+                        </VBox>
+                        <Separator maxHeight="-Infinity" minHeight="-Infinity" orientation="VERTICAL" prefHeight="53.0">
+                            <HBox.margin>
+                                <Insets left="5.0" right="5.0"/>
+                            </HBox.margin>
+                        </Separator>
+                        <Label fx:id="newTaskTimerLabel" minHeight="25.0" minWidth="45.0" text="10:00"
+                               textFill="#2c3e50">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                            <HBox.margin>
+                                <Insets bottom="14.0" left="5.0" right="5.0" top="14.0"/>
+                            </HBox.margin>
+                        </Label>
+                        <Separator maxHeight="-Infinity" minHeight="-Infinity" orientation="VERTICAL" prefHeight="53.0">
+                            <HBox.margin>
+                                <Insets left="5.0" right="5.0"/>
+                            </HBox.margin>
+                        </Separator>
+                        <Button fx:id="newTaskButton" alignment="CENTER" maxHeight="-Infinity"
+                                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                                mnemonicParsing="false" onAction="#runTaskButton" prefHeight="25.0" prefWidth="96.0"
+                                text="ADD TASK" textFill="#2c3e50">
+                            <HBox.margin>
+                                <Insets left="5.0" right="13.0" top="14.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <ListView fx:id="tasksListView" editable="true" minWidth="80.0" VBox.vgrow="SOMETIMES">
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                </ListView>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
