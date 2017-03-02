@@ -9,7 +9,7 @@
     <top>
         <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
             <menus>
-                <Menu fx:id="menuTasks" mnemonicParsing="false" text="View">
+                <Menu fx:id="menuTasks" mnemonicParsing="false" text="Window">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#switchToLivingTasks" text="To-do List"/>
                         <MenuItem mnemonicParsing="false" onAction="#switchToDeadTasks" text="Completed Tasks"/>
@@ -55,7 +55,7 @@
                                 <Insets left="5.0" right="5.0"/>
                             </HBox.margin>
                         </Separator>
-                        <Label fx:id="newTaskTimerLabel" minHeight="25.0" minWidth="45.0" text="10:00"
+                        <Label fx:id="newTaskTimerLabel" minHeight="25.0" minWidth="48.0" text="10:00"
                                textFill="#2c3e50">
                             <font>
                                 <Font size="16.0"/>

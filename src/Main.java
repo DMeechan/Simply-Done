@@ -5,14 +5,21 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 
 public class Main extends Application {
-	
-	static String applicationDir = "file:\\" + System.getProperty("user.dir");
-	static String resourcesDir = applicationDir + "\\resources\\";
+
+	static String resourcesDir;
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public void setUpDirectories() {
+		//"file:\\" +
+		resourcesDir = System.getProperty("user.dir") + "/resources/";
+
 	}
 	
 	public static int StringMinsecToSec(String value) {
@@ -45,6 +52,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		setUpDirectories();
 		Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
 		
 		try {
@@ -54,13 +62,14 @@ public class Main extends Application {
 			Scene scene = new Scene(root, 620, 700);
 			scene.getStylesheets().add("style.css");
 			window.setScene(scene);
-			
+
 			try {
-				window.getIcons().add(new Image(resourcesDir + "default-icon.png"));
+				String location = resourcesDir + "default-icon.png";
+				window.getIcons().add(new Image(new File(location).toURI().toString()));
 			} catch (Exception iconError) {
 				System.out.println("Error: application icon not found");
 			}
-			
+
 			window.show();
 			
 		} catch (Exception e) {

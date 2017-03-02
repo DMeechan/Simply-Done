@@ -110,9 +110,8 @@ public class Task {
 	
 	public void startCountdownSound() {
 		playingCountdownSound = true;
-		String musicFile = "resources\\countdown.mp3";     // For example
-		
-		Media sound = new Media(new File(musicFile).toURI().toString());
+		String location = Main.resourcesDir + "countdown.mp3";
+		Media sound = new Media(new File(location).toURI().toString());
 		mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
 	}

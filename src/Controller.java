@@ -2,6 +2,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import org.controlsfx.glyphfont.Glyph;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -64,11 +66,19 @@ public class Controller implements Initializable {
 		tasksListView.setItems(livingTasks);
 		
 		useCustomCell();
-		
+
+		tasksListView.setOnScrollTo(new EventHandler<ScrollToEvent<Integer>>() {
+			@Override
+			public void handle(ScrollToEvent<Integer> event) {
+
+			}
+		});
+
 		tasksListView.setOnMouseClicked(v -> {
 			if (tasksListView.getFocusModel().getFocusedItem() != null) {
 				activateEditMode();
 			}
+
 		});
 		
 		tasksListView.setOnKeyPressed(v -> v.consume());
@@ -240,19 +250,23 @@ public class Controller implements Initializable {
 		Text taskNameText = new Text("GET GOOD MR TEXT");
 		Text overtimeText = new Text("OVERTIME!");
 		Pane pane = new Pane();
-		
-		Button deleteButton = new Button("D");
-		Button runButton = new Button("R");
-		Button doneButton = new Button("C");
-		// D = delete; R = run; P = pause; C = complete
+
+		private static Glyph play, stop, trash, check;
+
+
+		Button runButton = new Button("");
+		Button deleteButton = new Button("");
+		Button doneButton = new Button("");
 		
 		Task task = null;
 		
 		public CustomCell() {
 			super();
-			
+
+			setUpGlyphs();
 			setProperties();
-			
+
+
 			deleteButton.setOnAction(v -> {
 				updateTask();
 				clickDelete();
@@ -267,6 +281,14 @@ public class Controller implements Initializable {
 			});
 			
 		}
+
+		private void setUpGlyphs() {
+			play = new Glyph("FontAwesome", "PLAY");
+			stop = new Glyph("FontAwesome", "STOP");
+			trash = new Glyph("FontAwesome", "TRASH_ALT");
+			check = new Glyph("FontAwesome", "CHECK_SQUARE");
+			// remove = new Glyph("FontAwesome", "REMOVE");
+		}
 		
 		public void updateTask() {
 			task = getItem();
@@ -278,17 +300,19 @@ public class Controller implements Initializable {
 			if (task.isLiving()) {
 				task.stop();
 				livingTasks.remove(task);
-				
 			} else {
 				deadTasks.remove(task);
 			}
 		}
 		
 		public void clickRun() {
+			setUpLiving(task);
 			if (task.isRunning()) {
 				task.stop();
+				runButton.setGraphic(play);
 			} else {
 				task.start();
+				runButton.setGraphic(stop);
 				
 			}
 		}
@@ -315,25 +339,12 @@ public class Controller implements Initializable {
 			if (empty) {
 				setGraphic(null);
 			} else {
-				if (task.isLiving()) {
-					setLivingProperties();
-					
-					task.overtimeProperty().addListener(v -> {
-						if (task.getOvertime()) {
-							this.overtimeText.setVisible(true);
-							setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white");
-							this.taskNameText.setFill(Color.WHITE);
-							this.taskTimerText.setFill(Color.WHITE);
-							
-						} else {
-							this.overtimeText.setVisible(false);
-							setStyle("-fx-background-color: transparent");
-							this.taskNameText.setFill(Color.BLACK);
-							this.taskTimerText.setFill(Color.BLACK);
-						}
-					});
-				} else {
-					setDeadProperties();
+				if(this.task == null) {
+					if (task.isLiving()) {
+						setUpLiving(task);
+					} else {
+						setUpDead(task);
+					}
 				}
 				
 				taskNameText.textProperty().bind(task.nameProperty());
@@ -342,6 +353,29 @@ public class Controller implements Initializable {
 				setGraphic(container);
 			}
 			
+		}
+		
+		public void setUpLiving(Task task) {
+			runButton.setVisible(true);
+			
+			task.overtimeProperty().addListener(v -> {
+				if (task.getOvertime()) {
+					this.overtimeText.setVisible(true);
+					setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white");
+					this.taskNameText.setFill(Color.WHITE);
+					this.taskTimerText.setFill(Color.WHITE);
+					
+				} else {
+					this.overtimeText.setVisible(false);
+					setStyle("-fx-background-color: transparent");
+					this.taskNameText.setFill(Color.BLACK);
+					this.taskTimerText.setFill(Color.BLACK);
+				}
+			});
+		}
+		
+		public void setUpDead(Task task) {
+			runButton.setVisible(false);
 		}
 		
 		// SETTING UP THE CELL
@@ -365,6 +399,10 @@ public class Controller implements Initializable {
 			setupButton(deleteButton);
 			setupButton(runButton);
 			setupButton(doneButton);
+
+			runButton.setGraphic(play);
+			deleteButton.setGraphic(trash);
+			doneButton.setGraphic(check);
 			
 			
 			overtimeText.setVisible(false);
@@ -373,15 +411,6 @@ public class Controller implements Initializable {
 			
 			
 			container.getChildren().addAll(taskTimerText, separator, taskNameText, overtimeText, pane, runButton, deleteButton, doneButton);
-		}
-		
-		public void setLivingProperties() {
-			runButton.setVisible(true);
-		}
-		
-		public void setDeadProperties() {
-			runButton.setVisible(false);
-			
 		}
 		
 		public void setupText(Text text, double fontSize, double top, double right, double bottom, double left) {
