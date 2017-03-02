@@ -80,6 +80,8 @@ public class Controller implements Initializable {
 			}
 			
 		});
+
+		tasksListView.setOnScroll(v -> System.out.println("hello world"));
 		
 		tasksListView.setOnKeyPressed(Event::consume);
 		
@@ -91,7 +93,11 @@ public class Controller implements Initializable {
 	public void runTaskButton(Event e) {
 		
 		if (editModeActive) {
-			updateTask();
+			Task task = tasksListView.getSelectionModel().getSelectedItem();
+			task.stop();
+			task.setTimerLength(Main.StringMinsecToSec(newTaskTimerLabel.getText()));
+			task.setName(newTaskNameTextField.getText());
+
 			deactivateEditMode();
 			
 		} else if (!newTaskNameTextField.getText().equals("")) {
@@ -100,20 +106,11 @@ public class Controller implements Initializable {
 			resetNewTaskUI();
 			
 		}
-		
+
 		clearListViewSelection();
 		
 	}
-	
-	private void updateTask() {
-		// Update selected task
-		Task task = tasksListView.getSelectionModel().getSelectedItem();
-		task.stop();
-		task.setTimerLength(Main.StringMinsecToSec(newTaskTimerLabel.getText()));
-		task.setName(newTaskNameTextField.getText());
-		//tasksListView.refresh();
-	}
-	
+
 	private void deactivateEditMode() {
 		editModeActive = false;
 		newUIBox.setStyle("-fx-background-color: transparent");
@@ -139,6 +136,7 @@ public class Controller implements Initializable {
 	
 	private void useCustomCell() {
 		tasksListView.setCellFactory(v -> new CustomCell());
+
 	}
 	
 	// SWITCH DISPLAY
@@ -234,20 +232,44 @@ public class Controller implements Initializable {
 			
 			setUpGlyphs();
 			setProperties();
-			
-			
+
 			deleteButton.setOnAction(v -> {
-				updateTask();
+				updateTaskVariable();
 				clickDelete();
 			});
 			runButton.setOnAction(v -> {
-				updateTask();
+				updateTaskVariable();
 				clickRun();
 			});
 			doneButton.setOnAction(v -> {
-				updateTask();
+				updateTaskVariable();
 				clickDone();
 			});
+
+			this.itemProperty().addListener((obs, oldItem, newItem) -> {
+				if(newItem != null) {
+					//System.out.println(newItem.getName());
+				}
+			});
+
+			this.emptyProperty().addListener((obs, wasEmpty, isEmpty) -> {
+				if (isEmpty) {
+					//System.out.println("Is empty: "+ isEmpty);
+				} else {
+					//System.out.println("Was empty?: " + isEmpty);
+				}
+			});
+
+			//updateTaskVariable();
+/*
+			task.overtimeProperty().addListener((observable, oldValue, newValue) -> {
+				if(!newValue) {
+					System.out.println("Yay, new value is: " + newValue);
+				} else {
+					System.out.println("Uhh k?. New value: " + newValue);
+				}
+			});
+*/
 			
 		}
 		
@@ -259,7 +281,7 @@ public class Controller implements Initializable {
 			// remove = new Glyph("FontAwesome", "REMOVE");
 		}
 		
-		public void updateTask() {
+		public void updateTaskVariable() {
 			task = getItem();
 		}
 		
@@ -305,7 +327,7 @@ public class Controller implements Initializable {
 		public void updateItem(Task task, boolean empty) {
 			super.updateItem(task, empty);
 			
-			if (empty) {
+			if (empty || task == null) {
 				setGraphic(null);
 			} else {
 				if (this.task == null) {

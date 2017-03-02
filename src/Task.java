@@ -18,7 +18,7 @@ class Task {
 	private static MediaPlayer mediaPlayer;
 	private final StringProperty timeLengthFormatted = new SimpleStringProperty("");
 	private final StringProperty name = new SimpleStringProperty(""); // name of task
-	private final BooleanProperty overtime = new SimpleBooleanProperty(false); // is the timer currently in overtime
+	private BooleanProperty overtime = new SimpleBooleanProperty(false); // is the timer currently in overtime
 	private int timerLength; // length of timer value (seconds)
 	private Timeline timer;
 	private boolean isRunning; // is the timer currently running

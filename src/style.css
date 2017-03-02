@@ -5,5 +5,9 @@
 -fx-border-style: dashed;
     -fx-border-color: firebrick;
 
+.button {
+    -fx-background-color: linear-gradient(to bottom, #158fdb, #1e72a6);;
+}
+
 */
 
