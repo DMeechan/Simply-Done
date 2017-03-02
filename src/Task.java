@@ -1,7 +1,3 @@
-/**
- * Created by Daniel on 22.02.2017.
- */
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,18 +12,14 @@ import javafx.util.Duration;
 import java.awt.*;
 import java.io.File;
 
-/**
- * Created by Daniel on 05.02.2017.
- */
-public class Task {
+class Task {
 	
 	private static boolean playingCountdownSound;
 	private static MediaPlayer mediaPlayer;
-	public StringProperty timeLengthFormatted = new SimpleStringProperty("");
+	private final StringProperty timeLengthFormatted = new SimpleStringProperty("");
+	private final StringProperty name = new SimpleStringProperty(""); // name of task
+	private final BooleanProperty overtime = new SimpleBooleanProperty(false); // is the timer currently in overtime
 	private int timerLength; // length of timer value (seconds)
-	private StringProperty name = new SimpleStringProperty(""); // name of task
-	private BooleanProperty overtime = new SimpleBooleanProperty(false); // is the timer currently in overtime
-	
 	private Timeline timer;
 	private boolean isRunning; // is the timer currently running
 	private boolean isLiving; // is the timer currently marked as done
@@ -44,7 +36,7 @@ public class Task {
 		setTimer();
 	}
 	
-	public void setTimer() {
+	private void setTimer() {
 		timer = new Timeline((new KeyFrame(
 				Duration.millis(1000),
 				event -> timerTick()
@@ -62,7 +54,7 @@ public class Task {
 		timer.play();
 	}
 	
-	public void startOvertime() {
+	private void startOvertime() {
 		setOvertime(true);
 		Toolkit.getDefaultToolkit().beep();
 		// enable overtime label
@@ -87,7 +79,7 @@ public class Task {
 		
 	}
 	
-	public void timerTick() {
+	private void timerTick() {
 		if (getOvertime()) { // keep increasing overtime
 			setTimerLength(getTimerLength() + 1);
 			
@@ -96,7 +88,7 @@ public class Task {
 			playingCountdownSound = false;
 			startOvertime();
 			
-		} else if (getTimerLength() == 31 && playingCountdownSound == false) {
+		} else if (getTimerLength() == 31 && !playingCountdownSound) {
 			// start countdown music with 30 secs left
 			startCountdownSound();
 			setTimerLength(getTimerLength() - 1);
@@ -108,7 +100,7 @@ public class Task {
 		}
 	}
 	
-	public void startCountdownSound() {
+	private void startCountdownSound() {
 		playingCountdownSound = true;
 		String location = Main.resourcesDir + "countdown.mp3";
 		Media sound = new Media(new File(location).toURI().toString());
@@ -116,7 +108,7 @@ public class Task {
 		mediaPlayer.play();
 	}
 	
-	public void updateTimeLengthFormatted() {
+	private void updateTimeLengthFormatted() {
 		int[] store = Main.secToMinsec(getTimerLength());
 		timeLengthFormatted.set(Main.minsecToStringMinsec(store[0], store[1]));
 	}
@@ -130,16 +122,8 @@ public class Task {
 	////////////////////////////
 	
 	
-	public int timerLengthProperty() {
-		return timerLength;
-	}
-	
 	public String getTimeLengthFormatted() {
 		return timeLengthFormatted.get();
-	}
-	
-	public void setTimeLengthFormatted(String timeLengthFormatted) {
-		this.timeLengthFormatted.set(timeLengthFormatted);
 	}
 	
 	public StringProperty timeLengthFormattedProperty() {
@@ -150,7 +134,7 @@ public class Task {
 		return isRunning;
 	}
 	
-	public void setRunning(boolean running) {
+	private void setRunning(boolean running) {
 		isRunning = running;
 	}
 	
@@ -158,7 +142,7 @@ public class Task {
 		return overtime.get();
 	}
 	
-	public void setOvertime(boolean overtime) {
+	private void setOvertime(boolean overtime) {
 		this.overtime.set(overtime);
 	}
 	
@@ -183,13 +167,6 @@ public class Task {
 		updateTimeLengthFormatted();
 	}
 	
-	public Timeline getTimer() {
-		return timer;
-	}
-	
-	public void setTimer(Timeline timer) {
-		this.timer = timer;
-	}
 	
 	public String getName() {
 		return name.get();

@@ -16,12 +16,6 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public void setUpDirectories() {
-		//"file:\\" +
-		resourcesDir = System.getProperty("user.dir") + "/resources/";
-
-	}
-	
 	public static int StringMinsecToSec(String value) {
 		// Convert String 15:01 to minsec: 15 mins, 01 seconds
 		// And then convert that into seconds (minsecToSec())
@@ -46,35 +40,33 @@ public class Main extends Application {
 	}
 	
 	public static int[] secToMinsec(int secs) {
-		int[] out = {(int) Math.floor(secs / 60), secs % 60};
-		return out;
+		return new int[]{(int) Math.floor(secs / 60), secs % 60};
+	}
+	
+	private void setUpDirectories() {
+		//"file:\\" +
+		resourcesDir = System.getProperty("user.dir") + "/resources/";
+
 	}
 	
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage window) throws Exception {
 		setUpDirectories();
 		Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
 		
+		window.setTitle("Simply Done");
+		Scene scene = new Scene(root, 620, 700);
+		scene.getStylesheets().add("style.css");
+		window.setScene(scene);
+		
 		try {
-			
-			Stage window = primaryStage;
-			window.setTitle("Simply Done");
-			Scene scene = new Scene(root, 620, 700);
-			scene.getStylesheets().add("style.css");
-			window.setScene(scene);
-
-			try {
-				String location = resourcesDir + "default-icon.png";
-				window.getIcons().add(new Image(new File(location).toURI().toString()));
-			} catch (Exception iconError) {
-				System.out.println("Error: application icon not found");
-			}
-
-			window.show();
-			
-		} catch (Exception e) {
-			throw e;
+			String location = resourcesDir + "default-icon.png";
+			window.getIcons().add(new Image(new File(location).toURI().toString()));
+		} catch (Exception iconError) {
+			System.out.println("Error: application icon not found");
 		}
+		
+		window.show();
 		
 	}
 	

@@ -2,7 +2,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -24,32 +23,36 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 	
-	public static ObservableList<Task> livingTasks;
+	private static ObservableList<Task> livingTasks;
 	//public ListView<Task> taskDisplay;
-	public static ObservableList<Task> deadTasks;
+	private static ObservableList<Task> deadTasks;
 	
 	@FXML
+	private
 	ListView<Task> tasksListView;
 	
 	@FXML
+	private
 	Slider newTaskTimerSlider;
 	@FXML
+	private
 	Label newTaskTimerLabel;
 	@FXML
+	private
 	TextField newTaskNameTextField;
 	@FXML
+	private
 	Button newTaskButton;
 	@FXML
+	private
 	HBox newUIBox;
 	
 	private boolean editModeActive;
-	private int viewState;
 	// 0 = to do list
 	// 1 = completed tasks
 	// 2 = analytics
 	
 	public Controller() {
-		viewState = 0;
 		editModeActive = false;
 	}
 	
@@ -66,22 +69,19 @@ public class Controller implements Initializable {
 		tasksListView.setItems(livingTasks);
 		
 		useCustomCell();
-
-		tasksListView.setOnScrollTo(new EventHandler<ScrollToEvent<Integer>>() {
-			@Override
-			public void handle(ScrollToEvent<Integer> event) {
-
-			}
+		
+		tasksListView.setOnScrollTo(event -> {
+			
 		});
-
+		
 		tasksListView.setOnMouseClicked(v -> {
 			if (tasksListView.getFocusModel().getFocusedItem() != null) {
 				activateEditMode();
 			}
-
+			
 		});
 		
-		tasksListView.setOnKeyPressed(v -> v.consume());
+		tasksListView.setOnKeyPressed(Event::consume);
 		
 		listenForChanges();
 		
@@ -97,7 +97,7 @@ public class Controller implements Initializable {
 		} else if (!newTaskNameTextField.getText().equals("")) {
 			// Makes sure the textfield isn't empty
 			newTask();
-			resetNewTaskUI(false);
+			resetNewTaskUI();
 			
 		}
 		
@@ -105,7 +105,7 @@ public class Controller implements Initializable {
 		
 	}
 	
-	public void updateTask() {
+	private void updateTask() {
 		// Update selected task
 		Task task = tasksListView.getSelectionModel().getSelectedItem();
 		task.stop();
@@ -114,15 +114,15 @@ public class Controller implements Initializable {
 		//tasksListView.refresh();
 	}
 	
-	public void deactivateEditMode() {
+	private void deactivateEditMode() {
 		editModeActive = false;
 		newUIBox.setStyle("-fx-background-color: transparent");
 		newTaskTimerLabel.setStyle("-fx-text-fill: #2c3e50");
-		resetNewTaskUI(false);
+		resetNewTaskUI();
 		clearListViewSelection();
 	}
 	
-	public void activateEditMode() {
+	private void activateEditMode() {
 		editModeActive = true;
 		
 		// Item selected; let's update the task edit area
@@ -137,10 +137,8 @@ public class Controller implements Initializable {
 		newTaskNameTextField.setText(task.getName());
 	}
 	
-	public void useCustomCell() {
-		tasksListView.setCellFactory(v -> {
-			return new CustomCell();
-		});
+	private void useCustomCell() {
+		tasksListView.setCellFactory(v -> new CustomCell());
 	}
 	
 	// SWITCH DISPLAY
@@ -149,7 +147,6 @@ public class Controller implements Initializable {
 	public void switchToLivingTasks() {
 		tasksListView.setItems(livingTasks);
 		newUIBox.setDisable(false);
-		setViewState(0);
 		
 	}
 	
@@ -163,12 +160,6 @@ public class Controller implements Initializable {
 		}
 		tasksListView.setItems(deadTasks);
 		newUIBox.setDisable(true);
-		setViewState(1);
-	}
-	
-	@FXML
-	public void switchToAnalytics() {
-		//setViewState(2);
 	}
 	
 	// MINOR METHODS
@@ -178,47 +169,39 @@ public class Controller implements Initializable {
 		newTaskTimerLabel.setText(Main.secToStringMinsec((int) newTaskTimerSlider.getValue()));
 	}
 	
-	public void newTask() {
+	private void newTask() {
 		livingTasks.add(new Task(newTaskNameTextField.getText(), Main.StringMinsecToSec(newTaskTimerLabel.getText())));
 	}
 	
-	public void newTask(String name, int mins, int secs) {
+	private void newTask(String name, int mins, int secs) {
 		livingTasks.add(new Task(name, Main.minsecToSec(mins, secs)));
 	}
 	
-	public void clearListViewSelection() {
+	private void clearListViewSelection() {
 		tasksListView.getSelectionModel().clearSelection();
 	}
 	
-	public void resetNewTaskUI(boolean resetTimer) {
+	private void resetNewTaskUI() {
 		newTaskButton.setText("ADD TASK");
 		newTaskNameTextField.setText("");
 		
-		if (resetTimer) {
-			newTaskTimerLabel.setText("10:00");
-			newTaskTimerSlider.setValue(600);
-		}
+		newTaskTimerLabel.setText("10:00");
+		newTaskTimerSlider.setValue(600);
 	}
 	
-	public void listenForChanges() {
-		livingTasks.addListener(new ListChangeListener<Task>() {
-			@Override
-			public void onChanged(Change<? extends Task> c) {
-				deactivateEditMode();
-				stopAllTasks();
-			}
+	private void listenForChanges() {
+		livingTasks.addListener((ListChangeListener<Task>) c -> {
+			deactivateEditMode();
+			stopAllTasks();
 		});
 		
-		deadTasks.addListener(new ListChangeListener<Task>() {
-			@Override
-			public void onChanged(Change<? extends Task> c) {
-				deactivateEditMode();
-				stopAllTasks();
-			}
+		deadTasks.addListener((ListChangeListener<Task>) c -> {
+			deactivateEditMode();
+			stopAllTasks();
 		});
 	}
 	
-	public void stopAllTasks() {
+	private void stopAllTasks() {
 		for (Task task : livingTasks) {
 			task.stop();
 		}
@@ -228,45 +211,31 @@ public class Controller implements Initializable {
 	// CUSTOM CELL FOR LISTVIEW //
 	//////////////////////////////
 	
-	public int getViewState() {
-		return viewState;
-	}
-	
 	
 	// GETTERS AND SETTERS
 	
-	public void setViewState(int viewState) {
-		this.viewState = viewState;
-		tasksListView.refresh();
-		clearListViewSelection();
-	}
-	
 	static class CustomCell extends ListCell<Task> {
 		
-		HBox container = new HBox();
-		
-		Text taskTimerText = new Text("10:00");
-		Separator separator = new Separator();
-		Text taskNameText = new Text("GET GOOD MR TEXT");
-		Text overtimeText = new Text("OVERTIME!");
-		Pane pane = new Pane();
-
 		private static Glyph play, stop, trash, check;
-
-
-		Button runButton = new Button("");
-		Button deleteButton = new Button("");
-		Button doneButton = new Button("");
+		final HBox container = new HBox();
+		final Text taskTimerText = new Text("10:00");
+		final Separator separator = new Separator();
+		final Text taskNameText = new Text("GET GOOD MR TEXT");
+		final Text overtimeText = new Text("OVERTIME!");
+		final Pane pane = new Pane();
+		final Button runButton = new Button("");
+		final Button deleteButton = new Button("");
+		final Button doneButton = new Button("");
 		
 		Task task = null;
 		
 		public CustomCell() {
 			super();
-
+			
 			setUpGlyphs();
 			setProperties();
-
-
+			
+			
 			deleteButton.setOnAction(v -> {
 				updateTask();
 				clickDelete();
@@ -281,7 +250,7 @@ public class Controller implements Initializable {
 			});
 			
 		}
-
+		
 		private void setUpGlyphs() {
 			play = new Glyph("FontAwesome", "PLAY");
 			stop = new Glyph("FontAwesome", "STOP");
@@ -339,11 +308,11 @@ public class Controller implements Initializable {
 			if (empty) {
 				setGraphic(null);
 			} else {
-				if(this.task == null) {
+				if (this.task == null) {
 					if (task.isLiving()) {
 						setUpLiving(task);
 					} else {
-						setUpDead(task);
+						setUpDead();
 					}
 				}
 				
@@ -378,7 +347,7 @@ public class Controller implements Initializable {
 			});
 		}
 		
-		public void setUpDead(Task task) {
+		public void setUpDead() {
 			runButton.setVisible(false);
 		}
 		
@@ -403,7 +372,7 @@ public class Controller implements Initializable {
 			setupButton(deleteButton);
 			setupButton(runButton);
 			setupButton(doneButton);
-
+			
 			runButton.setGraphic(play);
 			deleteButton.setGraphic(trash);
 			doneButton.setGraphic(check);
