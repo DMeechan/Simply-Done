@@ -361,15 +361,19 @@ public class Controller implements Initializable {
 			task.overtimeProperty().addListener(v -> {
 				if (task.getOvertime()) {
 					this.overtimeText.setVisible(true);
+					/*
 					setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white");
 					this.taskNameText.setFill(Color.WHITE);
 					this.taskTimerText.setFill(Color.WHITE);
+					*/
 					
 				} else {
 					this.overtimeText.setVisible(false);
+					/*
 					setStyle("-fx-background-color: transparent");
 					this.taskNameText.setFill(Color.BLACK);
 					this.taskTimerText.setFill(Color.BLACK);
+					*/
 				}
 			});
 		}
@@ -406,7 +410,7 @@ public class Controller implements Initializable {
 			
 			
 			overtimeText.setVisible(false);
-			overtimeText.setFill(Color.WHITE);
+			overtimeText.setFill(Color.RED);
 			overtimeText.setStyle("-fx-font-weight: bold");
 			
 			
