@@ -9,13 +9,13 @@ import java.io.File;
 
 
 public class Main extends Application {
-
+	
 	static String resourcesDir;
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
 	public static int StringMinsecToSec(String value) {
 		// Convert String 15:01 to minsec: 15 mins, 01 seconds
 		// And then convert that into seconds (minsecToSec())
@@ -46,7 +46,7 @@ public class Main extends Application {
 	private void setUpDirectories() {
 		//"file:\\" +
 		resourcesDir = System.getProperty("user.dir") + "/resources/";
-
+		
 	}
 	
 	@Override
@@ -58,6 +58,8 @@ public class Main extends Application {
 		Scene scene = new Scene(root, 620, 700);
 		scene.getStylesheets().add("style.css");
 		window.setScene(scene);
+		
+		System.out.println("testing out scheduler branch");
 		
 		try {
 			String location = resourcesDir + "default-icon.png";

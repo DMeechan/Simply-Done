@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -70,11 +71,11 @@
                     </HBox.margin>
                 </Button>
             </HBox>
-            <ListView fx:id="tasksListView" editable="true" minWidth="80.0" VBox.vgrow="SOMETIMES">
+            <JFXListView fx:id="tasksListView" editable="true" minWidth="80.0" VBox.vgrow="SOMETIMES">
                 <VBox.margin>
                     <Insets/>
                 </VBox.margin>
-            </ListView>
+            </JFXListView>
         </VBox>
     </center>
 </BorderPane>

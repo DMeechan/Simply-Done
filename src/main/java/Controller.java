@@ -1,3 +1,4 @@
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -24,12 +25,11 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 	
 	private static ObservableList<Task> livingTasks;
-	//public ListView<Task> taskDisplay;
 	private static ObservableList<Task> deadTasks;
 	
 	@FXML
 	private
-	ListView<Task> tasksListView;
+	JFXListView<Task> tasksListView;
 	
 	@FXML
 	private
@@ -66,6 +66,8 @@ public class Controller implements Initializable {
 		newTask("Do Maths homework", 14, 30);
 		// newTask("Wash dishes", 35, 0);
 		
+		//tasksListView = new ListView<Task>();
+		
 		tasksListView.setItems(livingTasks);
 		
 		useCustomCell();
@@ -80,7 +82,7 @@ public class Controller implements Initializable {
 			}
 			
 		});
-
+		
 		tasksListView.setOnScroll(v -> System.out.println("hello world"));
 		
 		tasksListView.setOnKeyPressed(Event::consume);
@@ -97,7 +99,7 @@ public class Controller implements Initializable {
 			task.stop();
 			task.setTimerLength(Main.StringMinsecToSec(newTaskTimerLabel.getText()));
 			task.setName(newTaskNameTextField.getText());
-
+			
 			deactivateEditMode();
 			
 		} else if (!newTaskNameTextField.getText().equals("")) {
@@ -106,11 +108,11 @@ public class Controller implements Initializable {
 			resetNewTaskUI();
 			
 		}
-
+		
 		clearListViewSelection();
 		
 	}
-
+	
 	private void deactivateEditMode() {
 		editModeActive = false;
 		newUIBox.setStyle("-fx-background-color: transparent");
@@ -136,7 +138,7 @@ public class Controller implements Initializable {
 	
 	private void useCustomCell() {
 		tasksListView.setCellFactory(v -> new CustomCell());
-
+		
 	}
 	
 	// SWITCH DISPLAY
@@ -200,9 +202,11 @@ public class Controller implements Initializable {
 	}
 	
 	private void stopAllTasks() {
+		
 		for (Task task : livingTasks) {
 			task.stop();
 		}
+		
 	}
 	
 	//////////////////////////////
@@ -232,7 +236,7 @@ public class Controller implements Initializable {
 			
 			setUpGlyphs();
 			setProperties();
-
+			
 			deleteButton.setOnAction(v -> {
 				updateTaskVariable();
 				clickDelete();
@@ -245,13 +249,13 @@ public class Controller implements Initializable {
 				updateTaskVariable();
 				clickDone();
 			});
-
+			
 			this.itemProperty().addListener((obs, oldItem, newItem) -> {
-				if(newItem != null) {
+				if (newItem != null) {
 					//System.out.println(newItem.getName());
 				}
 			});
-
+			
 			this.emptyProperty().addListener((obs, wasEmpty, isEmpty) -> {
 				if (isEmpty) {
 					//System.out.println("Is empty: "+ isEmpty);
@@ -259,7 +263,7 @@ public class Controller implements Initializable {
 					//System.out.println("Was empty?: " + isEmpty);
 				}
 			});
-
+			
 			//updateTaskVariable();
 /*
 			task.overtimeProperty().addListener((observable, oldValue, newValue) -> {
@@ -275,7 +279,7 @@ public class Controller implements Initializable {
 		
 		private void setUpGlyphs() {
 			play = new Glyph("FontAwesome", "PLAY");
-			stop = new Glyph("FontAwesome", "STOP");
+			stop = new Glyph("FontAwesome", "PAUSE");
 			trash = new Glyph("FontAwesome", "TRASH_ALT");
 			check = new Glyph("FontAwesome", "CHECK_SQUARE");
 			// remove = new Glyph("FontAwesome", "REMOVE");
