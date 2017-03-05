@@ -1,9 +1,7 @@
 import com.jfoenix.controls.JFXButton;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -42,9 +39,10 @@ public class ClockView {
 	
 	private VBox container;
 	private Rectangle leftSeparator, rightSeparator;
-	private Label activeTaskLabel, activeTaskTimer;
+	private Label taskLabel, taskTimerLabel, totalTimerLabel;
 	private Gauge timerClock;
 	private JFXButton pauseButton, stopButton;
+	private FadeTransition pauseFade, stopFade, timerLabelFade, timerClockFade;
 	
 	private Glyph stopIcon, pauseIcon, playIcon;
 	private ObjectProperty<Color> activeColor = new SimpleObjectProperty<Color>(Color.web("#ffffff"));
@@ -58,15 +56,15 @@ public class ClockView {
 			combinedLength += t.getMinutes();
 		}
 		
-		setTotalLength(combinedLength); // set the total timer length to combined tasks lengths
-		System.out.println(getTotalLength());
+		setTotalLength(combinedLength * 60); // set the total timer length to combined tasks lengths
 		GaugeBuilder builder = GaugeBuilder.create().skinType(Gauge.SkinType.SLIM);
-		timerClock = builder.decimals(0).maxValue(getTotalLength()).unit("TIME LEFT TODAY").build();
+		timerClock = builder.decimals(0).maxValue(getTotalLength()).build();
 		timerClock.valueProperty().bind(totalLengthProperty());
-		timerClock.setAnimationDuration(100);
+		timerClock.setValueVisible(false);
 		
 		setUpGlyphs();
 		container = setProperties();
+		setUpFades();
 		
 		start();
 		
@@ -98,13 +96,15 @@ public class ClockView {
 			stopClick();
 			
 		} else if(isRunning()) { // currently running; so pause it
-			pauseButton.setGraphic(playIcon);
 			pauseTimer();
+			pauseButton.setGraphic(playIcon);
+			playFades();
 	
 		} else { // currently not running; let's resume
-			pauseButton.setGraphic(pauseIcon);
-			setRunning(true);
 			timer.play();
+			pauseButton.setGraphic(pauseIcon);
+			stopFades();
+			setRunning(true);
 		}
 		
 	}
@@ -167,16 +167,12 @@ public class ClockView {
 			System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
 			
 			setActiveColor(activeTask.getColour());
-			setTaskLength(activeTask.getMinutes());
-			activeTaskLabel.setText(activeTask.getName().toUpperCase());
+			setTaskLength(activeTask.getMinutes()*60);
+			taskLabel.setText(activeTask.getName().toUpperCase());
 			
-			String c = String.format( "#%02X%02X%02X",
-					(int)( getActiveColor().getRed() * 255 ),
-					(int)( getActiveColor().getGreen() * 255 ),
-					(int)( getActiveColor().getBlue() * 255 ) );
-			
-			pauseButton.setStyle("-fx-background-color: " + c);
-			stopButton.setStyle("-fx-background-color: " + c);
+			String c = colorToHex(getActiveColor());
+
+			setGlyphColours(c);
 			activeTaskCount++;
 		} else {
 			System.out.println("Error: next task doesn't exist...");
@@ -196,14 +192,10 @@ public class ClockView {
 		setOvertime(true);
 		Toolkit.getDefaultToolkit().beep();
 		setActiveColor(Color.web("#e74c3c"));
-		activeTaskLabel.setText("OVERTIME!");
-		activeTaskTimer.setVisible(false);
+		taskLabel.setText("OVERTIME!");
+		taskTimerLabel.setVisible(false);
 		
-		String c = String.format( "#%02X%02X%02X",
-				(int)( getActiveColor().getRed() * 255 ),
-				(int)( getActiveColor().getGreen() * 255 ),
-				(int)( getActiveColor().getBlue() * 255 ) );
-		
+		String c = colorToHex(getActiveColor());
 		pauseButton.setStyle("-fx-background-color: " + c);
 		stopButton.setStyle("-fx-background-color: " + c);
 	}
@@ -211,6 +203,14 @@ public class ClockView {
 	// SETTING UP
 	
 	private VBox setProperties() {
+		
+		taskLabel = new Label("INSERT TASK NAME HERE!");
+		taskLabel.textFillProperty().bind(activeColorProperty());
+		taskLabel.setAlignment(Pos.CENTER);
+		taskLabel.setPadding(new Insets(0, 10, 0, 10));
+		taskLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font-size: 18.0; -fx-font-style: italic");
+		
+		// LINEBAR
 		
 		leftSeparator = new Rectangle(200, 3);
 		leftSeparator.setArcWidth(6);
@@ -222,65 +222,139 @@ public class ClockView {
 		rightSeparator.setArcHeight(6);
 		rightSeparator.fillProperty().bind(activeColorProperty());
 		
+		taskTimerLabel = new Label("");
+		taskTimerLabel.textFillProperty().bind(activeColorProperty());
+		taskTimerLabel.setAlignment(Pos.CENTER);
+		taskTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: bold italic 20pt \"Arial\"");
+		taskLengthProperty().addListener(v -> {
+			taskTimerLabel.setText(Main.secToStringMinsec(getTaskLength()));
+		});
+		
+		HBox lineBar = new HBox();
+		lineBar.setAlignment(Pos.CENTER);
+		lineBar.setSpacing(10);
+		lineBar.setPadding(new Insets(0,5,15,5));
+		lineBar.getChildren().addAll(leftSeparator, taskTimerLabel, rightSeparator);
+		
+		// TIMER CENTRE
+		
+		totalTimerLabel = new Label("");
+		totalTimerLabel.textFillProperty().set(Color.WHITE);
+		totalTimerLabel.setAlignment(Pos.CENTER);
+		totalTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: 62pt \"Arial\"");
+		totalTimerLabel.textFillProperty().bind(activeColorProperty());
+		totalLengthProperty().addListener(v -> {
+			totalTimerLabel.setText(Main.secToStringMinsec(getTotalLength()));
+		});
+		
 		stopButton = new JFXButton();
-		stopButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		stopButton.setPrefSize(10,10);
-		stopButton.setAlignment(Pos.TOP_CENTER);
+		stopButton.setPrefSize(36,36);
+		stopButton.setStyle("-fx-background-color: transparent");
+		stopButton.setAlignment(Pos.CENTER);
 		stopButton.setFocusTraversable(false);
 		stopButton.setGraphic(stopIcon);
 		stopButton.setOnAction(v -> stopClick());
 		
 		pauseButton = new JFXButton();
-		pauseButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		pauseButton.setPrefSize(10,10);
-		pauseButton.setAlignment(Pos.TOP_CENTER);
+		pauseButton.setPrefSize(15,15);
+		pauseButton.setStyle("-fx-background-color: transparent");
+		pauseButton.setAlignment(Pos.CENTER);
 		pauseButton.setFocusTraversable(false);
 		pauseButton.setGraphic(pauseIcon);
 		pauseButton.setOnAction(v -> pauseClick());
 		
-		HBox buttonsBar = new HBox();
-		buttonsBar.setAlignment(Pos.CENTER);
-		buttonsBar.setSpacing(10);
-		buttonsBar.setMargin(stopButton, new Insets(5.0));
-		buttonsBar.setMargin(pauseButton, new Insets(5.0));
-		buttonsBar.getChildren().addAll(leftSeparator, pauseButton, stopButton, rightSeparator);
+		HBox buttonsBox = new HBox();
+		buttonsBox.setAlignment(Pos.CENTER);
+		buttonsBox.setSpacing(10);
+		buttonsBox.setPadding(new Insets(0,5,15,5));
+		buttonsBox.getChildren().addAll(pauseButton, stopButton);
 		
-		activeTaskTimer = new Label("99:99");
-		activeTaskTimer.textFillProperty().bind(activeColorProperty());
-		activeTaskTimer.setAlignment(Pos.CENTER);
-		activeTaskTimer.setPadding(new Insets(5, 0, 10, 0));
-		activeTaskTimer.setStyle("-fx-font-smoothing-type: gray; -fx-font-size: 32.0");
-		activeTaskTimer.textProperty().bind(taskLengthProperty().asString());
+		VBox timerCentre = new VBox();
+		timerCentre.setAlignment(Pos.CENTER);
+		timerCentre.setSpacing(10);
+		timerCentre.getChildren().addAll(totalTimerLabel, buttonsBox);
 		
-		activeTaskLabel = new Label("INSERT TASK NAME HERE!");
-		activeTaskLabel.textFillProperty().bind(activeColorProperty());
-		activeTaskLabel.setAlignment(Pos.CENTER);
-		activeTaskLabel.setPadding(new Insets(10, 0, 10, 0));
-		activeTaskLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font-size: 18.0");
-		
+		StackPane timerPane = new StackPane();
+		timerPane.getChildren().addAll(timerClock, timerCentre);
 		
 		timerClock.barColorProperty().bind(activeColorProperty());
 		//timerClock.setBarBackgroundColor(Color.web("#272c32"));
+
+		timerClock.setAnimationDuration(200);
 		timerClock.setAnimated(true);
 		timerClock.setPrefSize(500,500);
 		
-
-		
-		VBox vbox = new VBox(activeTaskLabel, buttonsBar, activeTaskTimer, timerClock);
+		VBox vbox = new VBox(taskLabel, lineBar, timerPane);
 		vbox.setSpacing(3);
 		vbox.setAlignment(Pos.CENTER);
 		vbox.setBackground(new Background(new BackgroundFill(Color.web("#272c32"), CornerRadii.EMPTY, Insets.EMPTY)));
 		vbox.setPadding(new Insets(20));
+		
 		return vbox;
 	}
 	
+	private void setUpFades(){
+		pauseFade = new FadeTransition(Duration.millis(600), pauseButton);
+		stopFade = new FadeTransition(Duration.millis(600), stopButton);
+		timerLabelFade = new FadeTransition(Duration.millis(600), totalTimerLabel);
+		timerClockFade = new FadeTransition(Duration.millis(600), timerClock);
+		
+		setUpFade(pauseFade);
+		setUpFade(stopFade);
+		setUpFade(timerClockFade);
+		setUpFade(timerLabelFade);
+		
+	}
+	
+	private void setUpFade(FadeTransition fade) {
+		fade.setFromValue(1.0);
+		fade.setToValue(0.6);
+		fade.setCycleCount(Timeline.INDEFINITE);
+		fade.setAutoReverse(true);
+		fade.setInterpolator(Interpolator.EASE_IN);
+	}
+	
+	private void stopFades() {
+		pauseFade.stop();
+		stopFade.stop();
+		timerClockFade.stop();
+		timerLabelFade.stop();
+		
+	}
+	
+	private void playFades() {
+		pauseFade.play();
+		stopFade.play();
+		timerClockFade.play();
+		timerLabelFade.play();
+	}
+	
 	private void setUpGlyphs() {
-		stopIcon = new Glyph("FontAwesome", "STOP");
-		pauseIcon = new Glyph("FontAwesome", "PAUSE");
 		playIcon = new Glyph("FontAwesome", "PLAY");
+		pauseIcon = new Glyph("FontAwesome", "PAUSE");
+		stopIcon = new Glyph("FontAwesome", "STOP");
+		playIcon.sizeFactor(2);
+		pauseIcon.sizeFactor(2);
+		stopIcon.sizeFactor(2);
+		String c = colorToHex(getActiveColor());
+		setGlyphColours(c);
+		
+	}
+	
+	private void setGlyphColours(String c) {
+		playIcon.setStyle("-fx-text-base-color: " + c);
+		pauseIcon.setStyle("-fx-text-base-color: " + c);
+		stopIcon.setStyle("-fx-text-base-color: " + c);
 	}
 	
 	///////////////////////////////////////////////////////////
+	
+	public static String colorToHex(Color colour) {
+		return String.format( "#%02X%02X%02X",
+				(int)( colour.getRed() * 255 ),
+				(int)( colour.getGreen() * 255 ),
+				(int)( colour.getBlue() * 255 ) );
+	}
 	
 	public boolean isRunning() {
 		return running;
@@ -304,7 +378,6 @@ public class ClockView {
 	
 	public void setTotalLength(int totalLength) {
 		this.totalLength.set(totalLength);
-		System.out.println(getTotalLength());
 	}
 	
 	public int getTaskLength() {
@@ -317,7 +390,6 @@ public class ClockView {
 	
 	public void setTaskLength(int taskLength) {
 		this.taskLength.set(taskLength);
-		System.out.println(getTaskLength());
 	}
 	
 	public int getTotalLength() {

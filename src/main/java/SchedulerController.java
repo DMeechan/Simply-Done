@@ -51,7 +51,8 @@ public class SchedulerController implements Initializable {
 		listenForTaskChanges();
 		
 		newTaskMinsLabel.textProperty().bind(newTaskTimerSlider.valueProperty().asString(("%.0f")));
-		startTasksButton.setStyle("-fx-text-fill: #12854a; -fx-background-color: #15202b");
+		startTasksButton.setStyle("-fx-text-fill: #12854a; -fx-background-color: #101820; -fx-font-weight: bold");
+		//15202b
 		deactivateEditMode();
 		
 	}
@@ -73,10 +74,10 @@ public class SchedulerController implements Initializable {
 	}
 	
 	public void addSampleData() {
-		newTask("Get good", 15, Color.web("#4dd0e1"));
-		newTask("Complete Computing IA", 4, Color.web("#9b59b6"));
-		newTask("Track down Xian's GitHub", 3, Color.web("#e74c3c"));
-		newTask("Do Maths homework", 4, Color.web("#2ecc71"));
+		newTask("Get good", 1, Color.web("#4dd0e1"));
+		newTask("Complete Computing IA", 1, Color.web("#9b59b6"));
+		newTask("Track down Xian's GitHub", 1, Color.web("#e74c3c"));
+		newTask("Do Maths homework", 1, Color.web("#2ecc71"));
 		
 	}
 	
@@ -137,8 +138,11 @@ public class SchedulerController implements Initializable {
 	
 	// EDIT MODE
 	
-	private void resetEditModeUI() {
+	private void resetEditModeUI()
+	{
 		Color colour = Color.web("#12854A");
+		//String c = ClockView.colorToHex(colour);
+		//newTaskColour.setStyle("fx-base: " + c);
 		newTaskColour.setValue(colour);
 		updateEditModeColours(colour);
 		
@@ -179,6 +183,9 @@ public class SchedulerController implements Initializable {
 			newTaskButton.setText("UPDATE");
 			newTaskTimerSlider.setValue(task.getMinutes());
 			newTaskNameTextField.setText(task.getName());
+			
+			//String c = ClockView.colorToHex(task.getColour());
+			//newTaskColour.setStyle("fx-base: " + c);
 			newTaskColour.setValue(task.getColour());
 			updateEditModeColours(task.getColour());
 			editTaskBox.setStyle("-fx-background-color: #e3e9ed");
@@ -190,7 +197,12 @@ public class SchedulerController implements Initializable {
 	//
 	
 	private void newTask() {
-		notDoneTasks.add(new Task(newTaskNameTextField.getText(), Integer.parseInt(newTaskMinsLabel.getText()),newTaskColour.getValue()));
+		if(notDoneTasks.size() == 10) {
+			System.out.println("Soo many tasks. Please mark one as done first!");
+			//Alert alert = new Alert();
+		} else {
+			notDoneTasks.add(new Task(newTaskNameTextField.getText(), Integer.parseInt(newTaskMinsLabel.getText()),newTaskColour.getValue()));
+		}
 	}
 	
 	private void newTask(String name, int mins, Color colour) {
@@ -350,6 +362,7 @@ public class SchedulerController implements Initializable {
 			button.setContentDisplay(ContentDisplay.CENTER);
 			button.setPrefSize(25.0, 25.0);
 			button.setTextAlignment(TextAlignment.CENTER);
+			button.setFocusTraversable(false);
 			HBox.setMargin(button, new Insets(5.0));
 		}
 		

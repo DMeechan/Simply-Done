@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +25,7 @@ public class Main extends Application {
 		setUpDirectories();
 		window = primaryStage;
 		window.setTitle("Simply Done");
+		window.setResizable(false);
 		
 		try {
 			String location = resourcesDir + "default-icon.png";
@@ -33,15 +35,11 @@ public class Main extends Application {
 		}
 		
 		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
-		schedulerScene = new Scene(root, 620, 700);
-		schedulerScene.getStylesheets().add("style.css");
+		schedulerScene = new Scene(root, 620, 620);
+		//schedulerScene.getStylesheets().add("style.css");
 		
 		clockActive = false;
 		window.setScene(schedulerScene);
-		
-		ClockView clock = new ClockView();
-		window.setScene(clock.getScene());
-		clockActive = true;
 		
 		window.show();
 		
@@ -50,27 +48,24 @@ public class Main extends Application {
 	}
 	
 	public static void switchScene() {
-		if(clockActive) {
-			// load tasks schedulerScene
-			window.setScene(schedulerScene);
-			clockActive = false;
-		} else {
-			// load clock
-			ClockView clock = new ClockView();
-			window.setScene(clock.getScene());
-			clockActive = true;
-		}
+		PauseTransition pause = new PauseTransition(javafx.util.Duration.millis(300));
+		pause.setOnFinished(v -> {
+			if(clockActive) {
+				// load tasks schedulerScene
+				clockActive = false;
+				window.setScene(schedulerScene);
+			} else {
+				// load clock
+				ClockView clock = new ClockView();
+				Scene clockScene = clock.getScene();
+				clockScene.getStylesheets().add("style.css");
+				window.setScene(clockScene);
+				clockActive = true;
+			}
+		});
+		pause.play();
 	}
 	
-	public static int StringMinsecToSec(String value) {
-		// Convert String 15:01 to minsec: 15 mins, 01 seconds
-		// And then convert that into seconds (minsecToSec())
-		
-		String min = String.valueOf(value.toCharArray(), 0, 2);
-		String sec = String.valueOf(value.toCharArray(), 3, 2);
-		
-		return minsecToSec(Integer.parseInt(min), Integer.parseInt(sec));
-	}
 	
 	public static String minsecToStringMinsec(int min, int secs) {
 		return String.format("%02d:%02d", min, secs);
@@ -79,10 +74,6 @@ public class Main extends Application {
 	public static String secToStringMinsec(int secs) {
 		int[] minsec = secToMinsec(secs);
 		return minsecToStringMinsec(minsec[0], minsec[1]);
-	}
-	
-	public static int minsecToSec(int mins, int secs) {
-		return secs + (mins * 60);
 	}
 	
 	public static int[] secToMinsec(int secs) {
