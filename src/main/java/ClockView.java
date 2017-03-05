@@ -70,6 +70,15 @@ public class ClockView {
 		
 	}
 	
+	public static String colorToHex(Color colour) {
+		return String.format("#%02X%02X%02X",
+				(int) (colour.getRed() * 255),
+				(int) (colour.getGreen() * 255),
+				(int) (colour.getBlue() * 255));
+	}
+	
+	// BUTTON CLICKS
+	
 	public void start() {
 		setActiveTask();
 		
@@ -84,12 +93,6 @@ public class ClockView {
 		timer.play();
 
 	}
-	
-	public Scene getScene() {
-		return new Scene(container, 620, 620);
-	}
-
-	// BUTTON CLICKS
 	
 	private void pauseClick() {
 		if(isOvertime()) { // turn this button into a stop button if in overtime
@@ -109,12 +112,32 @@ public class ClockView {
 		
 	}
 	
+	// TIMER STUFF
+	
 	private void stopClick() {
 		pauseTimer();
 		Main.switchScene();
 	}
 	
-	// TIMER STUFF
+	public void setActiveTask() {
+		if (!(activeTaskCount == taskList.size())) {
+			if (isRunning()) {
+				Toolkit.getDefaultToolkit().beep();
+			}
+			activeTask = taskList.get(activeTaskCount);
+			System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
+			
+			setActiveColor(activeTask.getColour());
+			setTaskLength(activeTask.getMinutes() * 60);
+			taskLabel.setText(activeTask.getName().toUpperCase());
+			
+			String c = colorToHex(getActiveColor());
+			setGlyphColours(c);
+			activeTaskCount++;
+		} else {
+			System.out.println("Error: next task doesn't exist...");
+		}
+	}
 	
 	private void timerTick(){
 		if(isOvertime()) { // keep increasing overtime
@@ -158,27 +181,6 @@ public class ClockView {
 		}
 	}
 	
-	public void setActiveTask() {
-		if(!(activeTaskCount==taskList.size())) {
-			if(isRunning()) {
-				Toolkit.getDefaultToolkit().beep();
-			}
-			activeTask = taskList.get(activeTaskCount);
-			System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
-			
-			setActiveColor(activeTask.getColour());
-			setTaskLength(activeTask.getMinutes()*60);
-			taskLabel.setText(activeTask.getName().toUpperCase());
-			
-			String c = colorToHex(getActiveColor());
-
-			setGlyphColours(c);
-			activeTaskCount++;
-		} else {
-			System.out.println("Error: next task doesn't exist...");
-		}
-	}
-	
 	private void startCountdownSound() {
 		playingCountdownSound = true;
 		//String location = Main.resourcesDir + "countdown.mp3";
@@ -188,6 +190,8 @@ public class ClockView {
 		mediaPlayer.play();
 	}
 	
+	// SETTING UP
+	
 	private void startOvertime() {
 		setOvertime(true);
 		Toolkit.getDefaultToolkit().beep();
@@ -196,11 +200,8 @@ public class ClockView {
 		taskTimerLabel.setVisible(false);
 		
 		String c = colorToHex(getActiveColor());
-		pauseButton.setStyle("-fx-background-color: " + c);
-		stopButton.setStyle("-fx-background-color: " + c);
+		setGlyphColours(c);
 	}
-	
-	// SETTING UP
 	
 	private VBox setProperties() {
 		
@@ -340,19 +341,16 @@ public class ClockView {
 		setGlyphColours(c);
 	}
 	
-	private void setGlyphColours(String c) {
-		playIcon.setStyle("-fx-text-base-color: " + c);
-		pauseIcon.setStyle("-fx-text-base-color: " + c);
-		stopIcon.setStyle("-fx-text-base-color: " + c);
+	public Scene getScene() {
+		return new Scene(container, 620, 620);
 	}
 	
 	///////////////////////////////////////////////////////////
 	
-	public static String colorToHex(Color colour) {
-		return String.format( "#%02X%02X%02X",
-				(int)( colour.getRed() * 255 ),
-				(int)( colour.getGreen() * 255 ),
-				(int)( colour.getBlue() * 255 ) );
+	private void setGlyphColours(String c) {
+		playIcon.setStyle("-fx-text-base-color: " + c);
+		pauseIcon.setStyle("-fx-text-base-color: " + c);
+		stopIcon.setStyle("-fx-text-base-color: " + c);
 	}
 	
 	public boolean isRunning() {
@@ -375,35 +373,35 @@ public class ClockView {
 		return totalLength;
 	}
 	
-	public void setTotalLength(int totalLength) {
-		this.totalLength.set(totalLength);
-	}
-	
 	public int getTaskLength() {
 		return taskLength.get();
-	}
-	
-	public IntegerProperty taskLengthProperty() {
-		return taskLength;
 	}
 	
 	public void setTaskLength(int taskLength) {
 		this.taskLength.set(taskLength);
 	}
 	
+	public IntegerProperty taskLengthProperty() {
+		return taskLength;
+	}
+	
 	public int getTotalLength() {
 		return totalLength.get();
+	}
+	
+	public void setTotalLength(int totalLength) {
+		this.totalLength.set(totalLength);
 	}
 	
 	public Color getActiveColor() {
 		return activeColor.get();
 	}
 	
-	public ObjectProperty<Color> activeColorProperty() {
-		return activeColor;
-	}
-	
 	public void setActiveColor(Color activeColor) {
 		this.activeColor.set(activeColor);
+	}
+	
+	public ObjectProperty<Color> activeColorProperty() {
+		return activeColor;
 	}
 }

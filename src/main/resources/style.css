@@ -1,27 +1,18 @@
-/*
-    -fx-padding: 5;
-    -fx-background-color: rgba(152, 251, 152, 0.2); // translucent palegreen
-    -fx-background-color: rgba(255, 182, 93, 0.3);  // translucent mistyrose
--fx-border-style: dashed;
-    -fx-border-color: firebrick;
-
-.button {
-    -fx-background-color: linear-gradient(to bottom, #158fdb, #1e72a6);;
-}
-
-*/
 .root {
 
-    /*
-    -fx-base:  rgb(46,52,64);
-    -fx-background: rgb(52,60,73);
-    -fx-text-base-color: rgb(238, 244, 255);
-    -fx-text-fill: -fx-text-base-color;
     -fx-light-text-color: -fx-text-base-color;
+    -fx-text-base-color: rgb(238, 244, 255);
+    -fx-background: rgb(52, 60, 73);
+    -fx-text-fill: -fx-text-base-color;
+    -fx-base: rgb(46, 52, 64);
+
+    /*
 
     base = background colour for most elements, like listview, slider, buttons, colour picker, slider etc.
     background = background colour for navigation bar and edit menu
     text base colour has minmal effect - just a bit on text
-     */
+    */
+
 
 }
+

@@ -109,12 +109,14 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	@FXML private void clickColourPicker(){
+	@FXML
+	private void clickColourPicker() {
 		Color colour = newTaskColour.getValue();
 		updateEditModeColours(colour);
 	}
 	
 	@FXML private void clickStartTasks() {
+		deactivateEditMode();
 		Main.switchScene();
 	}
 	
@@ -138,8 +140,7 @@ public class SchedulerController implements Initializable {
 	
 	// EDIT MODE
 	
-	private void resetEditModeUI()
-	{
+	private void resetEditModeUI() {
 		Color colour = Color.web("#12854A");
 		//String c = ClockView.colorToHex(colour);
 		//newTaskColour.setStyle("fx-base: " + c);
@@ -161,8 +162,7 @@ public class SchedulerController implements Initializable {
 		
 		newTaskMinsLabel.setStyle("-fx-text-fill: " + c);
 		newTaskSecsLabel.setStyle("-fx-text-fill: " + c);
-		newTaskNameTextField.setStyle("-fx-text-fill: " + c
-		);
+		newTaskNameTextField.setStyle("-fx-text-fill: " + c);
 		newTaskNameTextField.setFocusColor(colour);
 		newTaskButton.setStyle("-fx-background-color: " + c);
 		
@@ -378,6 +378,144 @@ public class SchedulerController implements Initializable {
 	
 	public static ObservableList<Task> getDoneTasks() {
 		return doneTasks;
+	}
+	
+	static class CustomCell extends ListCell<Task> {
+		
+		private static Glyph trash, check;
+		// private static Glyph play, stop;
+		final HBox container = new HBox();
+		final Text minutesText = new Text("10");
+		final Text secondsText = new Text(":00");
+		final Separator separator = new Separator();
+		final Text taskNameText = new Text("GET GOOD MR TEXT");
+		final Pane pane = new Pane();
+		final JFXButton deleteButton = new JFXButton("");
+		final JFXButton doneButton = new JFXButton("");
+		
+		Task task = null;
+		
+		public CustomCell() {
+			super();
+			
+			setUpGlyphs();
+			setProperties();
+			
+			deleteButton.setOnAction(v -> {
+				updateTaskVariable();
+				clickDelete();
+			});
+			
+			doneButton.setOnAction(v -> {
+				updateTaskVariable();
+				clickDone();
+			});
+			
+		}
+		
+		private void setUpGlyphs() {
+			trash = new Glyph("FontAwesome", "TRASH_ALT");
+			check = new Glyph("FontAwesome", "CHECK_SQUARE");
+			// play = new Glyph("FontAwesome", "PLAY");
+			// stop = new Glyph("FontAwesome", "PAUSE");
+			// remove = new Glyph("FontAwesome", "REMOVE");
+		}
+		
+		public void updateTaskVariable() {
+			task = getItem();
+		}
+		
+		// PERFORMING ACTIONS ON TASKS
+		
+		public void clickDelete() {
+			if (task.isNotDone()) {
+				notDoneTasks.remove(task);
+			} else {
+				doneTasks.remove(task);
+			}
+		}
+		
+		public void clickDone() {
+			if (task.isNotDone()) {
+				task.setNotDone(false);
+				doneTasks.add(task);
+				notDoneTasks.remove(task);
+			} else {
+				task.setNotDone(true);
+				notDoneTasks.add(task);
+				doneTasks.remove(task);
+			}
+		}
+		
+		// UPDATING THE CELL APPEARANCE
+		
+		@Override
+		public void updateItem(Task task, boolean empty) {
+			super.updateItem(task, empty);
+			
+			if (empty || task == null) {
+				setGraphic(null);
+			} else {
+				
+				minutesText.textProperty().bind(task.minutesProperty().asString());
+				taskNameText.textProperty().bind(task.nameProperty());
+				//("%.0f")
+				
+				setGraphic(container);
+			}
+			
+			if (!getListView().getItems().isEmpty()) {
+				if (!getListView().getItems().get(0).isNotDone()) {
+					//	getListView().getSelectionModel().setSelectionMode(new SelectionMode());
+					
+				}
+			}
+			
+		}
+		
+		// SETTING UP THE CELL
+		
+		public void setProperties() {
+			container.setAlignment(Pos.CENTER);
+			
+			container.setPrefSize(390.0, 25.0);
+			
+			separator.setOrientation(Orientation.VERTICAL);
+			HBox.setMargin(separator, new Insets(0, 13.0, 0, 13.0));
+			
+			setupText(minutesText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.RIGHT);
+			setupText(secondsText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.LEFT);
+			setupText(taskNameText, 12.0, 5.0, 5.0, 5.0, 5.0, TextAlignment.CENTER);
+			
+			//minutesText.setWrappingWidth(50.0);
+			HBox.setHgrow(taskNameText, Priority.ALWAYS);
+			HBox.setHgrow(pane, Priority.ALWAYS);
+			
+			setupButton(deleteButton);
+			setupButton(doneButton);
+			
+			deleteButton.setGraphic(trash);
+			doneButton.setGraphic(check);
+			
+			container.getChildren().addAll(minutesText, secondsText, separator, taskNameText, pane, deleteButton, doneButton);
+		}
+		
+		public void setupText(Text text, double fontSize, double top, double right, double bottom, double left, TextAlignment alignment) {
+			text.setTextAlignment(alignment);
+			text.setTextOrigin(VPos.CENTER);
+			text.setFont(new Font(fontSize));
+			HBox.setMargin(text, new Insets(top, right, bottom, left));
+		}
+		
+		public void setupButton(Button button) {
+			button.setAlignment(Pos.CENTER);
+			button.setContentDisplay(ContentDisplay.CENTER);
+			button.setPrefSize(25.0, 25.0);
+			button.setTextAlignment(TextAlignment.CENTER);
+			button.setFocusTraversable(false);
+			HBox.setMargin(button, new Insets(5.0));
+		}
+		
 	}
 	
 	public static void setDoneTasks(ObservableList<Task> doneTasks) {
