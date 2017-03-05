@@ -338,7 +338,6 @@ public class ClockView {
 		stopIcon.sizeFactor(2);
 		String c = colorToHex(getActiveColor());
 		setGlyphColours(c);
-		
 	}
 	
 	private void setGlyphColours(String c) {
