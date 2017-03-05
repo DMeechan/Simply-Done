@@ -11,6 +11,7 @@ import java.io.File;
 public class Main extends Application {
 	
 	static String resourcesDir;
+	static boolean clockActive = false;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -52,9 +53,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage window) throws Exception {
 		setUpDirectories();
-		Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
-		
 		window.setTitle("Simply Done");
+		
+		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
+		
 		Scene scene = new Scene(root, 620, 700);
 		scene.getStylesheets().add("style.css");
 		window.setScene(scene);
@@ -70,6 +72,16 @@ public class Main extends Application {
 		
 		window.show();
 		
+	}
+	
+	public void switchScene() {
+		if(clockActive) {
+			// load tasks scheduler
+			
+		} else {
+			// load clock
+			
+		}
 	}
 	
 	
