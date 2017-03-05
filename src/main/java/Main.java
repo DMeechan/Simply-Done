@@ -67,7 +67,7 @@ public class Main extends Application {
 	}
 	
 	
-	public static String minsecToStringMinsec(int min, int secs) {
+	private static String minsecToStringMinsec(int min, int secs) {
 		return String.format("%02d:%02d", min, secs);
 	}
 	
@@ -76,7 +76,7 @@ public class Main extends Application {
 		return minsecToStringMinsec(minsec[0], minsec[1]);
 	}
 	
-	public static int[] secToMinsec(int secs) {
+	private static int[] secToMinsec(int secs) {
 		return new int[]{(int) Math.floor(secs / 60), secs % 60};
 	}
 	

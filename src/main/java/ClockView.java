@@ -22,30 +22,27 @@ import org.controlsfx.glyphfont.Glyph;
 import java.awt.*;
 import java.io.File;
 
-/**
- * Created by Daniel on 05.03.2017.
- */
 public class ClockView {
 	
-	private ObservableList<Task> taskList;
+	private final ObservableList<Task> taskList;
 	private Task activeTask;
 	private int activeTaskCount = 0;
 	private boolean running, overtime, playingCountdownSound;
 	
 	private Timeline timer;
-	private IntegerProperty totalLength = new SimpleIntegerProperty(60);
-	private IntegerProperty taskLength = new SimpleIntegerProperty(0);
+	private final IntegerProperty totalLength = new SimpleIntegerProperty(60);
+	private final IntegerProperty taskLength = new SimpleIntegerProperty(0);
 	private MediaPlayer mediaPlayer;
 	
-	private VBox container;
-	private Rectangle leftSeparator, rightSeparator;
+	private final VBox container;
+	
 	private Label taskLabel, taskTimerLabel, totalTimerLabel;
-	private Gauge timerClock;
+	private final Gauge timerClock;
 	private JFXButton pauseButton, stopButton;
 	private FadeTransition pauseFade, stopFade, timerLabelFade, timerClockFade;
 	
 	private Glyph stopIcon, pauseIcon, playIcon;
-	private ObjectProperty<Color> activeColor = new SimpleObjectProperty<Color>(Color.web("#ffffff"));
+	private final ObjectProperty<Color> activeColor = new SimpleObjectProperty<Color>(Color.web("#ffffff"));
 	
 	ClockView() {
 		
@@ -70,7 +67,7 @@ public class ClockView {
 		
 	}
 	
-	public static String colorToHex(Color colour) {
+	private static String colorToHex(Color colour) {
 		return String.format("#%02X%02X%02X",
 				(int) (colour.getRed() * 255),
 				(int) (colour.getGreen() * 255),
@@ -79,7 +76,7 @@ public class ClockView {
 	
 	// BUTTON CLICKS
 	
-	public void start() {
+	private void start() {
 		setActiveTask();
 		
 		setOvertime(false);
@@ -119,7 +116,7 @@ public class ClockView {
 		Main.switchScene();
 	}
 	
-	public void setActiveTask() {
+	private void setActiveTask() {
 		if (!(activeTaskCount == taskList.size())) {
 			if (isRunning()) {
 				Toolkit.getDefaultToolkit().beep();
@@ -213,6 +210,7 @@ public class ClockView {
 		
 		// LINEBAR
 		
+		Rectangle leftSeparator, rightSeparator;
 		leftSeparator = new Rectangle(200, 3);
 		leftSeparator.setArcWidth(6);
 		leftSeparator.setArcHeight(6);
@@ -227,9 +225,7 @@ public class ClockView {
 		taskTimerLabel.textFillProperty().bind(activeColorProperty());
 		taskTimerLabel.setAlignment(Pos.CENTER);
 		taskTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: bold italic 20pt \"Arial\"");
-		taskLengthProperty().addListener(v -> {
-			taskTimerLabel.setText(Main.secToStringMinsec(getTaskLength()));
-		});
+		taskLengthProperty().addListener(v -> taskTimerLabel.setText(Main.secToStringMinsec(getTaskLength())));
 		
 		HBox lineBar = new HBox();
 		lineBar.setAlignment(Pos.CENTER);
@@ -244,9 +240,7 @@ public class ClockView {
 		totalTimerLabel.setAlignment(Pos.CENTER);
 		totalTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: 62pt \"Arial\"");
 		totalTimerLabel.textFillProperty().bind(activeColorProperty());
-		totalLengthProperty().addListener(v -> {
-			totalTimerLabel.setText(Main.secToStringMinsec(getTotalLength()));
-		});
+		totalLengthProperty().addListener(v -> totalTimerLabel.setText(Main.secToStringMinsec(getTotalLength())));
 		
 		stopButton = new JFXButton();
 		stopButton.setPrefSize(36,36);
@@ -353,55 +347,55 @@ public class ClockView {
 		stopIcon.setStyle("-fx-text-base-color: " + c);
 	}
 	
-	public boolean isRunning() {
+	private boolean isRunning() {
 		return running;
 	}
 	
-	public void setRunning(boolean running) {
+	private void setRunning(boolean running) {
 		this.running = running;
 	}
 	
-	public boolean isOvertime() {
+	private boolean isOvertime() {
 		return overtime;
 	}
 	
-	public void setOvertime(boolean overtime) {
+	private void setOvertime(boolean overtime) {
 		this.overtime = overtime;
 	}
 	
-	public IntegerProperty totalLengthProperty() {
+	private IntegerProperty totalLengthProperty() {
 		return totalLength;
 	}
 	
-	public int getTaskLength() {
+	private int getTaskLength() {
 		return taskLength.get();
 	}
 	
-	public void setTaskLength(int taskLength) {
+	private void setTaskLength(int taskLength) {
 		this.taskLength.set(taskLength);
 	}
 	
-	public IntegerProperty taskLengthProperty() {
+	private IntegerProperty taskLengthProperty() {
 		return taskLength;
 	}
 	
-	public int getTotalLength() {
+	private int getTotalLength() {
 		return totalLength.get();
 	}
 	
-	public void setTotalLength(int totalLength) {
+	private void setTotalLength(int totalLength) {
 		this.totalLength.set(totalLength);
 	}
 	
-	public Color getActiveColor() {
+	private Color getActiveColor() {
 		return activeColor.get();
 	}
 	
-	public void setActiveColor(Color activeColor) {
+	private void setActiveColor(Color activeColor) {
 		this.activeColor.set(activeColor);
 	}
 	
-	public ObjectProperty<Color> activeColorProperty() {
+	private ObjectProperty<Color> activeColorProperty() {
 		return activeColor;
 	}
 }

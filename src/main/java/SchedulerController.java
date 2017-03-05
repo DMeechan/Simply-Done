@@ -57,7 +57,7 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	public void initializeTaskViewList() {
+	private void initializeTaskViewList() {
 		tasksListView.setItems(notDoneTasks);
 		
 		useCustomCell();
@@ -73,11 +73,11 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	public void addSampleData() {
-		newTask("Get good", 1, Color.web("#4dd0e1"));
-		newTask("Complete Computing IA", 1, Color.web("#9b59b6"));
-		newTask("Track down Xian's GitHub", 1, Color.web("#e74c3c"));
-		newTask("Do Maths homework", 1, Color.web("#2ecc71"));
+	private void addSampleData() {
+		newTask("Email Mark", 1, Color.web("#e67e22"));
+		newTask("Commit latest build to GitHub", 1, Color.web("#2ecc71"));
+		newTask("Update documents", 1, Color.web("#e74c3c"));
+		newTask("Finish writing report", 1, Color.web("#3498db"));
 		
 	}
 	
@@ -109,8 +109,7 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	@FXML
-	private void clickColourPicker() {
+	@FXML private void clickColourPicker() {
 		Color colour = newTaskColour.getValue();
 		updateEditModeColours(colour);
 	}
@@ -194,7 +193,7 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	//
+	// OTHER
 	
 	private void newTask() {
 		if(notDoneTasks.size() == 10) {
@@ -214,21 +213,14 @@ public class SchedulerController implements Initializable {
 	}
 	
 	private void listenForTaskChanges() {
-		notDoneTasks.addListener((ListChangeListener<Task>) c -> {
-			deactivateEditMode();
-		});
+		notDoneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
 		
-		doneTasks.addListener((ListChangeListener<Task>) c -> {
-			deactivateEditMode();
-		});
+		doneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
 	}
 	
 	//////////////////////////////
 	// CUSTOM CELL FOR LISTVIEW //
 	//////////////////////////////
-	
-	
-	// GETTERS AND SETTERS
 	
 	static class CustomCell extends ListCell<Task> {
 		
@@ -245,7 +237,7 @@ public class SchedulerController implements Initializable {
 		
 		Task task = null;
 		
-		public CustomCell() {
+		private CustomCell() {
 			super();
 			
 			setUpGlyphs();
@@ -255,7 +247,7 @@ public class SchedulerController implements Initializable {
 				updateTaskVariable();
 				clickDelete();
 			});
-
+			
 			doneButton.setOnAction(v -> {
 				updateTaskVariable();
 				clickDone();
@@ -266,18 +258,15 @@ public class SchedulerController implements Initializable {
 		private void setUpGlyphs() {
 			trash = new Glyph("FontAwesome", "TRASH_ALT");
 			check = new Glyph("FontAwesome", "CHECK_SQUARE");
-			// play = new Glyph("FontAwesome", "PLAY");
-			// stop = new Glyph("FontAwesome", "PAUSE");
-			// remove = new Glyph("FontAwesome", "REMOVE");
 		}
 		
-		public void updateTaskVariable() {
+		private void updateTaskVariable() {
 			task = getItem();
 		}
 		
 		// PERFORMING ACTIONS ON TASKS
 		
-		public void clickDelete() {
+		private void clickDelete() {
 			if (task.isNotDone()) {
 				notDoneTasks.remove(task);
 			} else {
@@ -285,7 +274,7 @@ public class SchedulerController implements Initializable {
 			}
 		}
 		
-		public void clickDone() {
+		private void clickDone() {
 			if (task.isNotDone()) {
 				task.setNotDone(false);
 				doneTasks.add(task);
@@ -306,7 +295,7 @@ public class SchedulerController implements Initializable {
 			if (empty || task == null) {
 				setGraphic(null);
 			} else {
-
+				
 				minutesText.textProperty().bind(task.minutesProperty().asString());
 				taskNameText.textProperty().bind(task.nameProperty());
 				//("%.0f")
@@ -316,8 +305,8 @@ public class SchedulerController implements Initializable {
 			
 			if(!getListView().getItems().isEmpty()){
 				if(!getListView().getItems().get(0).isNotDone()){
-				//	getListView().getSelectionModel().setSelectionMode(new SelectionMode());
-		
+					//	getListView().getSelectionModel().setSelectionMode(new SelectionMode());
+					
 				}
 			}
 			
@@ -325,7 +314,7 @@ public class SchedulerController implements Initializable {
 		
 		// SETTING UP THE CELL
 		
-		public void setProperties() {
+		private void setProperties() {
 			container.setAlignment(Pos.CENTER);
 			
 			container.setPrefSize(390.0, 25.0);
@@ -336,7 +325,7 @@ public class SchedulerController implements Initializable {
 			setupText(minutesText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.RIGHT);
 			setupText(secondsText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.LEFT);
 			setupText(taskNameText, 12.0, 5.0, 5.0, 5.0, 5.0, TextAlignment.CENTER);
-
+			
 			//minutesText.setWrappingWidth(50.0);
 			HBox.setHgrow(taskNameText, Priority.ALWAYS);
 			HBox.setHgrow(pane, Priority.ALWAYS);
@@ -350,14 +339,14 @@ public class SchedulerController implements Initializable {
 			container.getChildren().addAll(minutesText, secondsText, separator, taskNameText, pane, deleteButton, doneButton);
 		}
 		
-		public void setupText(Text text, double fontSize, double top, double right, double bottom, double left, TextAlignment alignment) {
+		private void setupText(Text text, double fontSize, double top, double right, double bottom, double left, TextAlignment alignment) {
 			text.setTextAlignment(alignment);
 			text.setTextOrigin(VPos.CENTER);
 			text.setFont(new Font(fontSize));
 			HBox.setMargin(text, new Insets(top, right, bottom, left));
 		}
 		
-		public void setupButton(Button button) {
+		private void setupButton(Button button) {
 			button.setAlignment(Pos.CENTER);
 			button.setContentDisplay(ContentDisplay.CENTER);
 			button.setPrefSize(25.0, 25.0);
@@ -372,153 +361,4 @@ public class SchedulerController implements Initializable {
 		return notDoneTasks;
 	}
 	
-	public static void setNotDoneTasks(ObservableList<Task> notDoneTasks) {
-		SchedulerController.notDoneTasks = notDoneTasks;
-	}
-	
-	public static ObservableList<Task> getDoneTasks() {
-		return doneTasks;
-	}
-	
-	static class CustomCell extends ListCell<Task> {
-		
-		private static Glyph trash, check;
-		// private static Glyph play, stop;
-		final HBox container = new HBox();
-		final Text minutesText = new Text("10");
-		final Text secondsText = new Text(":00");
-		final Separator separator = new Separator();
-		final Text taskNameText = new Text("GET GOOD MR TEXT");
-		final Pane pane = new Pane();
-		final JFXButton deleteButton = new JFXButton("");
-		final JFXButton doneButton = new JFXButton("");
-		
-		Task task = null;
-		
-		public CustomCell() {
-			super();
-			
-			setUpGlyphs();
-			setProperties();
-			
-			deleteButton.setOnAction(v -> {
-				updateTaskVariable();
-				clickDelete();
-			});
-			
-			doneButton.setOnAction(v -> {
-				updateTaskVariable();
-				clickDone();
-			});
-			
-		}
-		
-		private void setUpGlyphs() {
-			trash = new Glyph("FontAwesome", "TRASH_ALT");
-			check = new Glyph("FontAwesome", "CHECK_SQUARE");
-			// play = new Glyph("FontAwesome", "PLAY");
-			// stop = new Glyph("FontAwesome", "PAUSE");
-			// remove = new Glyph("FontAwesome", "REMOVE");
-		}
-		
-		public void updateTaskVariable() {
-			task = getItem();
-		}
-		
-		// PERFORMING ACTIONS ON TASKS
-		
-		public void clickDelete() {
-			if (task.isNotDone()) {
-				notDoneTasks.remove(task);
-			} else {
-				doneTasks.remove(task);
-			}
-		}
-		
-		public void clickDone() {
-			if (task.isNotDone()) {
-				task.setNotDone(false);
-				doneTasks.add(task);
-				notDoneTasks.remove(task);
-			} else {
-				task.setNotDone(true);
-				notDoneTasks.add(task);
-				doneTasks.remove(task);
-			}
-		}
-		
-		// UPDATING THE CELL APPEARANCE
-		
-		@Override
-		public void updateItem(Task task, boolean empty) {
-			super.updateItem(task, empty);
-			
-			if (empty || task == null) {
-				setGraphic(null);
-			} else {
-				
-				minutesText.textProperty().bind(task.minutesProperty().asString());
-				taskNameText.textProperty().bind(task.nameProperty());
-				//("%.0f")
-				
-				setGraphic(container);
-			}
-			
-			if (!getListView().getItems().isEmpty()) {
-				if (!getListView().getItems().get(0).isNotDone()) {
-					//	getListView().getSelectionModel().setSelectionMode(new SelectionMode());
-					
-				}
-			}
-			
-		}
-		
-		// SETTING UP THE CELL
-		
-		public void setProperties() {
-			container.setAlignment(Pos.CENTER);
-			
-			container.setPrefSize(390.0, 25.0);
-			
-			separator.setOrientation(Orientation.VERTICAL);
-			HBox.setMargin(separator, new Insets(0, 13.0, 0, 13.0));
-			
-			setupText(minutesText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.RIGHT);
-			setupText(secondsText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.LEFT);
-			setupText(taskNameText, 12.0, 5.0, 5.0, 5.0, 5.0, TextAlignment.CENTER);
-			
-			//minutesText.setWrappingWidth(50.0);
-			HBox.setHgrow(taskNameText, Priority.ALWAYS);
-			HBox.setHgrow(pane, Priority.ALWAYS);
-			
-			setupButton(deleteButton);
-			setupButton(doneButton);
-			
-			deleteButton.setGraphic(trash);
-			doneButton.setGraphic(check);
-			
-			container.getChildren().addAll(minutesText, secondsText, separator, taskNameText, pane, deleteButton, doneButton);
-		}
-		
-		public void setupText(Text text, double fontSize, double top, double right, double bottom, double left, TextAlignment alignment) {
-			text.setTextAlignment(alignment);
-			text.setTextOrigin(VPos.CENTER);
-			text.setFont(new Font(fontSize));
-			HBox.setMargin(text, new Insets(top, right, bottom, left));
-		}
-		
-		public void setupButton(Button button) {
-			button.setAlignment(Pos.CENTER);
-			button.setContentDisplay(ContentDisplay.CENTER);
-			button.setPrefSize(25.0, 25.0);
-			button.setTextAlignment(TextAlignment.CENTER);
-			button.setFocusTraversable(false);
-			HBox.setMargin(button, new Insets(5.0));
-		}
-		
-	}
-	
-	public static void setDoneTasks(ObservableList<Task> doneTasks) {
-		SchedulerController.doneTasks = doneTasks;
-	}
 }

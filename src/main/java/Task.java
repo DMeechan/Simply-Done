@@ -10,8 +10,8 @@ class Task {
 	private boolean isNotDone; // is the timer currently marked as done
 	private Color colour; // task's user-defined colour
 	
-	private IntegerProperty minutes = new SimpleIntegerProperty(0);
-	private IntegerProperty seconds = new SimpleIntegerProperty(0);
+	private final IntegerProperty minutes = new SimpleIntegerProperty(0);
+	private final IntegerProperty seconds = new SimpleIntegerProperty(0);
 	
 	
 	public Task(String name, int minutes, Color colour) {
@@ -30,10 +30,6 @@ class Task {
 	////////////////////////////
 	
 	
-	public boolean isNotDone() {
-		return isNotDone;
-	}
-	
 	public void setNotDone(boolean notDone) {
 		isNotDone = notDone;
 	}
@@ -46,14 +42,6 @@ class Task {
 		this.name.set(name);
 	}
 	
-	public StringProperty nameProperty() {
-		return name;
-	}
-	
-	public Color getColour() {
-		return colour;
-	}
-	
 	public void setColour(Color colour) {
 		this.colour = colour;
 	}
@@ -62,23 +50,27 @@ class Task {
 		return minutes.get();
 	}
 	
-	public IntegerProperty minutesProperty() {
-		return minutes;
-	}
-	
 	public void setMinutes(int minutes) {
 		this.minutes.set(minutes);
 	}
 	
-	public int getSeconds() {
+	private int getSeconds() {
 		return seconds.get();
 	}
 	
-	public IntegerProperty secondsProperty() {
-		return seconds;
+	public boolean isNotDone() {
+		return isNotDone;
 	}
 	
-	public void setSeconds(int seconds) {
-		this.seconds.set(seconds);
+	public StringProperty nameProperty() {
+		return name;
+	}
+	
+	public IntegerProperty minutesProperty() {
+		return minutes;
+	}
+	
+	public Color getColour() {
+		return colour;
 	}
 }
