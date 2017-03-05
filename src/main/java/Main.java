@@ -11,10 +11,55 @@ import java.io.File;
 public class Main extends Application {
 	
 	static String resourcesDir;
-	static boolean clockActive = false;
+	private static Stage window;
+	private static Scene schedulerScene;
+	private static boolean clockActive;
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		setUpDirectories();
+		window = primaryStage;
+		window.setTitle("Simply Done");
+		
+		try {
+			String location = resourcesDir + "default-icon.png";
+			window.getIcons().add(new Image(new File(location).toURI().toString()));
+		} catch (Exception iconError) {
+			System.out.println("Error: application icon not found");
+		}
+		
+		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
+		schedulerScene = new Scene(root, 620, 700);
+		schedulerScene.getStylesheets().add("style.css");
+		
+		clockActive = false;
+		window.setScene(schedulerScene);
+		
+		ClockView clock = new ClockView();
+		window.setScene(clock.getScene());
+		clockActive = true;
+		
+		window.show();
+		
+		//SchedulerController.getNotDoneTasks().add(new Task("Get good", 1, Color.web("#2ecc71")));
+		
+	}
+	
+	public static void switchScene() {
+		if(clockActive) {
+			// load tasks schedulerScene
+			window.setScene(schedulerScene);
+			clockActive = false;
+		} else {
+			// load clock
+			ClockView clock = new ClockView();
+			window.setScene(clock.getScene());
+			clockActive = true;
+		}
 	}
 	
 	public static int StringMinsecToSec(String value) {
@@ -49,40 +94,5 @@ public class Main extends Application {
 		resourcesDir = System.getProperty("user.dir") + "/resources/";
 		
 	}
-	
-	@Override
-	public void start(Stage window) throws Exception {
-		setUpDirectories();
-		window.setTitle("Simply Done");
-		
-		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
-		
-		Scene scene = new Scene(root, 620, 700);
-		scene.getStylesheets().add("style.css");
-		window.setScene(scene);
-		
-		System.out.println("testing out scheduler branch");
-		
-		try {
-			String location = resourcesDir + "default-icon.png";
-			window.getIcons().add(new Image(new File(location).toURI().toString()));
-		} catch (Exception iconError) {
-			System.out.println("Error: application icon not found");
-		}
-		
-		window.show();
-		
-	}
-	
-	public void switchScene() {
-		if(clockActive) {
-			// load tasks scheduler
-			
-		} else {
-			// load clock
-			
-		}
-	}
-	
 	
 }

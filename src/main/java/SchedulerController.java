@@ -73,9 +73,11 @@ public class SchedulerController implements Initializable {
 	}
 	
 	public void addSampleData() {
-		newTask("Get good", 1, Color.DARKSLATEBLUE);
-		newTask("Get good 2", 1, Color.DARKORANGE);
-		newTask("Do Maths homework", 14, Color.DARKRED);
+		newTask("Get good", 15, Color.web("#4dd0e1"));
+		newTask("Complete Computing IA", 4, Color.web("#9b59b6"));
+		newTask("Track down Xian's GitHub", 3, Color.web("#e74c3c"));
+		newTask("Do Maths homework", 4, Color.web("#2ecc71"));
+		
 	}
 	
 	private void useCustomCell() {
@@ -112,7 +114,7 @@ public class SchedulerController implements Initializable {
 	}
 	
 	@FXML private void clickStartTasks() {
-		
+		Main.switchScene();
 	}
 	
 	@FXML public void clickToggleTasksView() {
@@ -294,6 +296,7 @@ public class SchedulerController implements Initializable {
 			} else {
 
 				minutesText.textProperty().bind(task.minutesProperty().asString());
+				taskNameText.textProperty().bind(task.nameProperty());
 				//("%.0f")
 				
 				setGraphic(container);
@@ -306,9 +309,7 @@ public class SchedulerController implements Initializable {
 				}
 			}
 			
-			
 		}
-		
 		
 		// SETTING UP THE CELL
 		
@@ -354,4 +355,19 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
+	public static ObservableList<Task> getNotDoneTasks() {
+		return notDoneTasks;
+	}
+	
+	public static void setNotDoneTasks(ObservableList<Task> notDoneTasks) {
+		SchedulerController.notDoneTasks = notDoneTasks;
+	}
+	
+	public static ObservableList<Task> getDoneTasks() {
+		return doneTasks;
+	}
+	
+	public static void setDoneTasks(ObservableList<Task> doneTasks) {
+		SchedulerController.doneTasks = doneTasks;
+	}
 }
