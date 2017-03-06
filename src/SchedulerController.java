@@ -8,8 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.*;
+import javafx.geometry.VPos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -75,7 +75,7 @@ public class SchedulerController implements Initializable {
 	
 	private void addSampleData() {
 		newTask("Email Mark", 1, Color.web("#e67e22"));
-		newTask("Commit latest build to GitHub", 1, Color.web("#2ecc71"));
+		newTask("Commit latest build to GitHub", 2, Color.web("#2ecc71"));
 		newTask("Update documents", 1, Color.web("#e74c3c"));
 		newTask("Finish writing report", 1, Color.web("#3498db"));
 		
