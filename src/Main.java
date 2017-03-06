@@ -35,8 +35,6 @@ public class Main extends Application {
 			System.out.println("Error: application icon not found");
 		}
 		
-		System.out.println( getClass().getResource(getClass().getSimpleName() + ".class") );
-		System.out.println(getClass().getResource("scheduler.fxml"));
 		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
 		schedulerScene = new Scene(root, 620, 620);
 		//schedulerScene.getStylesheets().add("style.css");
