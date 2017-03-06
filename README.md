@@ -2,7 +2,7 @@
 Helping people be more productive.
 Currently developing this as part of my Computer Science project. 
 
-Download the latest compiled jar file from the scheduler branch <a href="https://github.com/DMeechan/simply-done/blob/scheduler/Simply%20Done.jar?raw=true">here</a>.
+Download the latest compiled jar file from the scheduler branch <a href="https://goo.gl/ofeCKb">here</a>.
 
 ~~Once that's complete, I'll likely continue adding new features, like a task scheduler.~~
 
