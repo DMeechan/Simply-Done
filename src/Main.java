@@ -1,5 +1,6 @@
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,6 +35,8 @@ public class Main extends Application {
 			System.out.println("Error: application icon not found");
 		}
 		
+		System.out.println( getClass().getResource(getClass().getSimpleName() + ".class") );
+		System.out.println(getClass().getResource("scheduler.fxml"));
 		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
 		schedulerScene = new Scene(root, 620, 620);
 		//schedulerScene.getStylesheets().add("style.css");
@@ -42,6 +45,11 @@ public class Main extends Application {
 		window.setScene(schedulerScene);
 		
 		window.show();
+		
+		window.setOnCloseRequest(v -> {
+			Platform.exit();
+			System.exit(0);
+		});
 		
 		//SchedulerController.getNotDoneTasks().add(new Task("Get good", 1, Color.web("#2ecc71")));
 		
