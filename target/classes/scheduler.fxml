@@ -30,7 +30,7 @@
                         <Insets left="5.0" right="2.0" />
                     </HBox.margin>
                 </Separator>
-                <Label fx:id="newTaskMinsLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="18.0" text="5" textFill="#2980b9">
+                <Label fx:id="newTaskMinsLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="25.0" text="5" textFill="#2980b9">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -38,7 +38,7 @@
                         <Insets bottom="10.0" top="12.0" />
                     </HBox.margin>
                 </Label>
-            <Label fx:id="newTaskSecsLabel" layoutX="365.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="22.0" text=":00" textFill="#2980b9">
+            <Label fx:id="newTaskSecsLabel" layoutX="365.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="25.0" text=":00" textFill="#2980b9">
                <font>
                   <Font size="16.0" />
                </font>

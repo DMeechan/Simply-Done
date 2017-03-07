@@ -23,13 +23,16 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// set up basic window
+		// set up basic window - all activity will happen inside the window object
 		setUpDirectories();
 		window = primaryStage;
 		window.setTitle("Simply Done");
 		window.setResizable(false);
 		
 		// try to load application icon
+		// this implementation makes the file handling platform-agnostic
+		// so the icon should work on different platforms
+		// (however, setting the icon Dock icon on Mac requires making additional calls
 		try {
 			String location = resourcesDir + "default-icon.png";
 			window.getIcons().add(new Image(new File(location).toURI().toString()));

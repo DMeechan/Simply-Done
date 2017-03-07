@@ -310,6 +310,7 @@ public class SchedulerController implements Initializable {
 			}
 		}
 		
+		// prevent more than 12 tasks from being added to the lists
 		private void clickDone() {
 			if (task.isNotDone() && doneTasks.size() < 12) {
 					task.setNotDone(false);
