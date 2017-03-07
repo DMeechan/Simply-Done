@@ -24,11 +24,6 @@ import java.util.ResourceBundle;
 
 public class SchedulerController implements Initializable {
 	
-	private static ObservableList<Task> notDoneTasks;
-	private static ObservableList<Task> doneTasks;
-	
-	@FXML private JFXListView<Task> tasksListView;
-	
 	@FXML private JFXSlider newTaskTimerSlider;
 	@FXML private Label newTaskMinsLabel, newTaskSecsLabel;
 	@FXML private JFXTextField newTaskNameTextField;
@@ -37,6 +32,11 @@ public class SchedulerController implements Initializable {
 	@FXML private JFXToggleButton tasksViewSwitch;
 	@FXML private JFXColorPicker newTaskColour;
 	private boolean editModeActive;
+	
+	private static ObservableList<Task> notDoneTasks;
+	private static ObservableList<Task> doneTasks;
+	
+	@FXML private JFXListView<Task> tasksListView;
 	
 	public SchedulerController() {
 		editModeActive = false;
@@ -92,7 +92,7 @@ public class SchedulerController implements Initializable {
 		
 		if (editModeActive) {
 			Task task = tasksListView.getSelectionModel().getSelectedItem();
-			task.setMinutes((int)newTaskTimerSlider.getValue());
+			task.setMinutes(Integer.parseInt(newTaskMinsLabel.getText()));
 			task.setName(newTaskNameTextField.getText());
 			task.setColour(newTaskColour.getValue());
 			
@@ -102,7 +102,6 @@ public class SchedulerController implements Initializable {
 			// Makes sure the textfield isn't empty
 			newTask();
 			resetEditModeUI();
-			
 		}
 		
 		clearListViewSelection();
@@ -230,7 +229,7 @@ public class SchedulerController implements Initializable {
 		final Text minutesText = new Text("10");
 		final Text secondsText = new Text(":00");
 		final Separator separator = new Separator();
-		final Text taskNameText = new Text("GET GOOD MR TEXT");
+		final Text taskNameText = new Text("TASK NAME TEXT");
 		final Pane pane = new Pane();
 		final JFXButton deleteButton = new JFXButton("");
 		final JFXButton doneButton = new JFXButton("");

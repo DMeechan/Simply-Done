@@ -7,10 +7,9 @@
     -fx-base: rgb(46, 52, 64);
 
     /*
-
     base = background colour for most elements, like listview, slider, buttons, colour picker, slider etc.
     background = background colour for navigation bar and edit menu
-    text base colour has minmal effect - just a bit on text
+    text base colour has minmal effect - only a small amount of text
     */
 
 

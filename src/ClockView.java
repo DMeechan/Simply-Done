@@ -25,24 +25,29 @@ import java.io.File;
 public class ClockView {
 	
 	private final ObservableList<Task> taskList;
-	private Task activeTask;
-	private int activeTaskCount = 0;
+	private Task activeTask; // task which is currently being used for taskTimer
+	private int activeTaskCount = 0; // array value of task which is currently active
 	private boolean running, overtime, playingCountdownSound;
+	// store if the timers are running, if the main timer is in overtime, and if the countdown sound is being played
 	
 	private Timeline timer;
 	private final IntegerProperty totalLength = new SimpleIntegerProperty(60);
+	// current timer value for main timer
 	private final IntegerProperty taskLength = new SimpleIntegerProperty(0);
+	// current timer value for task timer
 	private MediaPlayer mediaPlayer;
+	// used for playing countdown sound
 	
 	private final VBox container;
-	
 	private Label taskLabel, taskTimerLabel, totalTimerLabel;
 	private final Gauge timerClock;
 	private JFXButton pauseButton, stopButton;
 	private FadeTransition pauseFade, stopFade, timerLabelFade, timerClockFade;
 	
 	private Glyph stopIcon, pauseIcon, playIcon;
-	private final ObjectProperty<Color> activeColor = new SimpleObjectProperty<Color>(Color.web("#ffffff"));
+	private final ObjectProperty<Color> activeColour = new SimpleObjectProperty<Color>(Color.web("#ffffff"));
+	// activeColour represents the colour of the current active task
+	// changing this value updates the colour of everything in this scene
 	
 	ClockView() {
 		
@@ -54,10 +59,13 @@ public class ClockView {
 		}
 		
 		setTotalLength(combinedLength * 60); // set the total timer length to combined tasks lengths
+		// length * 60 because the length is in minutes
+		// we need the timer to count down in seconds
 		GaugeBuilder builder = GaugeBuilder.create().skinType(Gauge.SkinType.SLIM);
 		timerClock = builder.decimals(0).maxValue(getTotalLength()).build();
 		timerClock.valueProperty().bind(totalLengthProperty());
 		timerClock.setValueVisible(false);
+		// hide clock's native text field
 		
 		setUpGlyphs();
 		container = setProperties();
@@ -77,6 +85,7 @@ public class ClockView {
 	// BUTTON CLICKS
 	
 	private void start() {
+		// start timer countdown
 		setActiveTask();
 		
 		setOvertime(false);
@@ -117,18 +126,28 @@ public class ClockView {
 	}
 	
 	private void setActiveTask() {
+		// found area for optimisation: instead of storing a reference to the active task
+		// just update the class's stored task colour, length, and name values
+		// no need to store the task itself
+		
+		// task timer has reached 00:00 - time to move to next task
 		if (!(activeTaskCount == taskList.size())) {
+			// check there are still more tasks to go through
 			if (isRunning()) {
+				// if not running, then means the main timer has reached 0 too
+				// so make sure it is running to avoid spamming the user with too many sounds
 				Toolkit.getDefaultToolkit().beep();
 			}
+			// get next task in list
 			activeTask = taskList.get(activeTaskCount);
-			System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
+			//System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
 			
-			setActiveColor(activeTask.getColour());
+			// update global
+			setActiveColour(activeTask.getColour());
 			setTaskLength(activeTask.getMinutes() * 60);
 			taskLabel.setText(activeTask.getName().toUpperCase());
 			
-			String c = colorToHex(getActiveColor());
+			String c = colorToHex(getActiveColour());
 			setGlyphColours(c);
 			activeTaskCount++;
 		} else {
@@ -192,18 +211,18 @@ public class ClockView {
 	private void startOvertime() {
 		setOvertime(true);
 		Toolkit.getDefaultToolkit().beep();
-		setActiveColor(Color.web("#e74c3c"));
+		setActiveColour(Color.web("#e74c3c"));
 		taskLabel.setText("OVERTIME!");
 		taskTimerLabel.setVisible(false);
 		
-		String c = colorToHex(getActiveColor());
+		String c = colorToHex(getActiveColour());
 		setGlyphColours(c);
 	}
 	
 	private VBox setProperties() {
 		
 		taskLabel = new Label("INSERT TASK NAME HERE!");
-		taskLabel.textFillProperty().bind(activeColorProperty());
+		
 		taskLabel.setAlignment(Pos.CENTER);
 		taskLabel.setPadding(new Insets(0, 10, 0, 10));
 		taskLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font-size: 18.0; -fx-font-style: italic");
@@ -214,15 +233,13 @@ public class ClockView {
 		leftSeparator = new Rectangle(200, 3);
 		leftSeparator.setArcWidth(6);
 		leftSeparator.setArcHeight(6);
-		leftSeparator.fillProperty().bind(activeColorProperty());
+		
 		
 		rightSeparator = new Rectangle(200, 3);
 		rightSeparator.setArcWidth(6);
 		rightSeparator.setArcHeight(6);
-		rightSeparator.fillProperty().bind(activeColorProperty());
 		
 		taskTimerLabel = new Label("");
-		taskTimerLabel.textFillProperty().bind(activeColorProperty());
 		taskTimerLabel.setAlignment(Pos.CENTER);
 		taskTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: bold italic 20pt \"Arial\"");
 		taskLengthProperty().addListener(v -> taskTimerLabel.setText(Main.secToStringMinsec(getTaskLength())));
@@ -236,10 +253,11 @@ public class ClockView {
 		// TIMER CENTRE
 		
 		totalTimerLabel = new Label("");
+		//totalTimerLabel.setText("Loading");
 		totalTimerLabel.textFillProperty().set(Color.WHITE);
 		totalTimerLabel.setAlignment(Pos.CENTER);
 		totalTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: 62pt \"Arial\"");
-		totalTimerLabel.textFillProperty().bind(activeColorProperty());
+		
 		totalLengthProperty().addListener(v -> totalTimerLabel.setText(Main.secToStringMinsec(getTotalLength())));
 		
 		stopButton = new JFXButton();
@@ -269,10 +287,19 @@ public class ClockView {
 		timerCentre.setSpacing(10);
 		timerCentre.getChildren().addAll(totalTimerLabel, buttonsBox);
 		
+		// bind the colour of all items in the interface to the activeColourProperty
+		// NOTE: can't bind colour of button graphics ; can only bind their background colour
+		taskLabel.textFillProperty().bind(activeColourProperty());
+		leftSeparator.fillProperty().bind(activeColourProperty());
+		rightSeparator.fillProperty().bind(activeColourProperty());
+		taskTimerLabel.textFillProperty().bind(activeColourProperty());
+		totalTimerLabel.textFillProperty().bind(activeColourProperty());
+		timerClock.barColorProperty().bind(activeColourProperty());
+		
 		StackPane timerPane = new StackPane();
 		timerPane.getChildren().addAll(timerClock, timerCentre);
 		
-		timerClock.barColorProperty().bind(activeColorProperty());
+		
 		//timerClock.setBarBackgroundColor(Color.web("#272c32"));
 
 		timerClock.setAnimationDuration(200);
@@ -289,6 +316,8 @@ public class ClockView {
 	}
 	
 	private void setUpFades(){
+		// set up the whole group of fade transitions
+		// create fade transitions for every element that will fade in and out
 		pauseFade = new FadeTransition(Duration.millis(600), pauseButton);
 		stopFade = new FadeTransition(Duration.millis(600), stopButton);
 		timerLabelFade = new FadeTransition(Duration.millis(600), totalTimerLabel);
@@ -298,10 +327,10 @@ public class ClockView {
 		setUpFade(stopFade);
 		setUpFade(timerClockFade);
 		setUpFade(timerLabelFade);
-		
 	}
 	
 	private void setUpFade(FadeTransition fade) {
+		// set properties of each fade identically so every object fades in sync
 		fade.setFromValue(1.0);
 		fade.setToValue(0.6);
 		fade.setCycleCount(Timeline.INDEFINITE);
@@ -331,7 +360,7 @@ public class ClockView {
 		playIcon.sizeFactor(2);
 		pauseIcon.sizeFactor(2);
 		stopIcon.sizeFactor(2);
-		String c = colorToHex(getActiveColor());
+		String c = colorToHex(getActiveColour());
 		setGlyphColours(c);
 	}
 	
@@ -342,6 +371,8 @@ public class ClockView {
 	///////////////////////////////////////////////////////////
 	
 	private void setGlyphColours(String c) {
+		// update colour of glyphs to active colour
+		// must call this method every time the active colour changes
 		playIcon.setStyle("-fx-text-base-color: " + c);
 		pauseIcon.setStyle("-fx-text-base-color: " + c);
 		stopIcon.setStyle("-fx-text-base-color: " + c);
@@ -387,15 +418,15 @@ public class ClockView {
 		this.totalLength.set(totalLength);
 	}
 	
-	private Color getActiveColor() {
-		return activeColor.get();
+	private Color getActiveColour() {
+		return activeColour.get();
 	}
 	
-	private void setActiveColor(Color activeColor) {
-		this.activeColor.set(activeColor);
+	private void setActiveColour(Color activeColour) {
+		this.activeColour.set(activeColour);
 	}
 	
-	private ObjectProperty<Color> activeColorProperty() {
-		return activeColor;
+	private ObjectProperty<Color> activeColourProperty() {
+		return activeColour;
 	}
 }

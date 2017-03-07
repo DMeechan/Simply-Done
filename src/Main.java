@@ -23,11 +23,13 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		// set up basic window
 		setUpDirectories();
 		window = primaryStage;
 		window.setTitle("Simply Done");
 		window.setResizable(false);
 		
+		// try to load application icon
 		try {
 			String location = resourcesDir + "default-icon.png";
 			window.getIcons().add(new Image(new File(location).toURI().toString()));
@@ -35,15 +37,16 @@ public class Main extends Application {
 			System.out.println("Error: application icon not found");
 		}
 		
+		// set up scheduler interface from FXML file
 		Parent root = FXMLLoader.load(getClass().getResource("scheduler.fxml"));
 		schedulerScene = new Scene(root, 620, 620);
 		//schedulerScene.getStylesheets().add("style.css");
 		
 		clockActive = false;
 		window.setScene(schedulerScene);
-		
 		window.show();
 		
+		// ensure the window closes correctly
 		window.setOnCloseRequest(v -> {
 			Platform.exit();
 			System.exit(0);
@@ -54,21 +57,26 @@ public class Main extends Application {
 	}
 	
 	public static void switchScene() {
+		// use pause transition to give visual feedback to users and prevent it feeling too sudden
 		PauseTransition pause = new PauseTransition(javafx.util.Duration.millis(300));
 		pause.setOnFinished(v -> {
 			if(clockActive) {
-				// load tasks schedulerScene
+				// currently on clock scene
+				// switch back to scheduler scene
 				clockActive = false;
 				window.setScene(schedulerScene);
 			} else {
-				// load clock
+				// set up a new clock scene every time to ensure it
+				// reflects the latest updates to the to-do list
 				ClockView clock = new ClockView();
 				Scene clockScene = clock.getScene();
+				// enable css stylesheet so pause and stop buttons change colour properly
 				clockScene.getStylesheets().add("style.css");
 				window.setScene(clockScene);
 				clockActive = true;
 			}
 		});
+		// remember to play the transition, otherwise method won't be called
 		pause.play();
 	}
 	
