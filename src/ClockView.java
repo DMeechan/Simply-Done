@@ -20,7 +20,7 @@ import javafx.util.Duration;
 import org.controlsfx.glyphfont.Glyph;
 
 import java.awt.*;
-import java.io.File;
+import java.net.URL;
 
 public class ClockView {
 	
@@ -45,7 +45,7 @@ public class ClockView {
 	private FadeTransition pauseFade, stopFade, timerLabelFade, timerClockFade;
 	
 	private Glyph stopIcon, pauseIcon, playIcon;
-	private final ObjectProperty<Color> activeColour = new SimpleObjectProperty<Color>(Color.web("#ffffff"));
+	private final ObjectProperty<Color> activeColour = new SimpleObjectProperty<>(Color.web("#ffffff"));
 	// activeColour represents the colour of the current active task
 	// changing this value updates the colour of everything in this scene
 	
@@ -75,7 +75,7 @@ public class ClockView {
 		
 	}
 	
-	private static String colorToHex(Color colour) {
+	private String colorToHex(Color colour) {
 		return String.format("#%02X%02X%02X",
 				(int) (colour.getRed() * 255),
 				(int) (colour.getGreen() * 255),
@@ -200,8 +200,8 @@ public class ClockView {
 	private void startCountdownSound() {
 		playingCountdownSound = true;
 		//String location = Main.resourcesDir + "countdown.mp3";
-		String location = Main.resourcesDir + "ticking.mp3";
-		Media sound = new Media(new File(location).toURI().toString());
+		URL source = this.getClass().getResource("ticking.mp3");
+		Media sound = new Media(source.toString());
 		mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
 	}
