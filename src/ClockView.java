@@ -376,7 +376,14 @@ public class ClockView {
 	}
 	
 	private String secToStringMinsec(int secs) {
-		int[] minsec = new int[]{(int) Math.floor(secs / 60), secs % 60};
+		// take length of time in seconds as input
+		int[] minsec = new int[]{
+				// divide it by 60 to find the number of mins, then save in array space 0
+				// then use modulus to find how many seconds, then save in array space 0
+				(int) Math.floor(secs / 60), secs % 60
+				
+		};
+		// take input (like [10],[15] and output in the time format 10:15 (as String)
 		return String.format("%02d:%02d", minsec[0], minsec[1]);
 	}
 	

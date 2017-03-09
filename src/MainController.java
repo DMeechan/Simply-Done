@@ -87,9 +87,12 @@ public class MainController extends Stage {
 		PauseTransition pause = new PauseTransition(javafx.util.Duration.millis(300));
 		pause.setOnFinished(v -> {
 			if (isClockActive) {
+				// bring the scheduler controller to the front of the stackpane
 				schedulerController.setSceneActive(true);
+				// remove the clockview from the stackpane
 				pane.getChildren().remove(nodeClock);
 			} else {
+				// remove the clockview to the stackpane
 				pane.getChildren().add(nodeClock);
 			}
 		});

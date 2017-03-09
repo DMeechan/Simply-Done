@@ -325,9 +325,9 @@ public class SchedulerController implements Initializable {
 		
 		private void clickDelete() {
 			if (task.isNotDone()) {
-				doneTasks.remove(task);
-			} else {
 				notDoneTasks.remove(task);
+			} else {
+				doneTasks.remove(task);
 			}
 		}
 		
