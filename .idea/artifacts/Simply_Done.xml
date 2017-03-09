@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Simply Done">
+    <output-path>$PROJECT_DIR$/out/artifacts/Simply_Done</output-path>
+    <root id="archive" name="Simply Done.jar">
+      <element id="module-output" name="v2" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jfoenix.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/Medusa-7.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/controlsfx-8.40.12.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

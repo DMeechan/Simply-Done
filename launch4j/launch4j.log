@@ -1,0 +1,26 @@
+
+
+Version:	3.9
+CmdLine:	C:\Users\Daniel\OneDrive\Google Drive\Dropbox\IB\Computer Science\Simply Done\Code\v2\Simply Done.exe --l4j-debug
+WOW64:		yes
+Working dir:	C:\Users\Daniel\OneDrive\Google Drive\Dropbox\IB\Computer Science\Simply Done\Code\v2\.
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	C:\Program Files\Java\jre1.8.0_121\bin\javaw.exe (OK)
+Match:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_111
+Check launcher:	C:\Program Files\Java\jre1.8.0_111\bin\javaw.exe (OK)
+Match:		1.8.0_111
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_121
+Check launcher:	C:\Program Files\Java\jre1.8.0_121\bin\javaw.exe (OK)
+Match:		1.8.0_121
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_121
+Ignore:		1.8.0_121
+Runtime used:	1.8.0_121 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_121\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Daniel\OneDrive\Google Drive\Dropbox\IB\Computer Science\Simply Done\Code\v2\Simply Done.exe"
+Args length:	108/32768 chars
+Exit code:	0
