@@ -1,4 +1,6 @@
 import com.jfoenix.controls.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -33,14 +35,15 @@ public class SchedulerController implements Initializable {
 	@FXML private JFXColorPicker newTaskColour;
 	// use @FXML injection to avoid overwriting the FXML View's objects and causing problems
 	private boolean editModeActive;
-	
 	// store them in separate lists so can easily move tasks between them
-	private static ObservableList<Task> notDoneTasks;
-	private static ObservableList<Task> doneTasks;
-	
+	private ObservableList<Task> notDoneTasks;
+	private ObservableList<Task> doneTasks;
 	@FXML private JFXListView<Task> tasksListView;
+	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
+	
 	
 	public SchedulerController() {
+		setSceneActive(true);
 		editModeActive = false;
 	}
 	
@@ -97,7 +100,7 @@ public class SchedulerController implements Initializable {
 	}
 	
 	private void useCustomCell() {
-		tasksListView.setCellFactory(v -> new CustomCell());
+		tasksListView.setCellFactory(v -> new CustomCell(notDoneTasks, doneTasks));
 		
 	}
 	
@@ -136,7 +139,7 @@ public class SchedulerController implements Initializable {
 		// otherwise it will still be enabled when the user re-opens the scheduler
 		// which would give an inconsistent user experience
 		deactivateEditMode();
-		Main.switchScene();
+		setSceneActive(false);
 	}
 	
 	@FXML public void clickToggleTasksView() {
@@ -254,13 +257,31 @@ public class SchedulerController implements Initializable {
 		doneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
 	}
 	
+	public boolean isSceneActive() {
+		return sceneActive.get();
+	}
+	
+	public BooleanProperty sceneActiveProperty() {
+		return sceneActive;
+	}
+	
+	public void setSceneActive(boolean sceneActive) {
+		this.sceneActive.set(sceneActive);
+	}
+	
+	public ObservableList<Task> getNotDoneTasks() {
+		return notDoneTasks;
+	}
+	
 	//////////////////////////////
 	// CUSTOM CELL FOR LISTVIEW //
 	//////////////////////////////
 	
 	static class CustomCell extends ListCell<Task> {
 		
-		private static Glyph trash, check;
+		private final Glyph trash = new Glyph("FontAwesome", "TRASH_ALT");
+		private final Glyph check = new Glyph("FontAwesome", "CHECK_SQUARE");
+		
 		// private static Glyph play, stop;
 		final HBox container = new HBox();
 		final Text minutesText = new Text("10");
@@ -271,12 +292,17 @@ public class SchedulerController implements Initializable {
 		final JFXButton deleteButton = new JFXButton("");
 		final JFXButton doneButton = new JFXButton("");
 		
+		ObservableList<Task> notDoneTasks = FXCollections.observableArrayList();
+		ObservableList<Task> doneTasks = FXCollections.observableArrayList();
+		
 		Task task = null;
 		
-		private CustomCell() {
+		private CustomCell(ObservableList<Task> notDoneTasksList, ObservableList<Task> doneTasksList) {
 			super();
 			
-			setUpGlyphs();
+			notDoneTasks = notDoneTasksList;
+			doneTasks = doneTasksList;
+			
 			setProperties();
 			
 			deleteButton.setOnAction(v -> {
@@ -291,11 +317,6 @@ public class SchedulerController implements Initializable {
 			
 		}
 		
-		private void setUpGlyphs() {
-			trash = new Glyph("FontAwesome", "TRASH_ALT");
-			check = new Glyph("FontAwesome", "CHECK_SQUARE");
-		}
-		
 		private void updateTaskVariable() {
 			task = getItem();
 		}
@@ -304,9 +325,9 @@ public class SchedulerController implements Initializable {
 		
 		private void clickDelete() {
 			if (task.isNotDone()) {
-				notDoneTasks.remove(task);
-			} else {
 				doneTasks.remove(task);
+			} else {
+				notDoneTasks.remove(task);
 			}
 		}
 		
@@ -345,12 +366,14 @@ public class SchedulerController implements Initializable {
 				setGraphic(container);
 			}
 			
+			/*
 			if(!getListView().getItems().isEmpty()){
 				if(!getListView().getItems().get(0).isNotDone()){
-					//	getListView().getSelectionModel().setSelectionMode(new SelectionMode());
+					// getListView().getSelectionModel().setSelectionMode(new SelectionMode());
 					
 				}
 			}
+			*/
 			
 		}
 		
@@ -399,8 +422,6 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	public static ObservableList<Task> getNotDoneTasks() {
-		return notDoneTasks;
-	}
+
 	
 }

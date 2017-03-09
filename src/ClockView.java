@@ -2,13 +2,11 @@ import com.jfoenix.controls.JFXButton;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
 import javafx.animation.*;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -24,6 +22,7 @@ import java.net.URL;
 
 public class ClockView {
 	
+	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
 	private final ObservableList<Task> taskList;
 	private Task activeTask; // task which is currently being used for taskTimer
 	private int activeTaskCount = 0; // array value of task which is currently active
@@ -49,9 +48,11 @@ public class ClockView {
 	// activeColour represents the colour of the current active task
 	// changing this value updates the colour of everything in this scene
 	
-	ClockView() {
+	ClockView(ObservableList<Task> tasks) {
 		
-		taskList = SchedulerController.getNotDoneTasks();
+		setSceneActive(true);
+		
+		taskList = tasks;
 		
 		int combinedLength = 0;
 		for (Task t : taskList) {
@@ -97,7 +98,7 @@ public class ClockView {
 		timer.setCycleCount(Animation.INDEFINITE);
 		
 		timer.play();
-
+		getScene();
 	}
 	
 	private void pauseClick() {
@@ -122,7 +123,8 @@ public class ClockView {
 	
 	private void stopClick() {
 		pauseTimer();
-		Main.switchScene();
+		setSceneActive(false);
+		//Main.switchScene();
 	}
 	
 	private void setActiveTask() {
@@ -242,7 +244,7 @@ public class ClockView {
 		taskTimerLabel = new Label("");
 		taskTimerLabel.setAlignment(Pos.CENTER);
 		taskTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: bold italic 20pt \"Arial\"");
-		taskLengthProperty().addListener(v -> taskTimerLabel.setText(Main.secToStringMinsec(getTaskLength())));
+		taskLengthProperty().addListener(v -> taskTimerLabel.setText(secToStringMinsec(getTaskLength())));
 		
 		HBox lineBar = new HBox();
 		lineBar.setAlignment(Pos.CENTER);
@@ -258,7 +260,7 @@ public class ClockView {
 		totalTimerLabel.setAlignment(Pos.CENTER);
 		totalTimerLabel.setStyle("-fx-font-smoothing-type: gray; -fx-font: 62pt \"Arial\"");
 		
-		totalLengthProperty().addListener(v -> totalTimerLabel.setText(Main.secToStringMinsec(getTotalLength())));
+		totalLengthProperty().addListener(v -> totalTimerLabel.setText(secToStringMinsec(getTotalLength())));
 		
 		stopButton = new JFXButton();
 		stopButton.setPrefSize(36,36);
@@ -311,6 +313,7 @@ public class ClockView {
 		vbox.setAlignment(Pos.CENTER);
 		vbox.setBackground(new Background(new BackgroundFill(Color.web("#272c32"), CornerRadii.EMPTY, Insets.EMPTY)));
 		vbox.setPadding(new Insets(20));
+		vbox.getStylesheets().add("style.css");
 		
 		return vbox;
 	}
@@ -364,8 +367,17 @@ public class ClockView {
 		setGlyphColours(c);
 	}
 	
-	public Scene getScene() {
-		return new Scene(container, 620, 620);
+	private void getScene() {
+		new Scene(container, 620, 620);
+	}
+	
+	public Node getNode() {
+		return container;
+	}
+	
+	private String secToStringMinsec(int secs) {
+		int[] minsec = new int[]{(int) Math.floor(secs / 60), secs % 60};
+		return String.format("%02d:%02d", minsec[0], minsec[1]);
 	}
 	
 	///////////////////////////////////////////////////////////
@@ -428,5 +440,17 @@ public class ClockView {
 	
 	private ObjectProperty<Color> activeColourProperty() {
 		return activeColour;
+	}
+	
+	public boolean isSceneActive() {
+		return sceneActive.get();
+	}
+	
+	public BooleanProperty sceneActiveProperty() {
+		return sceneActive;
+	}
+	
+	private void setSceneActive(boolean sceneActive) {
+		this.sceneActive.set(sceneActive);
 	}
 }
