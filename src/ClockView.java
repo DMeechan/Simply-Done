@@ -311,7 +311,7 @@ public class ClockView {
 		VBox vbox = new VBox(taskLabel, lineBar, timerPane);
 		vbox.setSpacing(3);
 		vbox.setAlignment(Pos.CENTER);
-		vbox.setBackground(new Background(new BackgroundFill(Color.web("#272c32"), CornerRadii.EMPTY, Insets.EMPTY)));
+		vbox.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
 		vbox.setPadding(new Insets(20));
 		vbox.getStylesheets().add("style.css");
 		
