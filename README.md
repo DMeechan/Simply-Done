@@ -7,7 +7,7 @@ Download the latest compiled jar file <a href="https://goo.gl/UGmQOK">here</a>.
 There's also a compiled .exe file (Windows only) up for download in the Master branch, with a custom icon and can be pinned to your taskbar.
 
 
-Current list of potential features for future versions:
+Current list of features I'd like to add in the near future:
 - Drag tasks to re-arrange
 - When timer is running, add ability to mark currently-active task as done or change its estimated time on the fly
 - Preferences to change:
