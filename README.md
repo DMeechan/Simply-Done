@@ -8,6 +8,9 @@ There's also a compiled .exe file (Windows only) up for download in the Master b
 
 
 Current list of features I'd like to add in the near future:
+- Make action buttons light up when hovered over
+  - As shown <a href="https://gyazo.com/746ce5e7b765e6cc8a5db5af674136b0">here</a> in Polymail
+  - If I use a similar style, it'll look *amazingly* clean
 - Drag tasks to re-arrange
 - When timer is running, add ability to mark currently-active task as done or change its estimated time on the fly
 - Preferences to change:
@@ -29,6 +32,7 @@ Current list of features I'd like to add in the near future:
 - Fix formatting of task timer labels so separator lines always line up
 - Add support for window resizing
 - Add a stealth mode (?) where the countdown timer is very small, semi opaque, and always on-top, so the timer ism't massive and distracting
+  - Add settings slider to adjust % opacity
 - Add fullscreen mode
 - Improve sounds that are played
 - Set task backgrond colour to task's set colour?
