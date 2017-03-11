@@ -12,6 +12,7 @@ Current list of features I'd like to add in the near future:
   - As shown <a href="https://gyazo.com/746ce5e7b765e6cc8a5db5af674136b0">here</a> in Polymail
   - If I use a similar style, it'll look *amazingly* clean
 - Drag tasks to re-arrange
+- Change .exe's icon hover-over text from app description to app title
 - When timer is running, add ability to mark currently-active task as done or change its estimated time on the fly
 - Preferences to change:
   - Enable / disable overtime
