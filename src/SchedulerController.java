@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonWriter;
 import com.jfoenix.controls.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -20,7 +22,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import org.controlsfx.glyphfont.Glyph;
+import org.hildan.fxgson.FxGson;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -125,7 +132,7 @@ public class SchedulerController implements Initializable {
 		}
 		
 		clearListViewSelection();
-		
+		writeSaveData();
 	}
 	
 	@FXML private void clickColourPicker() {
@@ -140,6 +147,7 @@ public class SchedulerController implements Initializable {
 		// which would give an inconsistent user experience
 		deactivateEditMode();
 		setSceneActive(false);
+		writeSaveData();
 	}
 	
 	@FXML public void clickToggleTasksView() {
@@ -164,6 +172,7 @@ public class SchedulerController implements Initializable {
 			startTasksButton.setDisable(false);
 			
 		}
+		writeSaveData();
 	}
 	
 	// EDIT MODE
@@ -230,6 +239,38 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
+	// FILE SAVING
+	
+	private void writeSaveData() {
+		ObservableList<Task> list = getNotDoneTasks();
+		list.addAll(getDoneTasks());
+		
+		try {
+			writeGsonStream(list);
+			System.out.println("Save complete!");
+		} catch (IOException e) {
+			System.out.println("Error writing file. Please turn it off and on again.");
+			System.out.println(e);
+		}
+		
+	}
+	
+	private void writeGsonStream(ObservableList<Task> list) throws IOException {
+		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+		
+		OutputStream outputStream = new FileOutputStream("src\\tasks.json");
+		
+		JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+		writer.setIndent("  ");
+		writer.beginArray();
+		for (Task task : list) {
+			gson.toJson(task, Task.class, writer);
+		}
+		writer.endArray();
+		writer.close();
+		
+	}
+	
 	// OTHER
 	
 	private void newTask() {
@@ -255,6 +296,7 @@ public class SchedulerController implements Initializable {
 		notDoneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
 		
 		doneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
+		
 	}
 	
 	public boolean isSceneActive() {
@@ -271,6 +313,14 @@ public class SchedulerController implements Initializable {
 	
 	public ObservableList<Task> getNotDoneTasks() {
 		return notDoneTasks;
+	}
+	
+	public ObservableList<Task> getDoneTasks() {
+		return doneTasks;
+	}
+	
+	public void setDoneTasks(ObservableList<Task> doneTasks) {
+		this.doneTasks = doneTasks;
 	}
 	
 	//////////////////////////////

@@ -1,16 +1,25 @@
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.hildan.fxgson.FxGson;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class MainController extends Stage {
+	
 	private final StackPane pane = new StackPane();
 	private SchedulerController schedulerController;
 	
@@ -27,6 +36,50 @@ public class MainController extends Stage {
 			});
 		}
 		
+		try {
+			loadSaveData();
+		} catch (Exception e) {
+			System.out.println("No file to read.");
+		}
+		
+	}
+	
+	private void loadSaveData() {
+		ObservableList<Task> list = FXCollections.observableArrayList();
+		try {
+			list.addAll(readGsonStream());
+		} catch (IOException e) {
+			System.out.println("Error reading file. Please turn it off and on again.");
+			System.out.println(e);
+		}
+		ObservableList<Task> doneList = FXCollections.observableArrayList();
+		for (Task task : list) {
+			if(!task.isNotDone()) {
+				doneList.add(task);
+				list.remove(task);
+			}
+		}
+		
+		schedulerController.setDoneTasks(list);
+		schedulerController.setDoneTasks(doneList);
+		
+	}
+	
+	private ObservableList<Task> readGsonStream() throws IOException {
+		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+		
+		InputStream input = new FileInputStream("src\\tasks.json");
+		
+		JsonReader reader = new JsonReader(new InputStreamReader(input, "UTF-8"));
+		ObservableList<Task> list = FXCollections.observableArrayList();
+		reader.beginArray();
+		while (reader.hasNext()) {
+			Task task = gson.fromJson(reader, Task.class);
+			list.add(task);
+		}
+		reader.endArray();
+		reader.close();
+		return list;
 		
 	}
 	
