@@ -258,7 +258,12 @@ public class SchedulerController implements Initializable {
 					}
 				}
 
-				setNotDoneTasks(list);
+				for (Task task : list) {
+					newTask(task.getName(), task.getMinutes(), task.getColour());
+				}
+
+				list.get(0).getName();
+
 				setDoneTasks(doneList);
 
 			} catch (IOException e) {
@@ -268,8 +273,6 @@ public class SchedulerController implements Initializable {
 
 
 		}
-
-
 
 	}
 
