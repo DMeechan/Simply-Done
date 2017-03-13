@@ -1,76 +1,6 @@
 [
   {
-    "name": "Email Mark",
-    "isNotDone": true,
-    "colour": {
-      "red": 0.9019608,
-      "green": 0.49411765,
-      "blue": 0.13333334,
-      "opacity": 1.0,
-      "platformPaint": {
-        "argb": -1671646,
-        "r": 0.9019608,
-        "g": 0.49411765,
-        "b": 0.13333334,
-        "a": 1.0,
-        "type": "COLOR",
-        "proportional": false,
-        "isMutable": false
-      }
-    },
-    "minutes": 1,
-    "seconds": 0
-  },
-  {
-    "name": "Commit latest build to GitHub",
-    "isNotDone": true,
-    "colour": {
-      "red": 0.18039216,
-      "green": 0.8,
-      "blue": 0.44313726,
-      "opacity": 1.0,
-      "platformPaint": null
-    },
-    "minutes": 2,
-    "seconds": 0
-  },
-  {
-    "name": "Update documents",
-    "isNotDone": true,
-    "colour": {
-      "red": 0.90588236,
-      "green": 0.29803923,
-      "blue": 0.23529412,
-      "opacity": 1.0,
-      "platformPaint": null
-    },
-    "minutes": 1,
-    "seconds": 0
-  },
-  {
-    "name": "Finish writing report",
-    "isNotDone": true,
-    "colour": {
-      "red": 0.20392157,
-      "green": 0.59607846,
-      "blue": 0.85882354,
-      "opacity": 1.0,
-      "platformPaint": {
-        "argb": -13330213,
-        "r": 0.20392157,
-        "g": 0.59607846,
-        "b": 0.85882354,
-        "a": 1.0,
-        "type": "COLOR",
-        "proportional": false,
-        "isMutable": false
-      }
-    },
-    "minutes": 34,
-    "seconds": 0
-  },
-  {
-    "name": "lgkndfg",
+    "name": "a",
     "isNotDone": true,
     "colour": {
       "red": 0.07058824,
@@ -78,7 +8,7 @@
       "blue": 0.2901961,
       "opacity": 1.0,
       "platformPaint": {
-        "argb": -15563446,
+        "argb": -1.5563446E7,
         "r": 0.07058824,
         "g": 0.52156866,
         "b": 0.2901961,
@@ -87,6 +17,71 @@
         "proportional": false,
         "isMutable": false
       }
+    },
+    "minutes": 10,
+    "seconds": 0
+  },
+  {
+    "name": "b",
+    "isNotDone": true,
+    "colour": {
+      "red": 0.07058824,
+      "green": 0.52156866,
+      "blue": 0.2901961,
+      "opacity": 1.0,
+      "platformPaint": null
+    },
+    "minutes": 10,
+    "seconds": 0
+  },
+  {
+    "name": "c",
+    "isNotDone": true,
+    "colour": {
+      "red": 0.07058824,
+      "green": 0.52156866,
+      "blue": 0.2901961,
+      "opacity": 1.0,
+      "platformPaint": null
+    },
+    "minutes": 10,
+    "seconds": 0
+  },
+  {
+    "name": "d",
+    "isNotDone": true,
+    "colour": {
+      "red": 0.07058824,
+      "green": 0.52156866,
+      "blue": 0.2901961,
+      "opacity": 1.0,
+      "platformPaint": null
+    },
+    "minutes": 10,
+    "seconds": 0
+  },
+  {
+    "name": "e",
+    "isNotDone": true,
+    "colour": {
+      "red": 0.07058824,
+      "green": 0.52156866,
+      "blue": 0.2901961,
+      "opacity": 1.0,
+      "platformPaint": null
+    },
+    "minutes": 10,
+    "seconds": 0
+  },
+  {
+    "name": "f",
+    "isNotDone": true,
+    "colour": {
+      "red": 0.07058824,
+      "green": 0.52156866,
+      "blue": 0.2901961,
+      "opacity": 1.0,
+      "platformPaint": null
     },
     "minutes": 10,
     "seconds": 0

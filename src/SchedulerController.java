@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.jfoenix.controls.*;
 import javafx.beans.property.BooleanProperty;
@@ -24,10 +25,7 @@ import javafx.scene.text.TextAlignment;
 import org.controlsfx.glyphfont.Glyph;
 import org.hildan.fxgson.FxGson;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,6 +45,7 @@ public class SchedulerController implements Initializable {
 	private ObservableList<Task> doneTasks;
 	@FXML private JFXListView<Task> tasksListView;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
+	private String saveFileLocation = "src/tasks.json";
 	
 	
 	public SchedulerController() {
@@ -59,7 +58,14 @@ public class SchedulerController implements Initializable {
 		doneTasks = FXCollections.observableArrayList();
 		
 		// optional to add sample data
-		addSampleData();
+		//addSampleData();
+
+		try {
+
+			loadSaveData();
+		} catch (Exception e) {
+			System.out.println("No file to read.");
+		}
 		
 		// set up taskViewList listeners and CustomCells
 		initializeTaskViewList();
@@ -76,6 +82,7 @@ public class SchedulerController implements Initializable {
 		deactivateEditMode();
 		
 	}
+
 	
 	private void initializeTaskViewList() {
 		// can easily switch its items between notDoneTasks and doneTasks
@@ -95,14 +102,6 @@ public class SchedulerController implements Initializable {
 				activateEditMode();
 			}
 		});
-		
-	}
-	
-	private void addSampleData() {
-		newTask("Email Mark", 1, Color.web("#e67e22"));
-		newTask("Commit latest build to GitHub", 2, Color.web("#2ecc71"));
-		newTask("Update documents", 1, Color.web("#e74c3c"));
-		newTask("Finish writing report", 1, Color.web("#3498db"));
 		
 	}
 	
@@ -240,9 +239,62 @@ public class SchedulerController implements Initializable {
 	}
 	
 	// FILE SAVING
+
+	private void loadSaveData() {
+		File saveDataFile = new File (saveFileLocation);
+
+		if (saveDataFile.exists()) {
+
+			ObservableList<Task> list = FXCollections.observableArrayList();
+			ObservableList<Task> doneList = FXCollections.observableArrayList();
+
+			try {
+				list.addAll(readGsonStream());
+
+				for (Task task : list) {
+					if(!task.isNotDone()) {
+						doneList.add(task);
+						list.remove(task);
+					}
+				}
+
+				setNotDoneTasks(list);
+				setDoneTasks(doneList);
+
+			} catch (IOException e) {
+				System.out.println("Error reading file. Please turn it off and on again.");
+				System.out.println(e);
+			}
+
+
+		}
+
+
+
+	}
+
+	private ObservableList<Task> readGsonStream() throws IOException {
+		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+
+		InputStream input = new FileInputStream(saveFileLocation);
+
+		JsonReader reader = new JsonReader(new InputStreamReader(input, "UTF-8"));
+		ObservableList<Task> list = FXCollections.observableArrayList();
+		reader.beginArray();
+		while (reader.hasNext()) {
+			Task task = gson.fromJson(reader, Task.class);
+			list.add(task);
+		}
+		reader.endArray();
+		reader.close();
+		return list;
+
+	}
 	
-	private void writeSaveData() {
-		ObservableList<Task> list = getNotDoneTasks();
+	public void writeSaveData() {
+
+		ObservableList<Task> list = FXCollections.observableArrayList();
+		list.addAll(getNotDoneTasks());
 		list.addAll(getDoneTasks());
 		
 		try {
@@ -252,13 +304,13 @@ public class SchedulerController implements Initializable {
 			System.out.println("Error writing file. Please turn it off and on again.");
 			System.out.println(e);
 		}
-		
+
 	}
 	
 	private void writeGsonStream(ObservableList<Task> list) throws IOException {
 		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 		
-		OutputStream outputStream = new FileOutputStream("src\\tasks.json");
+		OutputStream outputStream = new FileOutputStream(saveFileLocation);
 		
 		JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 		writer.setIndent("  ");
@@ -270,7 +322,15 @@ public class SchedulerController implements Initializable {
 		writer.close();
 		
 	}
-	
+
+	private void addSampleData() {
+		newTask("Email Mark", 1, Color.web("#e67e22"));
+		newTask("Commit latest build to GitHub", 2, Color.web("#2ecc71"));
+		newTask("Update documents", 1, Color.web("#e74c3c"));
+		newTask("Finish writing report", 1, Color.web("#3498db"));
+
+	}
+
 	// OTHER
 	
 	private void newTask() {
@@ -319,8 +379,12 @@ public class SchedulerController implements Initializable {
 		return doneTasks;
 	}
 	
-	public void setDoneTasks(ObservableList<Task> doneTasks) {
+	private void setDoneTasks(ObservableList<Task> doneTasks) {
 		this.doneTasks = doneTasks;
+	}
+
+	private void setNotDoneTasks(ObservableList<Task> notDoneTasks) {
+		this.notDoneTasks = notDoneTasks;
 	}
 	
 	//////////////////////////////
