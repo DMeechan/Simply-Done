@@ -27,6 +27,7 @@ import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class SchedulerController implements Initializable {
@@ -45,7 +46,7 @@ public class SchedulerController implements Initializable {
 	private ObservableList<Task> doneTasks;
 	@FXML private JFXListView<Task> tasksListView;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
-	private String saveFileLocation = "src/tasks.json";
+	private String saveFileLocation = "src" + java.nio.file.FileSystems.getDefault().getSeparator() + "tasks.json";
 	
 	
 	public SchedulerController() {
@@ -246,25 +247,18 @@ public class SchedulerController implements Initializable {
 		if (saveDataFile.exists()) {
 
 			ObservableList<Task> list = FXCollections.observableArrayList();
-			ObservableList<Task> doneList = FXCollections.observableArrayList();
 
 			try {
 				list.addAll(readGsonStream());
 
-				for (Task task : list) {
-					if(!task.isNotDone()) {
-						doneList.add(task);
-						list.remove(task);
+				for (Iterator<Task> item = list.iterator(); item.hasNext();) {
+					Task task = item.next();
+					if(task.isNotDone()) {
+						notDoneTasks.add(task);
+					} else {
+						doneTasks.add(task);
 					}
 				}
-
-				for (Task task : list) {
-					newTask(task.getName(), task.getMinutes(), task.getColour());
-				}
-
-				list.get(0).getName();
-
-				setDoneTasks(doneList);
 
 			} catch (IOException e) {
 				System.out.println("Error reading file. Please turn it off and on again.");

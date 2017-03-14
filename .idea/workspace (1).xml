@@ -6,9 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4957f7e3-dfe3-43f9-9caf-7c9c9531b28c" name="Default" comment="Semi-implemented file handling via JSON" />
+    <list default="true" id="b2c7ae05-f5c5-4d41-bb18-740d1b44e8b3" name="Default" comment="File saving seems to work fine, but loading files in does not.&#10;Plus still got the CGAffineTransformInvert: singular matrix bug." />
     <ignored path="$PROJECT_DIR$/out/" />
-    <ignored mask="*.ini" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,94 +21,73 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Task.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="18" />
-              <folding>
-                <element signature="e#982#983#0" expanded="true" />
-                <element signature="e#1008#1009#0" expanded="true" />
-                <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClockView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="49" column="4" lean-forward="false" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+            <state relative-caret-position="45">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+            <state relative-caret-position="285">
+              <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#loadSchedulerFXMLLoader#0;class#MainController#0" expanded="false" />
                 <element signature="method#loadScene#0;class#MainController#0" expanded="false" />
-                <element signature="e#2858#2889#0" expanded="false" />
-                <element signature="e#3102#3185#0" expanded="false" />
+                <element signature="e#1404#1435#0" expanded="false" />
+                <element signature="e#1648#1731#0" expanded="false" />
                 <element signature="method#loadClockView#0;class#MainController#0" expanded="false" />
-                <element signature="e#3630#3681#0" expanded="false" />
+                <element signature="e#2176#2227#0" expanded="false" />
                 <element signature="method#switchScene#0;class#MainController#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SchedulerController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SchedulerController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="239" column="5" lean-forward="true" selection-start-line="239" selection-start-column="5" selection-end-line="239" selection-end-column="5" />
+            <state relative-caret-position="375">
+              <caret line="266" column="39" lean-forward="true" selection-start-line="266" selection-start-column="39" selection-end-line="266" selection-end-column="39" />
               <folding>
                 <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-                <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#2270#2321#0" expanded="false" />
+                <element signature="e#2362#2413#0" expanded="false" />
                 <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#3001#3075#0" expanded="false" />
-                <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
+                <element signature="e#3094#3168#0" expanded="false" />
                 <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#4438#4477#0" expanded="false" />
+                <element signature="e#4255#4294#0" expanded="false" />
                 <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#4911#4948#0" expanded="false" />
-                <element signature="e#5386#5448#0" expanded="false" />
-                <element signature="e#5654#5702#0" expanded="false" />
+                <element signature="method#clickStartTasks#0;class#SchedulerController#0" expanded="false" />
+                <element signature="e#4728#4765#0" expanded="false" />
+                <element signature="method#clickToggleTasksView#0;class#SchedulerController#0" expanded="false" />
+                <element signature="e#5203#5265#0" expanded="false" />
+                <element signature="e#5471#5519#0" expanded="false" />
                 <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#6083#6125#0" expanded="false" />
+                <element signature="e#5900#5942#0" expanded="false" />
                 <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#6507#6585#0" expanded="false" />
+                <element signature="e#6324#6402#0" expanded="false" />
+                <element signature="method#deactivateEditMode#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#7547#7640#0" expanded="false" />
-                <element signature="e#7867#7919#0" expanded="false" />
+                <element signature="e#7364#7457#0" expanded="false" />
+                <element signature="e#7684#7736#0" expanded="false" />
                 <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
+                <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-                <element signature="e#9018#9123#0" expanded="false" />
-                <element signature="e#10379#10409#0" expanded="false" />
+                <element signature="e#10438#10543#0" expanded="false" />
+                <element signature="method#listenForTaskChanges#0;class#SchedulerController#0" expanded="false" />
+                <element signature="e#11907#11937#0" expanded="false" />
                 <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+                <element signature="method#clickDone#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
                 <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
@@ -119,11 +97,47 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ClockView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ClockView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1845">
+              <caret line="282" column="34" lean-forward="false" selection-start-line="282" selection-start-column="34" selection-end-line="282" selection-end-column="34" />
+              <folding>
+                <element signature="e#1844#1908#0" expanded="false" />
+                <element signature="method#ClockView#0;class#ClockView#0" expanded="false" />
+                <element signature="e#2271#2318#0" expanded="false" />
+                <element signature="method#colorToHex#0;class#ClockView#0" expanded="false" />
+                <element signature="method#start#0;class#ClockView#0" expanded="false" />
+                <element signature="method#pauseClick#0;class#ClockView#0" expanded="false" />
+                <element signature="method#stopClick#0;class#ClockView#0" expanded="false" />
+                <element signature="method#setActiveTask#0;class#ClockView#0" expanded="false" />
+                <element signature="e#3809#3890#0" expanded="false" />
+                <element signature="e#4193#4255#0" expanded="false" />
+                <element signature="e#4461#4569#0" expanded="false" />
+                <element signature="method#timerTick#0;class#ClockView#0" expanded="false" />
+                <element signature="method#pauseTimer#0;class#ClockView#0" expanded="false" />
+                <element signature="method#startCountdownSound#0;class#ClockView#0" expanded="false" />
+                <element signature="e#8850#8926#0" expanded="false" />
+                <element signature="method#setUpFades#0;class#ClockView#0" expanded="false" />
+                <element signature="e#10027#10072#0" expanded="false" />
+                <element signature="method#setUpFade#0;class#ClockView#0" expanded="false" />
+                <element signature="method#stopFades#0;class#ClockView#0" expanded="false" />
+                <element signature="method#playFades#0;class#ClockView#0" expanded="false" />
+                <element signature="method#setUpGlyphs#0;class#ClockView#0" expanded="false" />
+                <element signature="method#secToStringMinsec#0;class#ClockView#0" expanded="false" />
+                <element signature="e#11650#11723#0" expanded="false" />
+                <element signature="method#setGlyphColours#0;class#ClockView#0" expanded="false" />
+                <element signature="e#12105#12148#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+            <state relative-caret-position="165">
+              <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -131,49 +145,21 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>system</find>
-      <find>bind(activeColorProperty()</find>
-      <find>button.se</find>
-      <find>setGra</find>
-      <find>playIcon</find>
-      <find>setGlyph</find>
-      <find>taskList</find>
-      <find>.bind</find>
-      <find>CustomCell</find>
-      <find>activeTask</find>
-      <find>.ini</find>
-      <find>listenforT</find>
-      <find>newTask</find>
-      <find>minsecToStringMinsec</find>
-      <find>secToStringMinsec</find>
-      <find>secToMinsec</find>
-      <find>sceneac</find>
-      <find>doneTask</find>
-      <find>container</find>
-      <find>notDoneTasks</find>
-      <find>stop</find>
-      <find>static</find>
-      <find>getScene</find>
-      <find>.css</find>
-      <find>minsec</find>
-      <find>getNot</find>
-      <find>isNotDone</find>
-      <find>setNotDone</find>
-      <find>deactivateEditMode</find>
-      <find>setDOne</find>
+      <find>color</find>
+      <find>save</find>
+      <find>writesav</find>
+      <find>setnotdo</find>
+      <find>donetasks</find>
+      <find>setdone</find>
+      <find>savedata</find>
+      <find>writeSaveData</find>
+      <find>setNotDoneTasks</find>
+      <find>close</find>
+      <find>tasks.json</find>
+      <find>saveFileLocation</find>
     </findStrings>
-    <dirStrings>
-      <dir>C:\Users\Daniel\OneDrive\Google Drive\Dropbox\IB\Computer Science\Simply Done\Code\v2</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -181,16 +167,8 @@
         <option value="Daniel Meechan &lt;daniel.meechan.1@gmail.com&gt;" />
       </list>
     </option>
-    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="scheduler" />
-      </map>
-    </option>
-    <option name="PUSH_TAGS">
-      <GitPushTagMode />
-    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -200,14 +178,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/scheduler.fxml" />
-        <option value="$PROJECT_DIR$/src/Controller.java" />
-        <option value="$PROJECT_DIR$/src/style.css" />
-        <option value="$PROJECT_DIR$/src/ClockController.java" />
         <option value="$PROJECT_DIR$/src/ClockView.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/SchedulerController.java" />
         <option value="$PROJECT_DIR$/src/MainController.java" />
+        <option value="$PROJECT_DIR$/src/SchedulerController.java" />
       </list>
     </option>
   </component>
@@ -217,228 +190,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1057" />
-  </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Abstraction issuesJava</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Accessibility</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Correctness</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Correctness &gt; Messages</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Internationalization &gt; Bidirectional Text</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Security</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Usability</id>
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Usability &gt; Icons</id>
-          </State>
-          <State>
-            <id>Android Lint for Kotlin</id>
-          </State>
-          <State>
-            <id>Assignment issuesGroovy</id>
-          </State>
-          <State>
-            <id>Assignment issuesJava</id>
-          </State>
-          <State>
-            <id>Class metricsJava</id>
-          </State>
-          <State>
-            <id>Class structureJava</id>
-          </State>
-          <State>
-            <id>Cloning issuesJava</id>
-          </State>
-          <State>
-            <id>Code maturity issuesJava</id>
-          </State>
-          <State>
-            <id>Code style issuesJava</id>
-          </State>
-          <State>
-            <id>CoffeeScript</id>
-          </State>
-          <State>
-            <id>Control flow issuesJava</id>
-          </State>
-          <State>
-            <id>Control flow issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Data flow issuesJava</id>
-          </State>
-          <State>
-            <id>Data flow issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Declaration redundancyJava</id>
-          </State>
-          <State>
-            <id>DeclarationGroovy</id>
-          </State>
-          <State>
-            <id>Encapsulation issuesJava</id>
-          </State>
-          <State>
-            <id>Error handlingGroovy</id>
-          </State>
-          <State>
-            <id>Error handlingJava</id>
-          </State>
-          <State>
-            <id>Error handlingJavaScript</id>
-          </State>
-          <State>
-            <id>Finalization issuesJava</id>
-          </State>
-          <State>
-            <id>Gradle</id>
-          </State>
-          <State>
-            <id>Groovy</id>
-          </State>
-          <State>
-            <id>Guice Inspections</id>
-          </State>
-          <State>
-            <id>ImportsJava</id>
-          </State>
-          <State>
-            <id>Inheritance issuesJava</id>
-          </State>
-          <State>
-            <id>Initialization issuesJava</id>
-          </State>
-          <State>
-            <id>Internationalization issuesJava</id>
-          </State>
-          <State>
-            <id>J2ME issuesJava</id>
-          </State>
-          <State>
-            <id>JUnit issuesJava</id>
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-          <State>
-            <id>Java language level migration aidsJava</id>
-          </State>
-          <State>
-            <id>JavaBeans issuesJava</id>
-          </State>
-          <State>
-            <id>JavaScript</id>
-          </State>
-          <State>
-            <id>Javadoc issuesJava</id>
-          </State>
-          <State>
-            <id>Logging issuesJava</id>
-          </State>
-          <State>
-            <id>Memory issuesJava</id>
-          </State>
-          <State>
-            <id>Method MetricsGroovy</id>
-          </State>
-          <State>
-            <id>Method metricsJava</id>
-          </State>
-          <State>
-            <id>Naming ConventionsGroovy</id>
-          </State>
-          <State>
-            <id>Naming conventionsJava</id>
-          </State>
-          <State>
-            <id>Numeric issuesJava</id>
-          </State>
-          <State>
-            <id>Performance issuesJava</id>
-          </State>
-          <State>
-            <id>Plugin DevKit</id>
-          </State>
-          <State>
-            <id>Portability issuesJava</id>
-          </State>
-          <State>
-            <id>Potentially confusing code constructsJavaScript</id>
-          </State>
-          <State>
-            <id>Probable bugsCoffeeScript</id>
-          </State>
-          <State>
-            <id>Probable bugsGradle</id>
-          </State>
-          <State>
-            <id>Probable bugsGroovy</id>
-          </State>
-          <State>
-            <id>Probable bugsJava</id>
-          </State>
-          <State>
-            <id>Probable bugsJavaScript</id>
-          </State>
-          <State>
-            <id>Resource management issuesJava</id>
-          </State>
-          <State>
-            <id>Security issuesJava</id>
-          </State>
-          <State>
-            <id>Serialization issuesJava</id>
-          </State>
-          <State>
-            <id>TestNGJava</id>
-          </State>
-          <State>
-            <id>Threading issuesGroovy</id>
-          </State>
-          <State>
-            <id>Threading issuesJava</id>
-          </State>
-          <State>
-            <id>UI Form Problems</id>
-          </State>
-          <State>
-            <id>Visibility issuesJava</id>
-          </State>
-          <State>
-            <id>XPath</id>
-          </State>
-        </expanded-state>
-      </profile-state>
-    </entry>
-  </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1126" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -477,42 +232,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.ignored.files" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Daniel\OneDrive\Google Drive\Dropbox\IB\Computer Science\Simply Done\Code\v2\resources" />
-      <recent name="C:\Users\Daniel\OneDrive\Google Drive\Dropbox\IB\Computer Science\Simply Done\Code\v2\src" />
-    </key>
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -707,7 +452,7 @@
           <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
           <option name="launcherType" value="OSDefault" />
           <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
         </LauncherParameters>
       </option>
       <option name="mobileRunTarget" value="Emulator" />
@@ -730,7 +475,7 @@
           <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
           <option name="launcherType" value="OSDefault" />
           <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
         </LauncherParameters>
       </option>
       <option name="moduleName" value="" />
@@ -915,241 +660,100 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
-    <configuration>C:\Users\Daniel\AppData\Roaming\Subversion</configuration>
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4957f7e3-dfe3-43f9-9caf-7c9c9531b28c" name="Default" comment="" />
-      <created>1488763982037</created>
+      <changelist id="b2c7ae05-f5c5-4d41-bb18-740d1b44e8b3" name="Default" comment="" />
+      <created>1489047063782</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1488763982037</updated>
-      <workItem from="1488763984620" duration="1136000" />
-      <workItem from="1488765281661" duration="34000" />
-      <workItem from="1488765335176" duration="48000" />
-      <workItem from="1488765438181" duration="2536000" />
-      <workItem from="1488767993388" duration="24555000" />
-      <workItem from="1488865905213" duration="10175000" />
-      <workItem from="1488902071974" duration="1721000" />
-      <workItem from="1488908195635" duration="1626000" />
-      <workItem from="1489022694963" duration="12646000" />
-      <workItem from="1489039808858" duration="535000" />
-      <workItem from="1489040393459" duration="43000" />
-      <workItem from="1489040630143" duration="559000" />
-      <workItem from="1489041294594" duration="1614000" />
-      <workItem from="1489118019398" duration="837000" />
-      <workItem from="1489119790943" duration="147000" />
-      <workItem from="1489119993194" duration="110000" />
-      <workItem from="1489234420867" duration="14663000" />
+      <updated>1489047063782</updated>
+      <workItem from="1489047067368" duration="381000" />
+      <workItem from="1489047455573" duration="136000" />
+      <workItem from="1489048015016" duration="3684000" />
+      <workItem from="1489059826319" duration="1286000" />
+      <workItem from="1489409807738" duration="3448000" />
     </task>
-    <task id="LOCAL-00001" summary="Removed Maven with incredible difficulty">
-      <created>1488766356141</created>
+    <task id="LOCAL-00001" summary="Fixed bug preventing tasks from being deleted">
+      <created>1489047499292</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1488766356141</updated>
+      <updated>1489047499292</updated>
     </task>
-    <task id="LOCAL-00002" summary="Fixed compiling issue">
-      <created>1488769164395</created>
+    <task id="LOCAL-00002" summary="Implemented functional file handling via JSON! &#10;Note: currently only works on one platform (Windows or Unix (Mac / Linux)), depending on what path config is used in the file data location String.&#10; &#10; Currently suffering from CGAffineTransformInvert: singular matrix bug. Potentially due to JFXSlider?">
+      <created>1489413974903</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1488769164395</updated>
+      <updated>1489413974903</updated>
     </task>
-    <task id="LOCAL-00003" summary="Fixed bug with task length being saved incorrectly after being editted">
-      <created>1488869159394</created>
+    <task id="LOCAL-00003" summary="File saving seems to work fine, but loading files in does not.&#10;Plus still got the CGAffineTransformInvert: singular matrix bug.">
+      <created>1489425294782</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1488869159394</updated>
+      <updated>1489425294782</updated>
     </task>
-    <task id="LOCAL-00004" summary="Updated .jar file">
-      <created>1488869275755</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1488869275755</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Improved implementation of task creation limit">
-      <created>1488880843691</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1488880843691</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Added lots and lots and lots of comments&#10;Fixed issue with new task duration label formatting on Mac">
-      <created>1488903927009</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1488903927009</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Improved cross-platform file handling">
-      <created>1489029361421</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1489029361421</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Structure optimisation">
-      <created>1489039548738</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1489039548738</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Updated compiled jar">
-      <created>1489041123032</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1489041123032</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Updated compiled .exe file">
-      <created>1489120036416</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1489120036416</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Semi-implemented file handling via JSON">
-      <created>1489387716672</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1489387716672</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72985000" />
+    <option name="totallyTimeSpent" value="8935000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1057" extended-state="0" />
+    <frame x="0" y="23" width="1920" height="1126" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32368702" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913843" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49573562" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27056277" sideWeight="0.49653807" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Sequence" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3961039" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913843" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288201" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22538294" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15867944" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31511253" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941972" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33654878" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3365801" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39978564" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32475883" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49573562" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22829582" sideWeight="0.49653807" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Sequence" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3961039" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22647703" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Removed Maven with incredible difficulty" />
-    <MESSAGE value="Fixed compiling issue" />
-    <MESSAGE value="Fixed bug with task length being saved incorrectly after being editted" />
-    <MESSAGE value="Updated .jar file" />
-    <MESSAGE value="Improved implementation of task creation limit" />
-    <MESSAGE value="Added lots and lots and lots of comments&#10;Fixed issue with new task duration label formatting on Mac" />
-    <MESSAGE value="Improved cross-platform file handling" />
-    <MESSAGE value="Structure optimisation" />
-    <MESSAGE value="Updated compiled jar" />
-    <MESSAGE value="Updated compiled .exe file" />
-    <MESSAGE value="Semi-implemented file handling via JSON" />
-    <option name="LAST_COMMIT_MESSAGE" value="Semi-implemented file handling via JSON" />
+    <MESSAGE value="Fixed bug preventing tasks from being deleted" />
+    <MESSAGE value="Implemented functional file handling via JSON! &#10;Note: currently only works on one platform (Windows or Unix (Mac / Linux)), depending on what path config is used in the file data location String.&#10; &#10; Currently suffering from CGAffineTransformInvert: singular matrix bug. Potentially due to JFXSlider?" />
+    <MESSAGE value="File saving seems to work fine, but loading files in does not.&#10;Plus still got the CGAffineTransformInvert: singular matrix bug." />
+    <option name="LAST_COMMIT_MESSAGE" value="File saving seems to work fine, but loading files in does not.&#10;Plus still got the CGAffineTransformInvert: singular matrix bug." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/MainController.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="16" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1158,738 +762,335 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="40" column="38" lean-forward="true" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="296" column="9" lean-forward="true" selection-start-line="296" selection-start-column="9" selection-end-line="296" selection-end-column="9" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="45" column="4" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerView.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="60" column="31" lean-forward="false" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="146" column="8" lean-forward="true" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="42" column="29" lean-forward="false" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="54" lean-forward="false" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/v2.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/desktop.ini" />
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="54" lean-forward="false" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/v2.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="54" lean-forward="false" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/v2.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/desktop.ini" />
-    <entry file="file://$PROJECT_DIR$/resources/scheduler.fxml" />
-    <entry file="file://$PROJECT_DIR$/v2.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/ClockView">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>ClockView</OriginalElement>
-          <nodes>
-            <node x="" y="">ClockView</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="45.0" y="15.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/desktop.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller.java" />
-    <entry file="jar://$PROJECT_DIR$/libs/jfoenix.jar!/com/jfoenix/skins/JFXButtonSkin$$Lambda$1.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="25" column="73" lean-forward="false" selection-start-line="25" selection-start-column="73" selection-end-line="25" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jfoenix.jar!/com/jfoenix/skins/JFXButtonSkin.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerView.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockController.java" />
-    <entry file="file://$PROJECT_DIR$/launch4j/launch4j setup.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="1" lean-forward="false" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="18" />
-          <folding>
-            <element signature="e#982#983#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
-            <marker date="1489040981950" expanded="true" signature="7:14" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="1030" column="0" lean-forward="false" selection-start-line="1030" selection-start-column="0" selection-end-line="1030" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="239" column="5" lean-forward="true" selection-start-line="239" selection-start-column="5" selection-end-line="239" selection-end-column="5" />
-          <folding>
-            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#initialize#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#2270#2321#0" expanded="false" />
-            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#3001#3075#0" expanded="false" />
-            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4438#4477#0" expanded="false" />
-            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#4911#4948#0" expanded="false" />
-            <element signature="e#5386#5448#0" expanded="false" />
-            <element signature="e#5654#5702#0" expanded="false" />
-            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6083#6125#0" expanded="false" />
-            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#6507#6585#0" expanded="false" />
-            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#7547#7640#0" expanded="false" />
-            <element signature="e#7867#7919#0" expanded="false" />
-            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
-            <element signature="e#9018#9123#0" expanded="false" />
-            <element signature="e#10379#10409#0" expanded="false" />
-            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/fx-gson-2.0.1.jar!/org/hildan/fxgson/FxGson.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#789#790#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/gson-2.6.2.jar!/com/google/gson/GsonBuilder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="49" column="4" lean-forward="false" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+        <state relative-caret-position="975">
+          <caret line="74" column="81" lean-forward="true" selection-start-line="74" selection-start-column="81" selection-end-line="74" selection-end-column="81" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#loadSchedulerFXMLLoader#0;class#MainController#0" expanded="false" />
             <element signature="method#loadScene#0;class#MainController#0" expanded="false" />
-            <element signature="e#2858#2889#0" expanded="false" />
-            <element signature="e#3102#3185#0" expanded="false" />
+            <element signature="e#1404#1435#0" expanded="false" />
+            <element signature="e#1648#1731#0" expanded="false" />
             <element signature="method#loadClockView#0;class#MainController#0" expanded="false" />
-            <element signature="e#3630#3681#0" expanded="false" />
+            <element signature="e#2176#2227#0" expanded="false" />
             <element signature="method#switchScene#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArquillianSettingsConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <last-edited>Simply Done</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.5" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>v2</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>libs</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="40" column="50" lean-forward="true" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
+          <folding>
+            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#2362#2413#0" expanded="false" />
+            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#3094#3168#0" expanded="false" />
+            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4255#4294#0" expanded="false" />
+            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickStartTasks#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4728#4765#0" expanded="false" />
+            <element signature="method#clickToggleTasksView#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5203#5265#0" expanded="false" />
+            <element signature="e#5471#5519#0" expanded="false" />
+            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5900#5942#0" expanded="false" />
+            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#6324#6402#0" expanded="false" />
+            <element signature="method#deactivateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#7364#7457#0" expanded="false" />
+            <element signature="e#7684#7736#0" expanded="false" />
+            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#10438#10543#0" expanded="false" />
+            <element signature="method#listenForTaskChanges#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#11907#11937#0" expanded="false" />
+            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDone#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4275">
+          <caret line="305" column="0" lean-forward="true" selection-start-line="305" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
+          <folding>
+            <element signature="e#1844#1908#0" expanded="false" />
+            <element signature="method#ClockView#0;class#ClockView#0" expanded="false" />
+            <element signature="e#2271#2318#0" expanded="false" />
+            <element signature="method#colorToHex#0;class#ClockView#0" expanded="false" />
+            <element signature="method#start#0;class#ClockView#0" expanded="false" />
+            <element signature="method#pauseClick#0;class#ClockView#0" expanded="false" />
+            <element signature="method#stopClick#0;class#ClockView#0" expanded="false" />
+            <element signature="method#setActiveTask#0;class#ClockView#0" expanded="false" />
+            <element signature="e#3809#3890#0" expanded="false" />
+            <element signature="e#4193#4255#0" expanded="false" />
+            <element signature="e#4461#4569#0" expanded="false" />
+            <element signature="method#timerTick#0;class#ClockView#0" expanded="false" />
+            <element signature="method#pauseTimer#0;class#ClockView#0" expanded="false" />
+            <element signature="method#startCountdownSound#0;class#ClockView#0" expanded="false" />
+            <element signature="e#8850#8926#0" expanded="false" />
+            <element signature="method#setUpFades#0;class#ClockView#0" expanded="false" />
+            <element signature="e#10027#10072#0" expanded="false" />
+            <element signature="method#setUpFade#0;class#ClockView#0" expanded="false" />
+            <element signature="method#stopFades#0;class#ClockView#0" expanded="false" />
+            <element signature="method#playFades#0;class#ClockView#0" expanded="false" />
+            <element signature="method#setUpGlyphs#0;class#ClockView#0" expanded="false" />
+            <element signature="method#secToStringMinsec#0;class#ClockView#0" expanded="false" />
+            <element signature="e#11650#11723#0" expanded="false" />
+            <element signature="method#setGlyphColours#0;class#ClockView#0" expanded="false" />
+            <element signature="e#12105#12148#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#2362#2413#0" expanded="false" />
+            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#3094#3168#0" expanded="false" />
+            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4255#4294#0" expanded="false" />
+            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickStartTasks#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4728#4765#0" expanded="false" />
+            <element signature="method#clickToggleTasksView#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5203#5265#0" expanded="false" />
+            <element signature="e#5471#5519#0" expanded="false" />
+            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5900#5942#0" expanded="false" />
+            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#6324#6402#0" expanded="false" />
+            <element signature="method#deactivateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#7364#7457#0" expanded="false" />
+            <element signature="e#7684#7736#0" expanded="false" />
+            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#10438#10543#0" expanded="false" />
+            <element signature="method#listenForTaskChanges#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#11907#11937#0" expanded="false" />
+            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDone#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#2362#2413#0" expanded="false" />
+            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#3094#3168#0" expanded="false" />
+            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4255#4294#0" expanded="false" />
+            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickStartTasks#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4728#4765#0" expanded="false" />
+            <element signature="method#clickToggleTasksView#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5203#5265#0" expanded="false" />
+            <element signature="e#5471#5519#0" expanded="false" />
+            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5900#5942#0" expanded="false" />
+            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#6324#6402#0" expanded="false" />
+            <element signature="method#deactivateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#7364#7457#0" expanded="false" />
+            <element signature="e#7684#7736#0" expanded="false" />
+            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#10438#10543#0" expanded="false" />
+            <element signature="method#listenForTaskChanges#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#11907#11937#0" expanded="false" />
+            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDone#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClockView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1845">
+          <caret line="282" column="34" lean-forward="false" selection-start-line="282" selection-start-column="34" selection-end-line="282" selection-end-column="34" />
+          <folding>
+            <element signature="e#1844#1908#0" expanded="false" />
+            <element signature="method#ClockView#0;class#ClockView#0" expanded="false" />
+            <element signature="e#2271#2318#0" expanded="false" />
+            <element signature="method#colorToHex#0;class#ClockView#0" expanded="false" />
+            <element signature="method#start#0;class#ClockView#0" expanded="false" />
+            <element signature="method#pauseClick#0;class#ClockView#0" expanded="false" />
+            <element signature="method#stopClick#0;class#ClockView#0" expanded="false" />
+            <element signature="method#setActiveTask#0;class#ClockView#0" expanded="false" />
+            <element signature="e#3809#3890#0" expanded="false" />
+            <element signature="e#4193#4255#0" expanded="false" />
+            <element signature="e#4461#4569#0" expanded="false" />
+            <element signature="method#timerTick#0;class#ClockView#0" expanded="false" />
+            <element signature="method#pauseTimer#0;class#ClockView#0" expanded="false" />
+            <element signature="method#startCountdownSound#0;class#ClockView#0" expanded="false" />
+            <element signature="e#8850#8926#0" expanded="false" />
+            <element signature="method#setUpFades#0;class#ClockView#0" expanded="false" />
+            <element signature="e#10027#10072#0" expanded="false" />
+            <element signature="method#setUpFade#0;class#ClockView#0" expanded="false" />
+            <element signature="method#stopFades#0;class#ClockView#0" expanded="false" />
+            <element signature="method#playFades#0;class#ClockView#0" expanded="false" />
+            <element signature="method#setUpGlyphs#0;class#ClockView#0" expanded="false" />
+            <element signature="method#secToStringMinsec#0;class#ClockView#0" expanded="false" />
+            <element signature="e#11650#11723#0" expanded="false" />
+            <element signature="method#setGlyphColours#0;class#ClockView#0" expanded="false" />
+            <element signature="e#12105#12148#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#loadSchedulerFXMLLoader#0;class#MainController#0" expanded="false" />
+            <element signature="method#loadScene#0;class#MainController#0" expanded="false" />
+            <element signature="e#1404#1435#0" expanded="false" />
+            <element signature="e#1648#1731#0" expanded="false" />
+            <element signature="method#loadClockView#0;class#MainController#0" expanded="false" />
+            <element signature="e#2176#2227#0" expanded="false" />
+            <element signature="method#switchScene#0;class#MainController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SchedulerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="266" column="39" lean-forward="true" selection-start-line="266" selection-start-column="39" selection-end-line="266" selection-end-column="39" />
+          <folding>
+            <element signature="method#SchedulerController#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#2362#2413#0" expanded="false" />
+            <element signature="method#initializeTaskViewList#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#3094#3168#0" expanded="false" />
+            <element signature="method#useCustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickNewTaskButton#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4255#4294#0" expanded="false" />
+            <element signature="method#clickColourPicker#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickStartTasks#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#4728#4765#0" expanded="false" />
+            <element signature="method#clickToggleTasksView#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5203#5265#0" expanded="false" />
+            <element signature="e#5471#5519#0" expanded="false" />
+            <element signature="method#resetEditModeUI#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#5900#5942#0" expanded="false" />
+            <element signature="method#updateEditModeColours#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#6324#6402#0" expanded="false" />
+            <element signature="method#deactivateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#activateEditMode#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#7364#7457#0" expanded="false" />
+            <element signature="e#7684#7736#0" expanded="false" />
+            <element signature="method#writeSaveData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#writeGsonStream#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#addSampleData#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#newTask#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#10438#10543#0" expanded="false" />
+            <element signature="method#listenForTaskChanges#0;class#SchedulerController#0" expanded="false" />
+            <element signature="e#11907#11937#0" expanded="false" />
+            <element signature="class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#CustomCell#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDelete#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#clickDone#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#updateItem#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setProperties#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupText#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+            <element signature="method#setupButton#0;class#CustomCell#0;class#SchedulerController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
