@@ -24,7 +24,6 @@ public class ClockView {
 	
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
 	private final ObservableList<Task> taskList;
-	private Task activeTask; // task which is currently being used for taskTimer
 	private int activeTaskCount = 0; // array value of task which is currently active
 	private boolean running, overtime, playingCountdownSound;
 	// store if the timers are running, if the main timer is in overtime, and if the countdown sound is being played
@@ -141,7 +140,7 @@ public class ClockView {
 				Toolkit.getDefaultToolkit().beep();
 			}
 			// get next task in list
-			activeTask = taskList.get(activeTaskCount);
+			Task activeTask = taskList.get(activeTaskCount);
 			//System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
 			
 			// update global

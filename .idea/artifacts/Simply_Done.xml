@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Simply Done">
-    <output-path>$PROJECT_DIR$/out/artifacts/Simply_Done</output-path>
+    <output-path>$PROJECT_DIR$/download</output-path>
     <root id="archive" name="Simply Done.jar">
       <element id="module-output" name="v2" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/jfoenix.jar" path-in-jar="/" />

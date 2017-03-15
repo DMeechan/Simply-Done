@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -16,6 +17,7 @@ public class MainController extends Stage {
 	private SchedulerController schedulerController;
 	
 	public MainController()  {
+		new Alert(Alert.AlertType.ERROR,"Test!").showAndWait();
 		loadSchedulerFXMLLoader();
 		loadScene();
 		
@@ -29,14 +31,17 @@ public class MainController extends Stage {
 		}
 		
 	}
-
 	
 	private void loadSchedulerFXMLLoader() {
 		FXMLLoader schedulerFXMLLoader = new FXMLLoader(getClass().getResource("SchedulerView.fxml"));
+		//schedulerFXMLLoader.setResources(ResourceBundle.getBundle("bundles.MyBundle"));
+		//schedulerFXMLLoader.setResources();
 		
+		//new Alert(Alert.AlertType.ERROR,"Test!").showAndWait();
 		try {
 			pane.getChildren().add(schedulerFXMLLoader.load());
 		} catch (IOException e) {
+			new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
 			e.printStackTrace();
 		}
 		schedulerController = schedulerFXMLLoader.getController();
@@ -66,6 +71,7 @@ public class MainController extends Stage {
 			this.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 		} catch (Exception iconError) {
 			System.out.println("Error: application icon not found");
+			new Alert(Alert.AlertType.ERROR,iconError.getMessage()).showAndWait();
 		}
 	}
 	
