@@ -26,8 +26,6 @@ import org.controlsfx.glyphfont.Glyph;
 import org.hildan.fxgson.FxGson;
 
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -41,17 +39,14 @@ public class SchedulerController implements Initializable {
 	@FXML private HBox editTaskBox;
 	@FXML private JFXToggleButton tasksViewSwitch;
 	//private final String saveFileLocation = "src" + java.nio.file.FileSystems.getDefault().getSeparator() + "tasks.json";
-	private URI saveFileLocation;
 	@FXML private JFXColorPicker newTaskColour;
 	// use @FXML injection to avoid overwriting the FXML View's objects and causing problems
 	private boolean editModeActive;
 	// store them in separate lists so can easily move tasks between them
-	private ObservableList<Task> notDoneTasks;
-	private ObservableList<Task> doneTasks;
+	private ObservableList<Task> notDoneTasks, doneTasks;
 	@FXML private JFXListView<Task> tasksListView;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
-	
-	
+	private File savedTasksFile;
 	
 	public SchedulerController() {
 		setSceneActive(true);
@@ -65,22 +60,13 @@ public class SchedulerController implements Initializable {
 		
 		// optional to add sample data
 		//addSampleData();
-		try {
-			//saveFileLocation = getClass().getResource("/tasks.json").toURI();
-			System.out.println(getClass().getResource("/tasks.json").toURI().toString());
-			saveFileLocation = new URI("file:\\C:\\Users\\Daniel\\OneDrive\\Google Drive\\Dropbox\\IB\\Computer Science\\Simply Done\\Code\\v2\\src\\tasks.json");
-		} catch (URISyntaxException e) {
-			System.out.println("Error finding saveFileLocation tasks.json file");
-			displayError(e);
-			e.printStackTrace();
-		}
 		
 		try {
+			savedTasksFile = new File(getClass().getResource("tasks.json").toURI());
+			System.out.println(savedTasksFile.getAbsolutePath());
 			loadSaveData();
 		} catch (Exception e) {
-			System.out.println("No file to read.");
-			displayError(e);
-			e.printStackTrace();
+			Main.outputError(e);
 		}
 		
 		// set up taskViewList listeners and CustomCells
@@ -97,19 +83,6 @@ public class SchedulerController implements Initializable {
 		//15202b
 		deactivateEditMode();
 		
-	}
-	
-	public void displayError(Exception e) {
-		displayError(e.toString());
-		e.printStackTrace();
-	}
-	
-	public void displayError(String error) {
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle("Error.");
-		alert.setHeaderText("Oops, there was an error.");
-		alert.setContentText(error);
-		alert.showAndWait();
 	}
 	
 	private void initializeTaskViewList() {
@@ -268,9 +241,7 @@ public class SchedulerController implements Initializable {
 	// FILE SAVING
 
 	private void loadSaveData() {
-		File saveDataFile = new File (saveFileLocation);
-
-		if (saveDataFile.exists()) {
+		if (savedTasksFile.exists()) {
 
 			ObservableList<Task> list = FXCollections.observableArrayList();
 
@@ -288,8 +259,7 @@ public class SchedulerController implements Initializable {
 
 			} catch (IOException e) {
 				System.out.println("Error reading file. Please turn it off and on again.");
-				displayError(e);
-				e.printStackTrace();
+				Main.outputError(e);
 			}
 
 
@@ -300,7 +270,7 @@ public class SchedulerController implements Initializable {
 	private ObservableList<Task> readGsonStream() throws IOException {
 		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-		InputStream input = new FileInputStream(new File(saveFileLocation));
+		InputStream input = new FileInputStream(savedTasksFile);
 
 		JsonReader reader = new JsonReader(new InputStreamReader(input, "UTF-8"));
 		ObservableList<Task> list = FXCollections.observableArrayList();
@@ -326,8 +296,7 @@ public class SchedulerController implements Initializable {
 			System.out.println("Save complete!");
 		} catch (IOException e) {
 			System.out.println("Error writing file. Please turn it off and on again.");
-			displayError(e);
-			e.printStackTrace();
+			Main.outputError(e);
 		}
 
 	}
@@ -335,7 +304,7 @@ public class SchedulerController implements Initializable {
 	private void writeGsonStream(ObservableList<Task> list) throws IOException {
 		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 		
-		OutputStream outputStream = new FileOutputStream(new File(saveFileLocation));
+		OutputStream outputStream = new FileOutputStream(savedTasksFile);
 		
 		JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 		writer.setIndent("  ");
@@ -362,7 +331,7 @@ public class SchedulerController implements Initializable {
 		// Prevent more than 13 tasks being added because the ListView becomes buggy when displaying more than 13
 		// Likely due to something with the Custom Cells
 		if(notDoneTasks.size() >= 12) {
-			displayError("Too many tasks. Please complete some of them first!");
+			Main.outputError("Too many tasks. Please complete some of them first!");
 			//Alert alert = new Alert();
 		} else {
 			notDoneTasks.add(new Task(newTaskNameTextField.getText(), Integer.parseInt(newTaskMinsLabel.getText()),newTaskColour.getValue()));
