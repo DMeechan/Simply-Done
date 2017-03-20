@@ -17,6 +17,10 @@ public class MainController extends Stage {
 	
 	public MainController()  {
 		//new Alert(Alert.AlertType.ERROR,"Test!").showAndWait();
+		run();
+	}
+	
+	private void run() {
 		loadSchedulerFXMLLoader();
 		loadScene();
 		

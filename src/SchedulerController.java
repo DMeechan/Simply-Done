@@ -27,6 +27,10 @@ import org.hildan.fxgson.FxGson;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
@@ -61,13 +65,8 @@ public class SchedulerController implements Initializable {
 		// optional to add sample data
 		//addSampleData();
 		
-		try {
-			savedTasksFile = new File(getClass().getResource("tasks.json").toURI());
-			System.out.println(savedTasksFile.getAbsolutePath());
-			loadSaveData();
-		} catch (Exception e) {
-			Main.outputError(e);
-		}
+		setSavedTasksFile();
+		loadSaveData();
 		
 		// set up taskViewList listeners and CustomCells
 		initializeTaskViewList();
@@ -108,6 +107,112 @@ public class SchedulerController implements Initializable {
 	
 	private void useCustomCell() {
 		tasksListView.setCellFactory(v -> new CustomCell(notDoneTasks, doneTasks));
+	}
+	
+	// FILE SAVING
+	
+	private void setSavedTasksFile() {
+		try {
+			//savedTasksFile = new File(this.getClass().getClassLoader().getResource("tasks.json").toURI());
+			//savedTasksStream = getClass().getClassLoader().getResourceAsStream("tasks.json");
+			Path folder = Paths.get(System.getProperty("user.home") + "/.simply-done");
+			System.out.println(folder.toString());
+			
+			if(!Files.isDirectory(folder)) {
+				Files.createDirectory(folder);
+				Files.setAttribute(folder, "dos:hidden", Boolean.TRUE,  LinkOption.NOFOLLOW_LINKS);
+			}
+			
+			savedTasksFile = new File(folder + "/tasks.json");
+			
+		} catch (Exception e) {
+			Main.outputError(e);
+		}
+	}
+	
+	private void loadSaveData() {
+		
+		if (savedTasksFile.exists()) {
+			
+			ObservableList<Task> list = FXCollections.observableArrayList();
+			
+			try {
+				list.addAll(readGsonStream(savedTasksFile));
+				
+				for (Iterator<Task> item = list.iterator(); item.hasNext();) {
+					Task task = item.next();
+					if(task.isNotDone()) {
+						notDoneTasks.add(task);
+					} else {
+						doneTasks.add(task);
+					}
+				}
+				
+			} catch (IOException e) {
+				System.out.println("Error reading file. Please turn it off and on again.");
+				Main.outputError(e);
+			}
+			
+		}
+		
+	}
+	
+	private ObservableList<Task> readGsonStream(File tasksFile) throws IOException {
+		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+		
+		// change input to abc
+		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(tasksFile), "UTF-8"));
+		ObservableList<Task> list = FXCollections.observableArrayList();
+		reader.beginArray();
+		while (reader.hasNext()) {
+			Task task = gson.fromJson(reader, Task.class);
+			list.add(task);
+		}
+		reader.endArray();
+		reader.close();
+		return list;
+		
+	}
+	
+	public void writeSaveData() {
+		ObservableList<Task> list = FXCollections.observableArrayList();
+		list.addAll(getNotDoneTasks());
+		list.addAll(getDoneTasks());
+		
+		try {
+			writeGsonStream(list);
+			System.out.println("Save complete!");
+		} catch (IOException e) {
+			System.out.println("Error writing file. Please turn it off and on again.");
+			Main.outputError(e);
+		}
+		
+	}
+	
+	private void writeGsonStream(ObservableList<Task> list) throws IOException {
+		//OutputStream savedTasksStream = getClass().getClassLoader().getResourceAsStream("tasks.json");
+		
+		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+		
+		OutputStream outputStream = new FileOutputStream(savedTasksFile);
+		
+		JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+		writer.setIndent("  ");
+		writer.beginArray();
+		for (Task task : list) {
+			gson.toJson(task, Task.class, writer);
+		}
+		writer.endArray();
+		writer.close();
+		
+	}
+	
+	private void addSampleData() {
+		newTask("Email Mark", 1, Color.web("#e67e22"));
+		newTask("Commit latest build to GitHub", 2, Color.web("#2ecc71"));
+		newTask("Update documents", 1, Color.web("#e74c3c"));
+		newTask("Finish writing report", 1, Color.web("#3498db"));
+		
 	}
 	
 	// BUTTON CLICKS
@@ -237,93 +342,6 @@ public class SchedulerController implements Initializable {
 		}
 		
 	}
-	
-	// FILE SAVING
-
-	private void loadSaveData() {
-		if (savedTasksFile.exists()) {
-
-			ObservableList<Task> list = FXCollections.observableArrayList();
-
-			try {
-				list.addAll(readGsonStream());
-				
-				for (Iterator<Task> item = list.iterator(); item.hasNext();) {
-					Task task = item.next();
-					if(task.isNotDone()) {
-						notDoneTasks.add(task);
-					} else {
-						doneTasks.add(task);
-					}
-				}
-
-			} catch (IOException e) {
-				System.out.println("Error reading file. Please turn it off and on again.");
-				Main.outputError(e);
-			}
-
-
-		}
-
-	}
-
-	private ObservableList<Task> readGsonStream() throws IOException {
-		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-
-		InputStream input = new FileInputStream(savedTasksFile);
-
-		JsonReader reader = new JsonReader(new InputStreamReader(input, "UTF-8"));
-		ObservableList<Task> list = FXCollections.observableArrayList();
-		reader.beginArray();
-		while (reader.hasNext()) {
-			Task task = gson.fromJson(reader, Task.class);
-			list.add(task);
-		}
-		reader.endArray();
-		reader.close();
-		return list;
-
-	}
-	
-	public void writeSaveData() {
-
-		ObservableList<Task> list = FXCollections.observableArrayList();
-		list.addAll(getNotDoneTasks());
-		list.addAll(getDoneTasks());
-		
-		try {
-			writeGsonStream(list);
-			System.out.println("Save complete!");
-		} catch (IOException e) {
-			System.out.println("Error writing file. Please turn it off and on again.");
-			Main.outputError(e);
-		}
-
-	}
-	
-	private void writeGsonStream(ObservableList<Task> list) throws IOException {
-		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-		
-		OutputStream outputStream = new FileOutputStream(savedTasksFile);
-		
-		JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-		writer.setIndent("  ");
-		writer.beginArray();
-		for (Task task : list) {
-			gson.toJson(task, Task.class, writer);
-		}
-		writer.endArray();
-		writer.close();
-		
-	}
-
-	private void addSampleData() {
-		newTask("Email Mark", 1, Color.web("#e67e22"));
-		newTask("Commit latest build to GitHub", 2, Color.web("#2ecc71"));
-		newTask("Update documents", 1, Color.web("#e74c3c"));
-		newTask("Finish writing report", 1, Color.web("#3498db"));
-
-	}
 
 	// OTHER
 	
@@ -332,7 +350,6 @@ public class SchedulerController implements Initializable {
 		// Likely due to something with the Custom Cells
 		if(notDoneTasks.size() >= 12) {
 			Main.outputError("Too many tasks. Please complete some of them first!");
-			//Alert alert = new Alert();
 		} else {
 			notDoneTasks.add(new Task(newTaskNameTextField.getText(), Integer.parseInt(newTaskMinsLabel.getText()),newTaskColour.getValue()));
 		}
