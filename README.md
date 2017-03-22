@@ -2,7 +2,9 @@
 Helping people be more productive.
 Currently developing this as part of my Computer Science project. 
 
-Download the latest compiled jar file <a href="https://goo.gl/UGmQOK">here</a>.
+Download the latest compiled .jar file <a href="https://goo.gl/BoqkpR">here</a>.
+
+Or download the latest compiled .exe file <a href="http://i.meechan.co/2o5zp58">here</a> (Windows only)
 
 There's also a compiled .exe file (Windows only) up for download in the Master branch, with a custom icon and can be pinned to your taskbar.
 
