@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane fx:controller="SchedulerController" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="100.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="100.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SchedulerController">
     <center>
         <VBox BorderPane.alignment="CENTER">
          <Separator prefWidth="200.0" />
@@ -77,10 +77,20 @@
       </JFXButton>
    </bottom>
    <top>
-      <JFXToggleButton fx:id="tasksViewSwitch" contentDisplay="RIGHT" ellipsisString="-" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" onAction="#clickToggleTasksView" prefHeight="30.0" text="Show Completed Tasks" textAlignment="CENTER" BorderPane.alignment="CENTER_LEFT">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </JFXToggleButton>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <JFXToggleButton fx:id="tasksViewSwitch" cache="true" contentDisplay="RIGHT" ellipsisString="-" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" onAction="#clickToggleTasksView" prefHeight="30.0" text="Show Completed Tasks" textAlignment="CENTER">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </JFXToggleButton>
+            <Pane HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="resetButton" alignment="CENTER" cache="true" contentDisplay="CENTER" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" onAction="#reset" prefHeight="24.0" text="RESET" textAlignment="CENTER" textFill="#d39494">
+               <HBox.margin>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
    </top>
 </BorderPane>

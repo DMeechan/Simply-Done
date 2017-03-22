@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Files;
 
 
 public class MainController extends Stage {
@@ -31,6 +32,23 @@ public class MainController extends Stage {
 					loadClockView();
 				}
 			});
+			
+			schedulerController.resetProperty().addListener(v -> {
+				if(schedulerController.isReset()) {
+					try {
+						// delete old save file
+						Files.delete(schedulerController.getSavedTasksFile().toPath());
+						// start new stage
+						new MainController();
+						// close current stage
+						close();
+						
+					} catch (IOException e) {
+						Main.outputError(e);
+					}
+				}
+			});
+			
 		}
 		
 	}

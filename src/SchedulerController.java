@@ -32,6 +32,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SchedulerController implements Initializable {
@@ -50,10 +51,13 @@ public class SchedulerController implements Initializable {
 	private ObservableList<Task> notDoneTasks, doneTasks;
 	@FXML private JFXListView<Task> tasksListView;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
+	private BooleanProperty reset = new SimpleBooleanProperty();
+	
 	private File savedTasksFile;
 	
 	public SchedulerController() {
 		setSceneActive(true);
+		setReset(false);
 		editModeActive = false;
 	}
 	
@@ -67,6 +71,7 @@ public class SchedulerController implements Initializable {
 		
 		setSavedTasksFile();
 		loadSaveData();
+		writeSaveData();
 		
 		// set up taskViewList listeners and CustomCells
 		initializeTaskViewList();
@@ -120,8 +125,11 @@ public class SchedulerController implements Initializable {
 			
 			if(!Files.isDirectory(folder)) {
 				Files.createDirectory(folder);
-				Files.setAttribute(folder, "dos:hidden", Boolean.TRUE,  LinkOption.NOFOLLOW_LINKS);
+				if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+					Files.setAttribute(folder, "dos:hidden", Boolean.TRUE,  LinkOption.NOFOLLOW_LINKS);
+				}
 			}
+			System.out.println(System.getProperty("os.name").toLowerCase());
 			
 			savedTasksFile = new File(folder + "/tasks.json");
 			
@@ -153,6 +161,8 @@ public class SchedulerController implements Initializable {
 				Main.outputError(e);
 			}
 			
+		} else {
+			addSampleData();
 		}
 		
 	}
@@ -208,10 +218,17 @@ public class SchedulerController implements Initializable {
 	}
 	
 	private void addSampleData() {
-		newTask("Email Mark", 1, Color.web("#e67e22"));
-		newTask("Commit latest build to GitHub", 2, Color.web("#2ecc71"));
-		newTask("Update documents", 1, Color.web("#e74c3c"));
-		newTask("Finish writing report", 1, Color.web("#3498db"));
+		newTask("> This is a task. Here's how you can make your own:", 1, Color.web("#2ecc71"));
+		newTask("---> 1. Type the name of a task into the textbox at the top", 2, Color.web("#3498db"));
+		newTask("---> 2. Drag the slider to the amount of time you expect the task will take", 3, Color.web("#e74c3c"));
+		newTask("---> 3. Click the coloured square on the right and choose a colour for the task", 4, Color.web("#e67e22"));
+		newTask("---> 4. Click the 'Add Task' button to add the task to your to-do list", 5, Color.web("#4db6ac"));
+		newTask("> Click the checkbox on the right to mark this task as complete!", 6, Color.web("#ffa726"));
+		newTask("---> To view all your completed tasks, click 'Show Completed Tasks' above", 7, Color.web("#ba68c8"));
+		newTask("---> Once you've added all your tasks, click the Start Tasks button below", 8, Color.web("#4E6A9C"));
+		newTask("---> Then a timer will start counting the time left for the first task", 9, Color.web("#66bb6a"));
+		newTask("---> And the total time you've got left until every task should be done", 10, Color.web("#64b5f6"));
+		newTask("> Delete each of these tasks and then have fun getting everything Simply Done!", 11, Color.web("#12854a"));
 		
 	}
 	
@@ -277,6 +294,23 @@ public class SchedulerController implements Initializable {
 			
 		}
 		writeSaveData();
+	}
+	
+	@FXML private void reset() {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Are you sure?");
+		alert.setHeaderText("Are you sure you want to delete all data?");
+		alert.setContentText("Note that all saved data will be lost and Simply Done will restart.");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.get() == ButtonType.OK) {
+			// reset
+			setReset(true);
+			
+		} else {
+			// cancel
+			
+		}
 	}
 	
 	// EDIT MODE
@@ -388,6 +422,26 @@ public class SchedulerController implements Initializable {
 	
 	private ObservableList<Task> getDoneTasks() {
 		return doneTasks;
+	}
+	
+	public boolean isReset() {
+		return reset.get();
+	}
+	
+	public BooleanProperty resetProperty() {
+		return reset;
+	}
+	
+	private void setReset(boolean reset) {
+		this.reset.set(reset);
+	}
+	
+	public File getSavedTasksFile() {
+		return savedTasksFile;
+	}
+	
+	public void setSavedTasksFile(File savedTasksFile) {
+		this.savedTasksFile = savedTasksFile;
 	}
 	
 	//////////////////////////////

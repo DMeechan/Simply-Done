@@ -55,7 +55,9 @@ public class ClockView {
 		
 		int combinedLength = 0;
 		for (Task t : taskList) {
-			combinedLength += t.getMinutes();
+			if(t.isNotDone()) {
+				combinedLength += t.getMinutes();
+			}
 		}
 		
 		setTotalLength(combinedLength * 60); // set the total timer length to combined tasks lengths

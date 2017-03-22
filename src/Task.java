@@ -19,6 +19,8 @@ class Task {
 		setNotDone(true);
 		setMinutes(minutes);
 		setColour(colour);
+		
+		
 	}
 	
 	@Override
