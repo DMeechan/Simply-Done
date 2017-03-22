@@ -6,7 +6,7 @@ Download the latest compiled .jar file <a href="https://goo.gl/BoqkpR">here</a>.
 
 Or download the latest compiled .exe file <a href="https://github.com/DMeechan/Simply-Done/raw/master/download/Simply%20Done.exe">here</a> (Windows only)
 
-There's also a compiled .exe file (Windows only) up for download in the Master branch, with a custom icon and can be pinned to your taskbar.
+The compiled .exe file has a custom icon and can be pinned to your taskbar.
 
 
 Current list of features I'd like to add in the near future:
