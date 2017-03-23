@@ -8,6 +8,7 @@ Or download the latest compiled .exe file <a href="https://github.com/DMeechan/S
 
 The compiled .exe file has a custom icon and can be pinned to your taskbar.
 
+![alt tag](https://i.gyazo.com/cb812149fa7480e232cab3d4a796439b.mp4)
 
 Current list of features I'd like to add in the near future:
 - Make action buttons light up when hovered over
