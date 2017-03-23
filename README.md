@@ -8,16 +8,12 @@ Or download the latest compiled .exe file <a href="https://github.com/DMeechan/S
 
 The compiled .exe file has a custom icon and can be pinned to your taskbar.
 
-<img src="https://i.gyazo.com/cb812149fa7480e232cab3d4a796439b.gif" alt="Drawing" width="432" height="450"/>
-<img src="https://i.gyazo.com/66f2fa12cd7c20a9f1e8ef3e995aabda.gif" alt="Drawing" width="432" height="450"/>
-<img src="https://i.gyazo.com/3b8e1d13b6d24042fa694af045a9fed1.gif" alt="Drawing" width="432" height="450"/>
-
-![alt tag]()
-
-![alt tag]()
+<img src="https://i.gyazo.com/cb812149fa7480e232cab3d4a796439b.gif" alt="Selecting various tasks" width="432" height="450"/>
+<img src="https://i.gyazo.com/66f2fa12cd7c20a9f1e8ef3e995aabda.gif" alt="Adding a task" width="432" height="450"/>
+<img src="https://i.gyazo.com/3b8e1d13b6d24042fa694af045a9fed1.gif" alt="Countdown timer" width="432" height="450"/>
 
 
-Current list of features I'd like to add in the near future:
+<b>Current list of features I'd like to add in the near future:</b>
 - Make action buttons light up when hovered over
   - As shown <a href="https://gyazo.com/746ce5e7b765e6cc8a5db5af674136b0">here</a> in Polymail
   - If I use a similar style, it'll look *amazingly* clean
