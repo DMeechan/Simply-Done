@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -448,6 +449,21 @@ public class SchedulerController implements Initializable {
 	// CUSTOM CELL FOR LISTVIEW //
 	//////////////////////////////
 	
+	public void taskDisplay() {
+		
+		notDoneTasks.addListener((ListChangeListener<Task>) c -> {
+			
+		});
+		
+		doneTasks.addListener((ListChangeListener<Task>) c -> {
+			
+		});
+		
+		
+		VBox container = new VBox();
+		
+	}
+	
 	static class CustomCell extends ListCell<Task> {
 		
 		private final Glyph trash = new Glyph("FontAwesome", "TRASH_ALT");
@@ -458,9 +474,8 @@ public class SchedulerController implements Initializable {
 		final Text minutesText = new Text("10");
 		final Text secondsText = new Text(":00");
 		final Separator separator = new Separator();
-		final Pane spacer = new Pane();
 		final Text taskNameText = new Text("TASK NAME TEXT");
-		final Pane pane = new Pane();
+		final Pane spacer = new Pane();
 		final JFXButton deleteButton = new JFXButton("");
 		final JFXButton doneButton = new JFXButton("");
 		
@@ -553,8 +568,6 @@ public class SchedulerController implements Initializable {
 			HBox.setMargin(separator, new Insets(0, 13.0, 0, 13.0));
 			
 			//HBox.setHgrow(spacer, Priority.SOMETIMES);
-			spacer.setMinWidth(5);
-			spacer.setMaxWidth(10);
 			
 			setupText(minutesText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.RIGHT);
 			setupText(secondsText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.LEFT);
@@ -565,7 +578,7 @@ public class SchedulerController implements Initializable {
 			
 			//minutesText.setWrappingWidth(50.0);
 			HBox.setHgrow(taskNameText, Priority.ALWAYS);
-			HBox.setHgrow(pane, Priority.ALWAYS);
+			HBox.setHgrow(spacer, Priority.ALWAYS);
 			
 			setupButton(deleteButton);
 			setupButton(doneButton);
@@ -575,7 +588,7 @@ public class SchedulerController implements Initializable {
 			
 			container.getChildren().addAll(minutesText, secondsText,
 					//spacer,
-					separator, taskNameText, pane, deleteButton, doneButton);
+					separator, taskNameText, spacer, deleteButton, doneButton);
 		}
 		
 		private void setupText(Text text, double fontSize, double top, double right, double bottom, double left, TextAlignment alignment) {
