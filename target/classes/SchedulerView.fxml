@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="100.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SchedulerController">
     <center>
         <VBox BorderPane.alignment="CENTER">
@@ -62,11 +72,12 @@
                </HBox.margin>
             </JFXButton>
             </HBox>
-            <JFXListView fx:id="tasksListView" editable="true" focusTraversable="false" minWidth="80.0" VBox.vgrow="SOMETIMES">
+            <JFXListView fx:id="tasksListView" editable="true" focusTraversable="false" maxHeight="50.0" minWidth="80.0" VBox.vgrow="SOMETIMES">
                 <VBox.margin>
                     <Insets />
                 </VBox.margin>
             </JFXListView>
+         <VBox fx:id="tasksContainer" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
         </VBox>
     </center>
    <bottom>

@@ -51,6 +51,7 @@ public class SchedulerController implements Initializable {
 	// store them in separate lists so can easily move tasks between them
 	private ObservableList<Task> notDoneTasks, doneTasks;
 	@FXML private JFXListView<Task> tasksListView;
+	@FXML private VBox tasksContainer;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
 	private BooleanProperty reset = new SimpleBooleanProperty();
 	
@@ -76,6 +77,9 @@ public class SchedulerController implements Initializable {
 		
 		// set up taskViewList listeners and CustomCells
 		initializeTaskViewList();
+		
+		// set up custom tasksContainer
+		displayTasks(false);
 		
 		// listen for changes so edit task pane is disabled
 		// if a task is moved or deleted by CustomCell
@@ -445,25 +449,73 @@ public class SchedulerController implements Initializable {
 		this.savedTasksFile = savedTasksFile;
 	}
 	
-	//////////////////////////////
-	// CUSTOM CELL FOR LISTVIEW //
-	//////////////////////////////
 	
-	public void taskDisplay() {
-		
-		notDoneTasks.addListener((ListChangeListener<Task>) c -> {
+	public void displayTasks(boolean isDisplayingCompletedTasks) {
+		/*
+		if (isDisplayingCompletedTasks) {
+			doneTasks.list
+			doneTasks.addListener((ListChangeListener<Task>) c -> {
+				
+			});
 			
-		});
+		} else {
+			notDoneTasks.addListener((ListChangeListener<Task>) c -> {
+				
+			});
+		}
+		*/
 		
-		doneTasks.addListener((ListChangeListener<Task>) c -> {
-			
-		});
-		
-		
-		VBox container = new VBox();
+		createTaskCells(tasksContainer, getNotDoneTasks());
 		
 	}
 	
+	
+	private void createTaskCells(VBox container, ObservableList<Task> taskList) {
+		for(Task task : taskList) {
+			TaskCell cell = new TaskCell(task);
+			container.getChildren().add(cell);
+			
+			cell.statusProperty().addListener(v -> {
+				switch(cell.getStatus()) {
+					// move to not done
+					case 0:
+						moveTask(task, cell, notDoneTasks, doneTasks);
+						break;
+					// move to done
+					case 1:
+						moveTask(task, cell, doneTasks, notDoneTasks);
+						break;
+					// delete
+					case 2:
+						if (task.isNotDone()) {
+							notDoneTasks.remove(task);
+						} else {
+							doneTasks.remove(task);
+						}
+						container.getChildren().remove(cell);
+						break;
+					default:
+						break;
+				}
+			});
+			
+		}
+	}
+	
+	private void moveTask(Task task, TaskCell cell, ObservableList<Task> moveTo, ObservableList<Task> moveFrom) {
+		
+		if (moveTo.size() < 12) {
+			task.setNotDone(true);
+			cell.setStatus(0);
+			moveFrom.remove(task);
+			moveTo.add(task);
+		}
+	}
+	
+	//////////////////////////////
+	// CUSTOM CELL FOR LISTVIEW //
+	//////////////////////////////
+		
 	static class CustomCell extends ListCell<Task> {
 		
 		private final Glyph trash = new Glyph("FontAwesome", "TRASH_ALT");

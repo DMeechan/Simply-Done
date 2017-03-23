@@ -1,14 +1,12 @@
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 
 class Task {
 	
 	private final StringProperty name = new SimpleStringProperty(""); // name of task
 	private boolean isNotDone; // is the timer currently marked as done
-	private Color colour; // task's user-defined colour
+	//private Color colour;
+	private ObjectProperty<Color> colour; // task's user-defined colour
 	
 	private final IntegerProperty minutes = new SimpleIntegerProperty(0);
 	private final IntegerProperty seconds = new SimpleIntegerProperty(0);
@@ -44,10 +42,6 @@ class Task {
 		this.name.set(name);
 	}
 	
-	public void setColour(Color colour) {
-		this.colour = colour;
-	}
-	
 	public int getMinutes() {
 		return minutes.get();
 	}
@@ -73,6 +67,15 @@ class Task {
 	}
 	
 	public Color getColour() {
+		return colour.get();
+	}
+	
+	public ObjectProperty<Color> colourProperty() {
 		return colour;
 	}
+	
+	public void setColour(Color colour) {
+		this.colour.set(colour);
+	}
+	
 }
