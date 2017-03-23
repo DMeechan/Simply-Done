@@ -458,6 +458,7 @@ public class SchedulerController implements Initializable {
 		final Text minutesText = new Text("10");
 		final Text secondsText = new Text(":00");
 		final Separator separator = new Separator();
+		final Pane spacer = new Pane();
 		final Text taskNameText = new Text("TASK NAME TEXT");
 		final Pane pane = new Pane();
 		final JFXButton deleteButton = new JFXButton("");
@@ -545,16 +546,22 @@ public class SchedulerController implements Initializable {
 		// SETTING UP THE CELL
 		
 		private void setProperties() {
-			container.setAlignment(Pos.CENTER);
-			
+			container.setAlignment(Pos.CENTER_LEFT);
 			container.setPrefSize(390.0, 25.0);
 			
 			separator.setOrientation(Orientation.VERTICAL);
 			HBox.setMargin(separator, new Insets(0, 13.0, 0, 13.0));
 			
+			//HBox.setHgrow(spacer, Priority.SOMETIMES);
+			spacer.setMinWidth(5);
+			spacer.setMaxWidth(10);
+			
 			setupText(minutesText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.RIGHT);
 			setupText(secondsText, 14.0, 3.0, 0.0, 3.0, 0.0, TextAlignment.LEFT);
 			setupText(taskNameText, 12.0, 5.0, 5.0, 5.0, 5.0, TextAlignment.CENTER);
+	
+			minutesText.setWrappingWidth(19);
+			secondsText.setWrappingWidth(19);
 			
 			//minutesText.setWrappingWidth(50.0);
 			HBox.setHgrow(taskNameText, Priority.ALWAYS);
@@ -566,7 +573,9 @@ public class SchedulerController implements Initializable {
 			deleteButton.setGraphic(trash);
 			doneButton.setGraphic(check);
 			
-			container.getChildren().addAll(minutesText, secondsText, separator, taskNameText, pane, deleteButton, doneButton);
+			container.getChildren().addAll(minutesText, secondsText,
+					//spacer,
+					separator, taskNameText, pane, deleteButton, doneButton);
 		}
 		
 		private void setupText(Text text, double fontSize, double top, double right, double bottom, double left, TextAlignment alignment) {
