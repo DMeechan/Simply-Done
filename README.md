@@ -10,6 +10,11 @@ The compiled .exe file has a custom icon and can be pinned to your taskbar.
 
 ![alt tag](https://i.gyazo.com/cb812149fa7480e232cab3d4a796439b.gif)
 
+![alt tag](https://i.gyazo.com/66f2fa12cd7c20a9f1e8ef3e995aabda.gif)
+
+![alt tag](https://i.gyazo.com/3b8e1d13b6d24042fa694af045a9fed1.gif)
+
+
 Current list of features I'd like to add in the near future:
 - Make action buttons light up when hovered over
   - As shown <a href="https://gyazo.com/746ce5e7b765e6cc8a5db5af674136b0">here</a> in Polymail
