@@ -9,10 +9,12 @@ Or download the latest compiled .exe file <a href="https://github.com/DMeechan/S
 The compiled .exe file has a custom icon and can be pinned to your taskbar.
 
 <img src="https://i.gyazo.com/cb812149fa7480e232cab3d4a796439b.gif" alt="Drawing" width="432" height="450"/>
+<img src="https://i.gyazo.com/66f2fa12cd7c20a9f1e8ef3e995aabda.gif" alt="Drawing" width="432" height="450"/>
+<img src="https://i.gyazo.com/3b8e1d13b6d24042fa694af045a9fed1.gif" alt="Drawing" width="432" height="450"/>
 
-![alt tag](https://i.gyazo.com/66f2fa12cd7c20a9f1e8ef3e995aabda.gif)
+![alt tag]()
 
-![alt tag](https://i.gyazo.com/3b8e1d13b6d24042fa694af045a9fed1.gif)
+![alt tag]()
 
 
 Current list of features I'd like to add in the near future:
