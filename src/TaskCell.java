@@ -8,7 +8,9 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -81,8 +83,10 @@ public class TaskCell extends HBox {
 		doneButton.setGraphic(check);
 		
 		task.colourProperty().addListener(v -> {
-			this.setBackground(new Background(new BackgroundFill(task.getColour(), CornerRadii.EMPTY, Insets.EMPTY)));
+			//this.setBackground(new Background(new BackgroundFill(task.getColour(), CornerRadii.EMPTY, Insets.EMPTY)));
 		});
+		
+		//this.setBackground(new Background(new BackgroundFill(task.getColour(), CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		this.getChildren().addAll(minutesText, secondsText, separator, taskNameText, spacer, deleteButton, doneButton);
 	}

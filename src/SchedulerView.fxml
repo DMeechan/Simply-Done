@@ -62,7 +62,7 @@
                </HBox.margin>
             </JFXButton>
             </HBox>
-            <JFXListView fx:id="tasksListView" editable="true" focusTraversable="false" maxHeight="50.0" minWidth="80.0" VBox.vgrow="SOMETIMES">
+            <JFXListView fx:id="tasksListView" editable="true" focusTraversable="false" maxHeight="140.0" minWidth="80.0" VBox.vgrow="SOMETIMES">
                 <VBox.margin>
                     <Insets />
                 </VBox.margin>

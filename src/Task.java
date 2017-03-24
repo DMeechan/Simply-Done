@@ -1,12 +1,14 @@
 import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 
-class Task {
+import java.io.Serializable;
+
+class Task implements Serializable{
 	
 	private final StringProperty name = new SimpleStringProperty(""); // name of task
 	private boolean isNotDone; // is the timer currently marked as done
 	//private Color colour;
-	private ObjectProperty<Color> colour; // task's user-defined colour
+	private ObjectProperty<Color> colour = new SimpleObjectProperty<Color>(); // task's user-defined colour
 	
 	private final IntegerProperty minutes = new SimpleIntegerProperty(0);
 	private final IntegerProperty seconds = new SimpleIntegerProperty(0);
@@ -17,7 +19,6 @@ class Task {
 		setNotDone(true);
 		setMinutes(minutes);
 		setColour(colour);
-		
 		
 	}
 	

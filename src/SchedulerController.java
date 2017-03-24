@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.jfoenix.controls.*;
@@ -27,12 +28,13 @@ import org.controlsfx.glyphfont.Glyph;
 import org.hildan.fxgson.FxGson;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -54,8 +56,8 @@ public class SchedulerController implements Initializable {
 	@FXML private VBox tasksContainer;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
 	private BooleanProperty reset = new SimpleBooleanProperty();
-	
 	private File savedTasksFile;
+	private Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 	
 	public SchedulerController() {
 		setSceneActive(true);
@@ -147,10 +149,20 @@ public class SchedulerController implements Initializable {
 		
 		if (savedTasksFile.exists()) {
 			
-			ObservableList<Task> list = FXCollections.observableArrayList();
+			//ObservableList<Task> list = FXCollections.observableArrayList();
 			
 			try {
-				list.addAll(readGsonStream(savedTasksFile));
+				ArrayList<Task> list = readGsonStream(savedTasksFile);
+				for (Task task : list) {
+					if(task.isNotDone()) {
+						notDoneTasks.add(task);
+					} else {
+						doneTasks.add(task);
+					}
+				}
+				
+				/*
+				//list.addAll(readGsonStream(savedTasksFile));
 				
 				for (Iterator<Task> item = list.iterator(); item.hasNext();) {
 					Task task = item.next();
@@ -160,6 +172,7 @@ public class SchedulerController implements Initializable {
 						doneTasks.add(task);
 					}
 				}
+				*/
 				
 			} catch (IOException e) {
 				System.out.println("Error reading file. Please turn it off and on again.");
@@ -172,8 +185,50 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	private ObservableList<Task> readGsonStream(File tasksFile) throws IOException {
-		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+	public void writeSaveData() {
+		//ObservableList<Task> list = FXCollections.observableArrayList();
+		ArrayList<Task> list = new ArrayList<Task>();
+		list.addAll(getNotDoneTasks());
+		list.addAll(getDoneTasks());
+		
+		try {
+			writeGsonStream(list);
+			System.out.println("Save complete!");
+		} catch (IOException e) {
+			System.out.println("Error writing file. Please turn it off and on again.");
+			Main.outputError(e);
+		}
+		
+	}
+	
+	private ArrayList<Task> readGsonStream(File tasksFile) throws IOException {
+		//ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(tasksFile));
+		InputStream inputStream = new FileInputStream(tasksFile);
+		JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
+		
+		Type listType = new TypeToken<ArrayList<Task>>() {}.getType();
+		
+		return gson.fromJson(reader, listType);
+	}
+	
+	private void writeGsonStream(ArrayList<Task> target) throws IOException {
+		Type listType = new TypeToken<ArrayList<Task>>() {}.getType();
+		
+		OutputStream outputStream = new FileOutputStream(savedTasksFile);
+		//ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savedTasksFile));
+		
+		try (JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"))) {
+			gson.toJson(target, listType, writer);
+			//writer.endObject(); // ?
+		}
+		
+		//ObservableList<Task> target2 = gson.fromJson(json, listType);
+	}
+	
+	// OLD GSON READER
+	
+	private ObservableList<Task> readGsonStream1(File tasksFile) throws IOException {
+		Type type = new TypeToken<Task>() {}.getType();
 		
 		// change input to abc
 		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(tasksFile), "UTF-8"));
@@ -189,25 +244,8 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	public void writeSaveData() {
-		ObservableList<Task> list = FXCollections.observableArrayList();
-		list.addAll(getNotDoneTasks());
-		list.addAll(getDoneTasks());
-		
-		try {
-			writeGsonStream(list);
-			System.out.println("Save complete!");
-		} catch (IOException e) {
-			System.out.println("Error writing file. Please turn it off and on again.");
-			Main.outputError(e);
-		}
-		
-	}
-	
-	private void writeGsonStream(ObservableList<Task> list) throws IOException {
+	private void writeGsonStream1(ObservableList<Task> list) throws IOException {
 		//OutputStream savedTasksStream = getClass().getClassLoader().getResourceAsStream("tasks.json");
-		
-		Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 		
 		OutputStream outputStream = new FileOutputStream(savedTasksFile);
 		
