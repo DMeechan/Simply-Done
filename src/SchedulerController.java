@@ -1,7 +1,6 @@
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import com.jfoenix.controls.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,17 +15,19 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import org.controlsfx.glyphfont.Glyph;
 import org.hildan.fxgson.FxGson;
 
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -55,9 +56,9 @@ public class SchedulerController implements Initializable {
 	@FXML private JFXListView<Task> tasksListView;
 	@FXML private VBox tasksContainer;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
-	private BooleanProperty reset = new SimpleBooleanProperty();
+	private final BooleanProperty reset = new SimpleBooleanProperty();
 	private File savedTasksFile;
-	private Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+	private final Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 	
 	public SchedulerController() {
 		setSceneActive(true);
@@ -81,7 +82,7 @@ public class SchedulerController implements Initializable {
 		initializeTaskViewList();
 		
 		// set up custom tasksContainer
-		displayTasks(false);
+		//displayTasks(false);
 		
 		// listen for changes so edit task pane is disabled
 		// if a task is moved or deleted by CustomCell
@@ -204,11 +205,12 @@ public class SchedulerController implements Initializable {
 	private ArrayList<Task> readGsonStream(File tasksFile) throws IOException {
 		//ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(tasksFile));
 		InputStream inputStream = new FileInputStream(tasksFile);
-		JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
+		InputStreamReader isr = new InputStreamReader(inputStream, "UTF-8");
+		//JsonReader reader = new JsonReader(isr);
 		
 		Type listType = new TypeToken<ArrayList<Task>>() {}.getType();
 		
-		return gson.fromJson(reader, listType);
+		return gson.fromJson(isr, listType);
 	}
 	
 	private void writeGsonStream(ArrayList<Task> target) throws IOException {
@@ -217,61 +219,30 @@ public class SchedulerController implements Initializable {
 		OutputStream outputStream = new FileOutputStream(savedTasksFile);
 		//ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savedTasksFile));
 		
-		try (JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"))) {
-			gson.toJson(target, listType, writer);
+		//try (JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"))) {
+		try (OutputStreamWriter osr = new OutputStreamWriter(outputStream, "UTF-8")) {
+			gson.toJson(target, listType, osr);
 			//writer.endObject(); // ?
 		}
 		
-		//ObservableList<Task> target2 = gson.fromJson(json, listType);
 	}
 	
 	// OLD GSON READER
 	
-	private ObservableList<Task> readGsonStream1(File tasksFile) throws IOException {
-		Type type = new TypeToken<Task>() {}.getType();
-		
-		// change input to abc
-		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(tasksFile), "UTF-8"));
-		ObservableList<Task> list = FXCollections.observableArrayList();
-		reader.beginArray();
-		while (reader.hasNext()) {
-			Task task = gson.fromJson(reader, Task.class);
-			list.add(task);
-		}
-		reader.endArray();
-		reader.close();
-		return list;
-		
-	}
-	
-	private void writeGsonStream1(ObservableList<Task> list) throws IOException {
-		//OutputStream savedTasksStream = getClass().getClassLoader().getResourceAsStream("tasks.json");
-		
-		OutputStream outputStream = new FileOutputStream(savedTasksFile);
-		
-		JsonWriter writer = new JsonWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-		writer.setIndent("  ");
-		writer.beginArray();
-		for (Task task : list) {
-			gson.toJson(task, Task.class, writer);
-		}
-		writer.endArray();
-		writer.close();
-		
-	}
-	
 	private void addSampleData() {
-		newTask("> This is a task. Here's how you can make your own:", 1, Color.web("#2ecc71"));
-		newTask("---> 1. Type the name of a task into the textbox at the top", 2, Color.web("#3498db"));
-		newTask("---> 2. Drag the slider to the amount of time you expect the task will take", 3, Color.web("#e74c3c"));
-		newTask("---> 3. Click the coloured square on the right and choose a colour for the task", 4, Color.web("#e67e22"));
-		newTask("---> 4. Click the 'Add Task' button to add the task to your to-do list", 5, Color.web("#4db6ac"));
-		newTask("> Click the checkbox on the right to mark this task as complete!", 6, Color.web("#ffa726"));
-		newTask("---> To view all your completed tasks, click 'Show Completed Tasks' above", 7, Color.web("#ba68c8"));
-		newTask("---> Once you've added all your tasks, click the Start Tasks button below", 8, Color.web("#4E6A9C"));
-		newTask("---> Then a timer will start counting the time left for the first task", 9, Color.web("#66bb6a"));
-		newTask("---> And the total time you've got left until every task should be done", 10, Color.web("#64b5f6"));
-		newTask("> Delete each of these tasks and then have fun getting everything Simply Done!", 11, Color.web("#12854a"));
+		
+		newTask("> This is a task. Here's how you can make your own:", 1, Color.decode("#2ecc71"));
+		newTask("---> 1. Type the name of a task into the textbox at the top", 2, Color.decode("#3498db"));
+		newTask("---> 2. Drag the slider to the amount of time you expect the task will take", 3, Color.decode("#e74c3c"));
+		newTask("---> 3. Click the coloured square on the right and choose a colour for the task", 4, Color.decode("#e67e22"));
+		newTask("---> 4. Click the 'Add Task' button to add the task to your to-do list", 5, Color.decode("#4db6ac"));
+		newTask("> Click the checkbox on the right to mark this task as complete!", 6, Color.decode("#ffa726"));
+		newTask("---> To view all your completed tasks, click 'Show Completed Tasks' above", 7, Color.decode("#ba68c8"));
+		newTask("---> Once you've added all your tasks, click the Start Tasks button below", 8, Color.decode("#4E6A9C"));
+		newTask("---> Then a timer will start counting the time left for the first task", 9, Color.decode("#66bb6a"));
+		newTask("---> And the total time you've got left until every task should be done", 10, Color.decode("#64b5f6"));
+		newTask("> Delete each of these tasks and then have fun getting everything Simply Done!", 11, Color.decode("#12854a"));
+		
 		
 	}
 	
@@ -284,7 +255,7 @@ public class SchedulerController implements Initializable {
 			Task task = tasksListView.getSelectionModel().getSelectedItem();
 			task.setMinutes(Integer.parseInt(newTaskMinsLabel.getText()));
 			task.setName(newTaskNameTextField.getText());
-			task.setColour(newTaskColour.getValue());
+			task.setColour(colorFxToAwt(newTaskColour.getValue()));
 			
 			deactivateEditMode();
 			
@@ -300,9 +271,8 @@ public class SchedulerController implements Initializable {
 	}
 	
 	@FXML private void clickColourPicker() {
-		Color colour = newTaskColour.getValue();
 		// update the colours of the edit pane when the user picks a colour
-		updateEditModeColours(colour);
+		updateEditModeColours(colorFxToAwt(newTaskColour.getValue()));
 	}
 	
 	@FXML private void clickStartTasks() {
@@ -360,12 +330,12 @@ public class SchedulerController implements Initializable {
 	
 	private void resetEditModeUI() {
 		// after adding / editing a task, reset the edit task box to its default values
-		Color colour = Color.web("#12854A");
+		javafx.scene.paint.Color colour = javafx.scene.paint.Color.web("#12854A");
 		//String c = ClockView.colorToHex(colour);
 		//newTaskColour.setStyle("fx-base: " + c);
 		newTaskColour.setValue(colour);
 		// set colours back to default
-		updateEditModeColours(colour);
+		updateEditModeColours(colorFxToAwt(colour));
 		
 		editTaskBox.setStyle("-fx-background-color: transparent");
 		newTaskButton.setText("ADD TASK");
@@ -374,9 +344,10 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	private void updateEditModeColours(Color colour) {
+	private void updateEditModeColours(Color awtColor) {
 		// need to format the string because otherwise it's returned in a weird format
 		// the weird format starts in 0x and ends in 2 additional characters for the alpha layer
+		javafx.scene.paint.Color colour = colorAwtToFx(awtColor);
 		String c = String.format( "#%02X%02X%02X",
 				(int)( colour.getRed() * 255 ),
 				(int)( colour.getGreen() * 255 ),
@@ -412,7 +383,7 @@ public class SchedulerController implements Initializable {
 			
 			//String c = ClockView.colorToHex(task.getColour());
 			//newTaskColour.setStyle("fx-base: " + c);
-			newTaskColour.setValue(task.getColour());
+			newTaskColour.setValue(colorAwtToFx(task.getColour()));
 			updateEditModeColours(task.getColour());
 			editTaskBox.setStyle("-fx-background-color: #e3e9ed");
 			
@@ -428,7 +399,7 @@ public class SchedulerController implements Initializable {
 		if(notDoneTasks.size() >= 12) {
 			Main.outputError("Too many tasks. Please complete some of them first!");
 		} else {
-			notDoneTasks.add(new Task(newTaskNameTextField.getText(), Integer.parseInt(newTaskMinsLabel.getText()),newTaskColour.getValue()));
+			notDoneTasks.add(new Task(newTaskNameTextField.getText(), Integer.parseInt(newTaskMinsLabel.getText()),colorFxToAwt(newTaskColour.getValue())));
 		}
 	}
 	
@@ -483,26 +454,8 @@ public class SchedulerController implements Initializable {
 		return savedTasksFile;
 	}
 	
-	public void setSavedTasksFile(File savedTasksFile) {
-		this.savedTasksFile = savedTasksFile;
-	}
-	
 	
 	public void displayTasks(boolean isDisplayingCompletedTasks) {
-		/*
-		if (isDisplayingCompletedTasks) {
-			doneTasks.list
-			doneTasks.addListener((ListChangeListener<Task>) c -> {
-				
-			});
-			
-		} else {
-			notDoneTasks.addListener((ListChangeListener<Task>) c -> {
-				
-			});
-		}
-		*/
-		
 		createTaskCells(tasksContainer, getNotDoneTasks());
 		
 	}
@@ -548,6 +501,23 @@ public class SchedulerController implements Initializable {
 			moveFrom.remove(task);
 			moveTo.add(task);
 		}
+	}
+	
+	private java.awt.Color colorFxToAwt(javafx.scene.paint.Color fx) {
+		return new Color((float) fx.getRed(),
+				(float) fx.getGreen(),
+				(float) fx.getBlue(),
+				(float) fx.getOpacity());
+	}
+	
+	private javafx.scene.paint.Color colorAwtToFx(java.awt.Color awtColor) {
+		int r = awtColor.getRed();
+		int g = awtColor.getGreen();
+		int b = awtColor.getBlue();
+		int a = awtColor.getAlpha();
+		double opacity = a / 255.0 ;
+		
+		return javafx.scene.paint.Color.rgb(r, g, b, opacity);
 	}
 	
 	//////////////////////////////

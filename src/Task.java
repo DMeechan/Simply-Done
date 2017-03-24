@@ -1,6 +1,6 @@
 import javafx.beans.property.*;
-import javafx.scene.paint.Color;
 
+import java.awt.*;
 import java.io.Serializable;
 
 class Task implements Serializable{
@@ -8,7 +8,8 @@ class Task implements Serializable{
 	private final StringProperty name = new SimpleStringProperty(""); // name of task
 	private boolean isNotDone; // is the timer currently marked as done
 	//private Color colour;
-	private ObjectProperty<Color> colour = new SimpleObjectProperty<Color>(); // task's user-defined colour
+	//private ObjectProperty<Color> colour = new SimpleObjectProperty<>(Color.web("#ffffff")); // task's user-defined colour
+	private final ObjectProperty<java.awt.Color> colour = new SimpleObjectProperty<>();
 	
 	private final IntegerProperty minutes = new SimpleIntegerProperty(0);
 	private final IntegerProperty seconds = new SimpleIntegerProperty(0);
@@ -19,7 +20,7 @@ class Task implements Serializable{
 		setNotDone(true);
 		setMinutes(minutes);
 		setColour(colour);
-		
+		//colour.plat
 	}
 	
 	@Override
@@ -67,16 +68,29 @@ class Task implements Serializable{
 		return minutes;
 	}
 	
+	/*
 	public Color getColour() {
 		return colour.get();
-	}
-	
-	public ObjectProperty<Color> colourProperty() {
-		return colour;
 	}
 	
 	public void setColour(Color colour) {
 		this.colour.set(colour);
 	}
 	
+	public ObjectProperty<Color> colourProperty() {
+		return colour;
+	}
+	*/
+	
+	public java.awt.Color getColour() {
+		return colour.get();
+	}
+	
+	public ObjectProperty<java.awt.Color> colourProperty() {
+		return colour;
+	}
+	
+	public void setColour(java.awt.Color colour) {
+		this.colour.set(colour);
+	}
 }

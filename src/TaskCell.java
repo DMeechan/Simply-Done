@@ -16,9 +16,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import org.controlsfx.glyphfont.Glyph;
 
-/**
- * Created by Daniel on 23.03.2017.
- */
 public class TaskCell extends HBox {
 	private final static Glyph trash = new Glyph("FontAwesome", "TRASH_ALT");
 	private final static Glyph check = new Glyph("FontAwesome", "CHECK_SQUARE");
@@ -32,7 +29,7 @@ public class TaskCell extends HBox {
 	final JFXButton doneButton = new JFXButton("");
 	
 	Task task;
-	IntegerProperty status = new SimpleIntegerProperty();
+	final IntegerProperty status = new SimpleIntegerProperty();
 	// 0 = not done; 1 = done; 2 = deleted
 	
 	public TaskCell(Task task) {
@@ -41,15 +38,11 @@ public class TaskCell extends HBox {
 		
 		setProperties();
 		
-		deleteButton.setOnAction(v -> {
-			setStatus(2);
-		});
+		deleteButton.setOnAction(v -> setStatus(2));
 		
-		doneButton.setOnAction(v -> {
-			setStatus(
-					(getStatus() + 1) % 2
-			);
-		});
+		doneButton.setOnAction(v -> setStatus(
+				(getStatus() + 1) % 2
+		));
 		
 	}
 	
