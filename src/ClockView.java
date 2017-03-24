@@ -146,7 +146,9 @@ public class ClockView {
 			//System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
 			
 			// update global
-			setActiveColour(activeTask.getColour());
+			java.awt.Color awtColor = activeTask.getColour();
+			javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue(), awtColor.getAlpha() / 255.0);
+			setActiveColour(fxColor);
 			setTaskLength(activeTask.getMinutes() * 60);
 			taskLabel.setText(activeTask.getName().toUpperCase());
 			
