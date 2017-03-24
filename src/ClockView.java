@@ -55,9 +55,7 @@ public class ClockView {
 		
 		int combinedLength = 0;
 		for (Task t : taskList) {
-			if(t.isNotDone()) {
-				combinedLength += t.getMinutes();
-			}
+			combinedLength += t.getMinutes();
 		}
 		
 		setTotalLength(combinedLength * 60); // set the total timer length to combined tasks lengths
@@ -146,9 +144,7 @@ public class ClockView {
 			//System.out.println("New active task: " + activeTask.getName() + " of length: " + activeTask.getMinutes());
 			
 			// update global
-			java.awt.Color awtColor = activeTask.getColour();
-			javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue(), awtColor.getAlpha() / 255.0);
-			setActiveColour(fxColor);
+			setActiveColour(activeTask.getFxColour());
 			setTaskLength(activeTask.getMinutes() * 60);
 			taskLabel.setText(activeTask.getName().toUpperCase());
 			

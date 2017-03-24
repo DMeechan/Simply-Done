@@ -40,25 +40,24 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SchedulerController implements Initializable {
-	
-	@FXML private JFXSlider newTaskTimerSlider;
-	@FXML private Label newTaskMinsLabel, newTaskSecsLabel;
-	@FXML private JFXTextField newTaskNameTextField;
-	@FXML private JFXButton newTaskButton, startTasksButton;
-	@FXML private HBox editTaskBox;
-	@FXML private JFXToggleButton tasksViewSwitch;
-	//private final String saveFileLocation = "src" + java.nio.file.FileSystems.getDefault().getSeparator() + "tasks.json";
-	@FXML private JFXColorPicker newTaskColour;
 	// use @FXML injection to avoid overwriting the FXML View's objects and causing problems
-	private boolean editModeActive;
-	// store them in separate lists so can easily move tasks between them
-	private ObservableList<Task> notDoneTasks, doneTasks;
+	@FXML private JFXToggleButton tasksViewSwitch;
+	@FXML private HBox editTaskBox;
+	@FXML private JFXTextField newTaskNameTextField;
+	@FXML private Label newTaskMinsLabel, newTaskSecsLabel;
+	@FXML private JFXSlider newTaskTimerSlider;
+	@FXML private JFXColorPicker newTaskColour;
+	@FXML private JFXButton newTaskButton, startTasksButton;
 	@FXML private JFXListView<Task> tasksListView;
 	@FXML private VBox tasksContainer;
+	// store them in separate lists so can easily move tasks between them
+	private ObservableList<Task> notDoneTasks, doneTasks;
 	private final BooleanProperty sceneActive = new SimpleBooleanProperty();
 	private final BooleanProperty reset = new SimpleBooleanProperty();
+	private final Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping()
+			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+	private boolean editModeActive;
 	private File savedTasksFile;
-	private final Gson gson = FxGson.coreBuilder().setPrettyPrinting().disableHtmlEscaping().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 	
 	public SchedulerController() {
 		setSceneActive(true);
@@ -71,9 +70,6 @@ public class SchedulerController implements Initializable {
 		notDoneTasks = FXCollections.observableArrayList();
 		doneTasks = FXCollections.observableArrayList();
 		
-		// optional to add sample data
-		//addSampleData();
-		
 		setSavedTasksFile();
 		loadSaveData();
 		writeSaveData();
@@ -81,13 +77,13 @@ public class SchedulerController implements Initializable {
 		// set up taskViewList listeners and CustomCells
 		initializeTaskViewList();
 		
-		// set up custom tasksContainer
+		// set up custom tasksContainer <----
 		//displayTasks(false);
 		
 		// listen for changes so edit task pane is disabled
 		// if a task is moved or deleted by CustomCell
 		// to prevent bugs from occurring
-		listenForTaskChanges();
+		//listenForTaskChanges();
 		
 		// have the timer length label linked with the slider, and formatted properly!
 		newTaskMinsLabel.textProperty().bind(newTaskTimerSlider.valueProperty().asString(("%.0f")));
@@ -102,7 +98,7 @@ public class SchedulerController implements Initializable {
 		tasksListView.setItems(notDoneTasks);
 		
 		// need custom cell for custom buttons and general task UI
-		useCustomCell();
+		tasksListView.setCellFactory(v -> new CustomCell(notDoneTasks, doneTasks));
 		
 		// ensure that the only way for a task to be selected is by clicking on it
 		// having scroll wheel & arrow key selection disabled (Event::consume)
@@ -116,10 +112,6 @@ public class SchedulerController implements Initializable {
 			}
 		});
 		
-	}
-	
-	private void useCustomCell() {
-		tasksListView.setCellFactory(v -> new CustomCell(notDoneTasks, doneTasks));
 	}
 	
 	// FILE SAVING
@@ -150,8 +142,6 @@ public class SchedulerController implements Initializable {
 		
 		if (savedTasksFile.exists()) {
 			
-			//ObservableList<Task> list = FXCollections.observableArrayList();
-			
 			try {
 				ArrayList<Task> list = readGsonStream(savedTasksFile);
 				for (Task task : list) {
@@ -161,19 +151,6 @@ public class SchedulerController implements Initializable {
 						doneTasks.add(task);
 					}
 				}
-				
-				/*
-				//list.addAll(readGsonStream(savedTasksFile));
-				
-				for (Iterator<Task> item = list.iterator(); item.hasNext();) {
-					Task task = item.next();
-					if(task.isNotDone()) {
-						notDoneTasks.add(task);
-					} else {
-						doneTasks.add(task);
-					}
-				}
-				*/
 				
 			} catch (IOException e) {
 				System.out.println("Error reading file. Please turn it off and on again.");
@@ -227,8 +204,6 @@ public class SchedulerController implements Initializable {
 		
 	}
 	
-	// OLD GSON READER
-	
 	private void addSampleData() {
 		
 		newTask("> This is a task. Here's how you can make your own:", 1, Color.decode("#2ecc71"));
@@ -267,7 +242,6 @@ public class SchedulerController implements Initializable {
 		}
 		
 		clearListViewSelection();
-		writeSaveData();
 	}
 	
 	@FXML private void clickColourPicker() {
@@ -306,7 +280,6 @@ public class SchedulerController implements Initializable {
 			startTasksButton.setDisable(false);
 			
 		}
-		writeSaveData();
 	}
 	
 	@FXML private void reset() {
@@ -383,7 +356,7 @@ public class SchedulerController implements Initializable {
 			
 			//String c = ClockView.colorToHex(task.getColour());
 			//newTaskColour.setStyle("fx-base: " + c);
-			newTaskColour.setValue(colorAwtToFx(task.getColour()));
+			newTaskColour.setValue(task.getFxColour());
 			updateEditModeColours(task.getColour());
 			editTaskBox.setStyle("-fx-background-color: #e3e9ed");
 			
@@ -411,12 +384,80 @@ public class SchedulerController implements Initializable {
 		tasksListView.getSelectionModel().clearSelection();
 	}
 	
+	private Color colorFxToAwt(javafx.scene.paint.Color fx) {
+		return new Color((float) fx.getRed(),
+				(float) fx.getGreen(),
+				(float) fx.getBlue(),
+				(float) fx.getOpacity());
+	}
+	
+	private javafx.scene.paint.Color colorAwtToFx(java.awt.Color awtColor) {
+		int r = awtColor.getRed();
+		int g = awtColor.getGreen();
+		int b = awtColor.getBlue();
+		int a = awtColor.getAlpha();
+		double opacity = a / 255.0 ;
+		
+		return javafx.scene.paint.Color.rgb(r, g, b, opacity);
+	}
+	
 	private void listenForTaskChanges() {
 		notDoneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
 		
 		doneTasks.addListener((ListChangeListener<Task>) c -> deactivateEditMode());
 		
 	}
+	
+	// CUSTOM LISTVIEW IMPLEMENTATION
+	
+	public void displayTasks(boolean isDisplayingCompletedTasks) {
+		createTaskCells(tasksContainer, getNotDoneTasks());
+		
+	}
+	
+	private void createTaskCells(VBox container, ObservableList<Task> taskList) {
+		for(Task task : taskList) {
+			TaskCell cell = new TaskCell(task);
+			container.getChildren().add(cell);
+			
+			cell.statusProperty().addListener(v -> {
+				switch(cell.getStatus()) {
+					// move to not done
+					case 0:
+						moveTask(task, cell, notDoneTasks, doneTasks);
+						break;
+					// move to done
+					case 1:
+						moveTask(task, cell, doneTasks, notDoneTasks);
+						break;
+					// delete
+					case 2:
+						if (task.isNotDone()) {
+							notDoneTasks.remove(task);
+						} else {
+							doneTasks.remove(task);
+						}
+						container.getChildren().remove(cell);
+						break;
+					default:
+						break;
+				}
+			});
+			
+		}
+	}
+	
+	private void moveTask(Task task, TaskCell cell, ObservableList<Task> moveTo, ObservableList<Task> moveFrom) {
+		task.setNotDone(true);
+		cell.setStatus(0);
+		moveFrom.remove(task);
+		moveTo.add(task);
+		
+	}
+	
+	//////////////////////////////
+	//    GETTERS AND SETTERS   //
+	//////////////////////////////
 	
 	public boolean isSceneActive() {
 		return sceneActive.get();
@@ -452,72 +493,6 @@ public class SchedulerController implements Initializable {
 	
 	public File getSavedTasksFile() {
 		return savedTasksFile;
-	}
-	
-	
-	public void displayTasks(boolean isDisplayingCompletedTasks) {
-		createTaskCells(tasksContainer, getNotDoneTasks());
-		
-	}
-	
-	
-	private void createTaskCells(VBox container, ObservableList<Task> taskList) {
-		for(Task task : taskList) {
-			TaskCell cell = new TaskCell(task);
-			container.getChildren().add(cell);
-			
-			cell.statusProperty().addListener(v -> {
-				switch(cell.getStatus()) {
-					// move to not done
-					case 0:
-						moveTask(task, cell, notDoneTasks, doneTasks);
-						break;
-					// move to done
-					case 1:
-						moveTask(task, cell, doneTasks, notDoneTasks);
-						break;
-					// delete
-					case 2:
-						if (task.isNotDone()) {
-							notDoneTasks.remove(task);
-						} else {
-							doneTasks.remove(task);
-						}
-						container.getChildren().remove(cell);
-						break;
-					default:
-						break;
-				}
-			});
-			
-		}
-	}
-	
-	private void moveTask(Task task, TaskCell cell, ObservableList<Task> moveTo, ObservableList<Task> moveFrom) {
-		
-		if (moveTo.size() < 12) {
-			task.setNotDone(true);
-			cell.setStatus(0);
-			moveFrom.remove(task);
-			moveTo.add(task);
-		}
-	}
-	
-	private java.awt.Color colorFxToAwt(javafx.scene.paint.Color fx) {
-		return new Color((float) fx.getRed(),
-				(float) fx.getGreen(),
-				(float) fx.getBlue(),
-				(float) fx.getOpacity());
-	}
-	
-	private javafx.scene.paint.Color colorAwtToFx(java.awt.Color awtColor) {
-		int r = awtColor.getRed();
-		int g = awtColor.getGreen();
-		int b = awtColor.getBlue();
-		int a = awtColor.getAlpha();
-		double opacity = a / 255.0 ;
-		
-		return javafx.scene.paint.Color.rgb(r, g, b, opacity);
 	}
 	
 	//////////////////////////////

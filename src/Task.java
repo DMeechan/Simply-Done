@@ -93,4 +93,10 @@ class Task implements Serializable{
 	public void setColour(java.awt.Color colour) {
 		this.colour.set(colour);
 	}
+	
+	public javafx.scene.paint.Color getFxColour() {
+		java.awt.Color awtColor = getColour();
+		return javafx.scene.paint.Color.rgb(awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue(), awtColor.getAlpha() / 255.0);
+		
+	}
 }
