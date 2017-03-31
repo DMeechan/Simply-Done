@@ -1,4 +1,4 @@
-# simply-done
+# Simply Done
 Helping people be more productive.
 Currently developing this as part of my Computer Science project. 
 
