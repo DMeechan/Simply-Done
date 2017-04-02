@@ -1,3 +1,5 @@
+package com.github.dmeechan;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

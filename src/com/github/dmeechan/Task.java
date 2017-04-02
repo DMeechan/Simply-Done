@@ -1,3 +1,5 @@
+package com.github.dmeechan;
+
 import javafx.beans.property.*;
 
 import java.awt.*;

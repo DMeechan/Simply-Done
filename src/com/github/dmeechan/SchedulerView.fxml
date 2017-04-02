@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="100.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SchedulerController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="100.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.dmeechan.SchedulerController">
     <center>
         <VBox BorderPane.alignment="CENTER">
          <Separator prefWidth="200.0" />

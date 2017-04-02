@@ -1,3 +1,5 @@
+package com.github.dmeechan;
+
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;

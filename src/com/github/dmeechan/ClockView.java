@@ -1,3 +1,5 @@
+package com.github.dmeechan;
+
 import com.jfoenix.controls.JFXButton;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.GaugeBuilder;
@@ -312,7 +314,7 @@ public class ClockView {
 		vbox.setAlignment(Pos.CENTER);
 		vbox.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
 		vbox.setPadding(new Insets(20));
-		vbox.getStylesheets().add("style.css");
+		vbox.getStylesheets().add("com/github/dmeechan/style.css");
 		
 		return vbox;
 	}

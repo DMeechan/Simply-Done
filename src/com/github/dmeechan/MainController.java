@@ -1,3 +1,5 @@
+package com.github.dmeechan;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -87,7 +90,9 @@ public class MainController extends Stage {
 		try {
 			// new approach for adding the icon makes it much better for cross-platform support
 			//window.getIcons().add(new Image(new File(location).toURI().toString()));
-			this.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
+			//this.getClass().getResource().toURI().toString()
+			this.getIcons().add(new Image(new FileInputStream("resources/icon.png")));
+			//this.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 		} catch (Exception e) {
 			System.out.println("Error: application icon not found");
 			Main.outputError(e);

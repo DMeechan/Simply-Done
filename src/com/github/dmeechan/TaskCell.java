@@ -1,3 +1,5 @@
+package com.github.dmeechan;
+
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
