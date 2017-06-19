@@ -4,7 +4,7 @@ Currently developing this as part of my Computer Science project.
 
 **Download the latest compiled .jar file <a href="https://goo.gl/BoqkpR">here</a>.**
 
-**Note: currently in beta. Please send over any suggestions or bug reports to <a href="https://twitter.com/@DMeechan1">@DMeechan1</a> or on GitHub!**
+**Note: currently in beta. Please post any suggestions or bug reports on GitHub!**
 
 Or download the latest compiled .exe file <a href="https://github.com/DMeechan/Simply-Done/raw/master/download/Simply%20Done.exe">here</a> (Windows only)
 
